@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('gerarOrcamento');
         }
 
         return view('login')->with('error', 'Você não está logado.');
@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard')->with('success', 'Login realizado com sucesso!');
+            return redirect()->intended('/gerarOrcamento')->with('success', 'Login realizado com sucesso!');
         }
 
         return back()->withErrors([

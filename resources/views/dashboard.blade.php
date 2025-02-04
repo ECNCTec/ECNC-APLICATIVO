@@ -273,10 +273,6 @@
                 <li>
                     <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Site</a>
                 </li>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
             </ul>
         </nav>
         <div id="content">
@@ -285,6 +281,16 @@
                     <a href="#" id="sidebarCollapse" class="buttonSideBar">
                         <span><img src="{{ asset('storage/images/iconMenu.png') }}" alt=""></span>
                     </a>
+                </div>
+                <div class="container-fluid d-flex justify-content-end">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="buttonSideBar" style="background: transparent; border: none; padding: 0; outline: none;">
+                            <span style="font-size: 24px; color: #555;">
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </button>
+                    </form>
                 </div>
             </nav>
             @yield('content')

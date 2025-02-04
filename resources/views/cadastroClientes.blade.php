@@ -31,7 +31,7 @@
             }
 
             #form-container .form-control {
-                height: 25px;
+                height: 27px;
                 padding: 2px 5px;
                 font-size: 12px;
             }
