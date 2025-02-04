@@ -48,7 +48,7 @@
 
             @media (max-width: 768px) {
                 #form {
-                    margin: 30px 10px 0px 10px;
+                    margin: 30px 10px 30px 10px;
                 }
             }
         </style>

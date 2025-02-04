@@ -129,6 +129,21 @@
             transform: translateY(-50%);
         }
 
+        .btn-custom {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 14px;
+            line-height: 1;
+            min-height: 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
         ul ul a {
             font-size: 0.9em !important;
             padding-left: 30px !important;
@@ -156,6 +171,11 @@
         a.article:hover {
             background: linear-gradient(0deg, #7386D5, #384b99, #7386D5) !important;
             color: #fff !important;
+        }
+
+        a.sair {
+            background: linear-gradient(0deg, #305d77, #24495f, #305d77);
+            color: #7386D5;
         }
 
         .list-unstyled a {
@@ -245,19 +265,23 @@
             </div>
             <ul class="list-unstyled components">
                 <li class="{{ request()->routeIs('gerarOrcamento') ? 'active' : '' }}">
-                    <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt" style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
+                    <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt"
+                            style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
                 </li>
                 <li class="{{ request()->routeIs('cadastroClientes') ? 'active' : '' }}">
-                    <a href="{{ route('cadastroClientes') }}"><i class="fas fa-users" style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
+                    <a href="{{ route('cadastroClientes') }}"><i class="fas fa-users"
+                            style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 10px 0px 12px;"></i> Clientes Cadastrados</a>
+                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 10px 0px 12px;"></i> Clientes
+                        Cadastrados</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-box" style="margin: 0px 10px 0px 12px;"></i> Pedidos</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-chart-line" style="margin: 0px 10px 0px 12px;"></i> Relatórios</a>
+                    <a href="#"><i class="fas fa-chart-line" style="margin: 0px 10px 0px 12px;"></i>
+                        Relatórios</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-cogs" style="margin: 0px 10px 0px 12px;"></i> Configurações</a>
@@ -268,10 +292,18 @@
             </ul>
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download</a>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip"
+                        class="download btn-custom">Download</a>
                 </li>
                 <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Site</a>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article btn-custom">Site</a>
+                </li>
+                <li>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="sair btn-custom">Sair</a>
+                    <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </nav>
@@ -282,10 +314,11 @@
                         <span><img src="{{ asset('storage/images/iconMenu.png') }}" alt=""></span>
                     </a>
                 </div>
-                <div class="container-fluid d-flex justify-content-end">
+                <div class="container-fluid d-none d-md-flex justify-content-end">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="buttonSideBar" style="background: transparent; border: none; padding: 0; outline: none;">
+                        <button type="submit" class="buttonSideBar"
+                            style="background: transparent; border: none; padding: 0; outline: none;">
                             <span style="font-size: 24px; color: #555;">
                                 <i class="fas fa-times"></i>
                             </span>
