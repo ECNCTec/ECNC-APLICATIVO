@@ -67,6 +67,8 @@
             max-width: 250px;
             background: linear-gradient(45deg, #5790d6, #477cbd, #5790d6, #477cbd);
             color: #fff;
+            height: 100vh;
+            overflow-y: auto;
             transition: all 0.3s;
         }
 
@@ -281,14 +283,6 @@
                     <a href="{{ route('cadastroClientes') }}"><i class="fas fa-users"
                             style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
                 </li>
-                {{-- <li>
-                    <a href="#" class="dropdown-toggle">Pages</a>
-                    <ul class="list-unstyled" id="pageSubmenu">
-                        <li><a href="#">Page 1</a></li>
-                        <li><a href="#">Page 2</a></li>
-                        <li><a href="#">Page 3</a></li>
-                    </ul>
-                </li> --}}
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Pages</a>
