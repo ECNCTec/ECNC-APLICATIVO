@@ -68,7 +68,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login.form')->with('success', 'Cadastro realizado com sucesso! Faça login.');
+        return redirect()->route('telaPrincipal')->with('success', 'Cadastro realizado com sucesso! Faça login.');
     }
 
     public function logout(Request $request)

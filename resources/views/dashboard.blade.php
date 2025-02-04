@@ -244,14 +244,14 @@
                 <img src="{{ asset('storage/images/logo2.png') }}" alt="">
             </div>
             <ul class="list-unstyled components">
-                {{-- <li class="{{ request()->routeIs('formulario') ? 'active' : '' }}">
-                    <a href="{{ route('formulario') }}"><i class="fas fa-file-alt" style="margin: 0px 10px 0px 12px;"></i> Formulário</a>
+                <li class="{{ request()->routeIs('gerarOrcamento') ? 'active' : '' }}">
+                    <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt" style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
                 </li>
                 <li class="{{ request()->routeIs('cadastroClientes') ? 'active' : '' }}">
-                    <a href="{{ route('cadastroClientes') }}"><i class="fas fa-users" style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a> --}}
+                    <a href="{{ route('cadastroClientes') }}"><i class="fas fa-users" style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
+                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 10px 0px 12px;"></i> Clientes Cadastrados</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-box" style="margin: 0px 10px 0px 12px;"></i> Pedidos</a>
