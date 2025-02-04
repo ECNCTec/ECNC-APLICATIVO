@@ -24,14 +24,18 @@
         .conteiner {
             display: flex;
             justify-content: center;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
             width: 100%;
-            margin-top: 140px;
         }
 
         .card {
             background-color: #ffffffc4;
             padding: 30px;
             box-shadow: 0px 10px 13px -7px #262626;
+            height: auto;
             width: 400px;
         }
 
@@ -159,17 +163,31 @@
             padding: 10px;
             display: none;
         }
+
+        @media (max-width: 768px) {
+            .card {
+            margin: 0px 10px 0px 10px;
+            background-color: #ffffffc4;
+            padding: 30px;
+            box-shadow: 0px 10px 13px -7px #262626;
+            height: auto;
+            width: 400px;
+        }
+        }
     </style>
 </head>
 
 <body>
     <div class="conteiner">
         <div class="card">
-            <h1>Cadastro</h1>
+            <div>
+                <h1><img src="{{ asset('storage/images/logo.png') }}" alt=""></h1>
+            </div>
+            <h1>Cadastre-se</h1>
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="label-float">
-                    <input type="email" name="email" required>
+                    <input type="email" name="email" value="{{ old('email') }}" required>
                     <label for="email">Email:</label>
                 </div>
                 <div class="label-float">
@@ -196,7 +214,7 @@
                     @endif
                 </div>
             </form>
-            <p>Já tem uma conta? <a href="{{ route('login.form') }}">Faça login</a></p>
+            <p>Já tem uma conta? <a href="{{ route('telaPrincipal') }}">Faça login</a></p>
         </div>
     </div>
 

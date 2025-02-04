@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         return back()->withErrors([
             'email' => 'Credenciais inválidas ou você não está cadastrado.',
-        ]);
+        ])->withInput();        
     }
 
     public function showRegisterForm()
@@ -77,6 +77,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login.form')->with('error', 'Você não está logado.');
+        return redirect()->route('telaPrincipal')->with('error', 'Você não está logado.');
     }
 }

@@ -4,34 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>formLogin</title>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: "Roboto", sans-serif;
-        }
-
-        body {
-            background-image: url(https://img.freepik.com/fotos-gratis/renderizacao-3d-de-fundo-de-textura-hexagonal_23-2150796421.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-        }
-
-        .conteiner {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 140px;
-        }
 
         .card {
             background-color: #ffffffc4;
             padding: 30px;
             box-shadow: 0px 10px 13px -7px #262626;
+            height: auto;
             width: 400px;
         }
 
@@ -159,17 +139,31 @@
             padding: 10px;
             display: none;
         }
+
+        @media (max-width: 768px) {
+            .card {
+            margin: 0px 10px 0px 10px;
+            background-color: #ffffffc4;
+            padding: 30px;
+            box-shadow: 0px 10px 13px -7px #262626;
+            height: auto;
+            width: 400px;
+        }
+        }
     </style>
 </head>
 
 <body>
     <div class="conteiner">
         <div class="card">
+            <div>
+                <h1><img src="{{ asset('storage/images/logo.png') }}" alt=""></h1>
+            </div>
             <h1>Login</h1>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="label-float">
-                    <input type="email" name="email" required>
+                    <input type="email" name="email" value="{{ old('email') }}" required>
                     <label for="email">Email:</label>
                 </div>
                 <div class="label-float">
@@ -177,7 +171,7 @@
                     <label for="password">Senha:</label>
                 </div>
                 <div class="button">
-                    <button type="submit">Login</button>
+                    <button type="submit">Entrar</button>
                 </div>
                 <div>
                     @if (session('success'))
