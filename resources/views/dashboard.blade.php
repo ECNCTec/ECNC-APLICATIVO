@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* DEMO STYLE */
         body {
@@ -119,6 +120,11 @@
 
         a[data-toggle="collapse"] {
             position: relative;
+        }
+
+        #pageSubmenu {
+            display: none;
+            transition: all 0.5s ease;
         }
 
         .dropdown-toggle::after {
@@ -273,6 +279,15 @@
                             style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
                 </li>
                 <li>
+                    <a href="#" class="dropdown-toggle">Pages</a>
+                    <ul class="list-unstyled" id="pageSubmenu">
+                        <li><a href="#">Page 1</a></li>
+                        <li><a href="#">Page 2</a></li>
+                        <li><a href="#">Page 3</a></li>
+                    </ul>
+                </li>
+
+                <li>
                     <a href="#"><i class="fas fa-user-plus" style="margin: 0px 10px 0px 12px;"></i> Clientes
                         Cadastrados</a>
                 </li>
@@ -329,9 +344,19 @@
             @yield('content')
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Carregue o jQuery primeiro -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Carregue o Popper.js (necessário para o Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+
+    <!-- Carregue o Bootstrap.js depois -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Código adicional para os links e sidebar -->
     <script>
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {
@@ -349,6 +374,24 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Remover o evento de clique do link para evitar conflito com o Bootstrap
+            $('.dropdown-toggle').on('click', function(e) {
+                e.preventDefault(); // Impede o comportamento de navegação padrão
+
+                var $submenu = $(this).next('ul'); // Pega o submenu associado (ul)
+
+                // Alterna a visibilidade do submenu com animação suave de 500ms
+                $submenu.stop(true, true).slideToggle(500); // Ajuste o tempo (500ms) conforme necessário
+            });
+        });
+    </script>
+
 </body>
 
 </html>
