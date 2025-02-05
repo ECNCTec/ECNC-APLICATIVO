@@ -112,8 +112,159 @@
                 </form>
             </div>
         </div>
-        <div class="container">
-            <h3>Produtos Cadastrados</h3>
+        <style>
+            /* Estilos Gerais da Tabela */
+            .crm-table-container {
+                border: 1px solid #ddd;
+                padding: 5px;
+                margin: 10px 0;
+                background-color: #ffffff;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .crm-table-container h6 {
+                font-size: 20px;
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+            .crm-table-container table.table {
+                width: 100%;
+                border-collapse: collapse;
+                font-family: 'Arial', sans-serif;
+            }
+
+            .crm-table-container table.table th,
+            .crm-table-container table.table td {
+                padding: 2px 8px;
+                text-align: center;
+                font-size: 14px;
+                border-bottom: 1px solid #f2f2f2;
+            }
+
+            .crm-table-container table.table th {
+                background-color: #007bff;
+                color: #fff;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .crm-table-container table.table tr:nth-child(odd) {
+                background-color: #f9f9f9;
+            }
+
+            .crm-table-container table.table tr:nth-child(even) {
+                background-color: #f1f1f1;
+            }
+
+            .crm-table-container table.table td {
+                color: #555;
+            }
+
+            .crm-table-container table.table td button {
+                font-size: 14px;
+                padding: 8px 12px;
+                margin: 0 5px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .crm-table-container table.table td button.btn-warning {
+                background-color: #ffc107;
+                color: #fff;
+            }
+
+            .crm-table-container table.table td button.btn-danger {
+                background-color: #dc3545;
+                color: #fff;
+            }
+
+            .crm-table-container table.table td button:hover {
+                opacity: 0.9;
+            }
+
+            /* Responsividade para dispositivos móveis */
+            @media (max-width: 768px) {
+                .crm-table-container {
+                    padding: 10px;
+                    margin: 10px 0;
+                }
+
+                .crm-table-container table.table {
+                    font-size: 12px;
+                }
+
+                .crm-table-container table.table th,
+                .crm-table-container table.table td {
+                    padding: 10px 15px;
+                }
+
+                .crm-table-container table.table td {
+                    display: block;
+                    text-align: left;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    border: none;
+                    border-bottom: 1px solid #f2f2f2;
+                    margin-bottom: 15px;
+                }
+
+                .crm-table-container table.table th {
+                    display: none;
+                }
+
+                .crm-table-container table.table tr {
+                    border-bottom: 1px solid #ddd;
+                }
+
+                .crm-table-container table.table td:before {
+                    content: attr(data-label);
+                    font-weight: bold;
+                    color: #007bff;
+                    display: block;
+                    margin-bottom: 5px;
+                }
+
+                .crm-table-container table.table td button {
+                    font-size: 12px;
+                    padding: 5px 10px;
+                }
+            }
+
+            /* Estilo para a paginação, caso esteja implementada */
+            .pagination {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .pagination li {
+                list-style-type: none;
+                margin: 0 5px;
+            }
+
+            .pagination li a {
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 4px;
+                font-weight: 600;
+            }
+
+            .pagination li a:hover {
+                background-color: #0056b3;
+            }
+
+            .pagination li a.active {
+                background-color: #0056b3;
+            }
+        </style>
+        <div id="form" class="crm-table-container">
+            <h6>Produtos Cadastrados</h6>
 
             <!-- Tabela para exibir produtos -->
             <table class="table table-bordered">
@@ -137,10 +288,10 @@
                             <td>{{ ucfirst($produto->tipo_medida) }}</td>
                             <td>
                                 <!-- Botão de Edição - Abre o Modal -->
-                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                <a type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                     data-target="#editModal{{ $produto->id }}">
                                     Editar
-                                </button>
+                                </a>
 
                                 <!-- Modal de Edição -->
                                 <div class="modal fade" id="editModal{{ $produto->id }}" tabindex="-1" role="dialog"
@@ -203,10 +354,10 @@
                                 </div>
 
                                 <!-- Botão de Exclusão - Abre o Modal -->
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                <a type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                     data-target="#deleteModal{{ $produto->id }}">
                                     Excluir
-                                </button>
+                                </a>
 
                                 <!-- Modal de Confirmação de Exclusão -->
                                 <div class="modal fade" id="deleteModal{{ $produto->id }}" tabindex="-1"
