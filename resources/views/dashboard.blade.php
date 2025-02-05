@@ -122,6 +122,10 @@
             border-bottom: 0.3px solid rgba(255, 255, 255, 0.526);
         }
 
+        .produtos-dropdown {
+            border-bottom: 0.3px solid rgba(255, 255, 255, 0.526);
+        }
+
         .submenu {
             max-height: 0;
             overflow: hidden;
@@ -299,16 +303,23 @@
             </div>
             <ul class="list-unstyled components">
                 <li class="{{ request()->routeIs('gerarOrcamento') ? 'active' : '' }}">
-                    <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt"
-                            style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
+                    <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt" style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
                 </li>
                 <li>
-                    <a href="#" id="dropdownToggle" class="clientes-dropdown" aria-expanded="false" style="padding-left: 21px;">Clientes</a>
-                    <li id="pageSubmenu" class="submenu">
+                    <a href="#" id="clientesDropdownToggle" class="clientes-dropdown" aria-expanded="false" style="padding-left: 21px;">Clientes</a>
+                    <div id="clientesSubmenu" class="submenu">
                         <a href="{{ route('cadastroClientes') }}" style="padding-left: 39px;">Cadastrar</a>
                         <a href="#" style="padding-left: 39px;">Cadastrados</a>
                         <a href="#" style="padding-left: 39px;">Relatório</a>
-                    </li>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" id="produtosDropdownToggle" class="produtos-dropdown" aria-expanded="false" style="padding-left: 21px;">Produtos</a>
+                    <div id="produtosSubmenu" class="submenu">
+                        <a href="#" style="padding-left: 39px;">Cadastrar</a>
+                        <a href="#" style="padding-left: 39px;">Cadastrados</a>
+                        <a href="#" style="padding-left: 39px;">Relatório</a>
+                    </div>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-user-plus" style="margin: 0px 6px 0px 12px;"></i> Clientes
@@ -399,20 +410,25 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var toggleButton = document.getElementById('dropdownToggle');
-            var submenu = document.getElementById('pageSubmenu');
+    var clientesDropdownToggle = document.getElementById('clientesDropdownToggle');
+    var produtosDropdownToggle = document.getElementById('produtosDropdownToggle');
+    var clientesSubmenu = document.getElementById('clientesSubmenu');
+    var produtosSubmenu = document.getElementById('produtosSubmenu');
 
-            toggleButton.addEventListener('click', function(e) {
-                e.preventDefault(); // Impede o comportamento padrão do link
+    clientesDropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault(); // Impede o comportamento padrão do link
+        clientesSubmenu.classList.toggle('open');
+        var isExpanded = clientesSubmenu.classList.contains('open');
+        clientesDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    });
 
-                // Alterna a classe 'open' para controlar a visibilidade com o efeito suave
-                submenu.classList.toggle('open');
-
-                // Atualiza o atributo aria-expanded com base na visibilidade
-                var isExpanded = submenu.classList.contains('open');
-                toggleButton.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-            });
-        });
+    produtosDropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault(); // Impede o comportamento padrão do link
+        produtosSubmenu.classList.toggle('open');
+        var isExpanded = produtosSubmenu.classList.contains('open');
+        produtosDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    });
+});
     </script>
 </body>
 
