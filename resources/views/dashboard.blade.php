@@ -108,41 +108,39 @@
             text-decoration: none;
         }
 
-        /* Hover para links não ativos */
         #sidebar ul li a:hover {
             color: rgb(65, 65, 65);
             background: #fff;
         }
 
-        /* Estilo para o link ativo, ou seja, quando foi clicado */
         #sidebar ul li a.active {
             color: rgb(73, 73, 73);
             background: #fff;
+        }
+
+        .clientes-dropdown {
+            border-bottom: 0.3px solid rgba(255, 255, 255, 0.526);
         }
 
         .submenu {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-out;
-            /* Transição suave */
+        }
+
+        .submenu a::before {
+            content: "• ";
+            color: rgb(60, 60, 60);
+            font-size: 18px;
         }
 
         .submenu.open {
-            max-height: 500px;
-            /* Limite máximo para a abertura */
+            max-height: 300px;
         }
 
         .submenu.closing {
             max-height: 0;
-            /* Garantir que feche suavemente */
             transition: max-height 0.5s ease-in;
-            /* Duração mais rápida para o fechamento */
-        }
-
-
-        .submenu.open {
-            max-height: 500px;
-            /* ou qualquer valor que seja suficiente para o submenu */
         }
 
         a[data-toggle="collapse"] {
@@ -304,20 +302,16 @@
                     <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt"
                             style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
                 </li>
-                <li class="{{ request()->routeIs('cadastroClientes') ? 'active' : '' }}">
-                    <a href="{{ route('cadastroClientes') }}"><i class="fas fa-users"
-                            style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
+                <li>
+                    <a href="#" id="dropdownToggle" class="clientes-dropdown" aria-expanded="false" style="padding-left: 21px;">Clientes</a>
+                    <li id="pageSubmenu" class="submenu">
+                        <a href="{{ route('cadastroClientes') }}" style="padding-left: 39px;">Cadastrar</a>
+                        <a href="#" style="padding-left: 39px;">Cadastrados</a>
+                        <a href="#" style="padding-left: 39px;">Relatório</a>
+                    </li>
                 </li>
                 <li>
-                    <a href="#" id="dropdownToggle" aria-expanded="false">Pages</a>
-                    <ul id="pageSubmenu" class="submenu">
-                        <li><a href="#">Page 1</a></li>
-                        <li><a href="#">Page 2</a></li>
-                        <li><a href="#">Page 3</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 10px 0px 12px;"></i> Clientes
+                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 6px 0px 12px;"></i> Clientes
                         Cadastrados</a>
                 </li>
                 <li>
@@ -328,7 +322,7 @@
                         Relatórios</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-cogs" style="margin: 0px 10px 0px 12px;"></i> Configurações</a>
+                    <a href="#"><i class="fas fa-cogs" style="margin: 0px 6px 0px 12px;"></i> Configurações</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-headset" style="margin: 0px 10px 0px 12px;"></i> Suporte</a>
