@@ -111,7 +111,12 @@
             }
         </style>
         <div id="form">
+            </div>
             <div id="form-container">
+                    <div class="lucro-multiplicador col-md-2">
+                        <label>Lucro Miltiplicador:</label>
+                        <input type="number" name="lucro" class="form-control" required>
+                    </div>
                 <div id="formsContainer">
                     <div class="form-row" id="formTemplate">
                         <div class="form-row-wrapper"> <!-- Novo contêiner para o botão -->
@@ -143,7 +148,7 @@
                 <button id="addFormBtn" type="button"
                     class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
                     onclick="addForm()">Adicionar</button>
-                <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1">Enviar</button>
+                <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-4 mb-3">Enviar</button>
             </div>
             <button id="addFormBtn" type="button"
                 class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none mt-2"
