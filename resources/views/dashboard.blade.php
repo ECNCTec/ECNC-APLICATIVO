@@ -304,7 +304,7 @@
             <ul class="list-unstyled components">
                 <li class="{{ request()->routeIs('gerarOrcamento') ? 'active' : '' }}">
                     <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt"
-                            style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
+                            style="margin: 0px 8px 0px 12px;"></i> Gerar Orçamento</a>
                 </li>
                 <li>
                     <a href="#" id="clientesDropdownToggle" class="clientes-dropdown" aria-expanded="false"

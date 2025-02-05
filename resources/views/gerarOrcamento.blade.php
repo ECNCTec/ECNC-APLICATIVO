@@ -48,7 +48,7 @@
             .button-adicionar {
                 background: linear-gradient(to bottom, #3387fb, #4242ff, #3387fb);
                 color: #fff;
-                height: 28px;
+                height: 27px;
                 padding: 0 20px;
                 border: none;
                 border-radius: 5px;
@@ -62,9 +62,9 @@
             }
 
             .button-enviar {
-                background: linear-gradient(to bottom, #32d758, #218838,#32d758);
+                background: linear-gradient(to bottom, #32d758, #218838, #32d758);
                 color: #fff;
-                height: 28px;
+                height: 27px;
                 padding: 0 20px;
                 border: none;
                 border-radius: 5px;
@@ -77,17 +77,48 @@
                 transition: background 0.3s ease;
             }
 
+            .form-row-wrapper {
+                position: relative;
+                width: 100%;
+            }
+
+            .buttonExcluir {
+                position: absolute;
+                top: -8px;
+                right: 0;
+                padding: 5px;
+                z-index: 10;
+            }
+
+            .buttonExcluir img {
+                height: 20px;
+            }
+
+            .form-row {
+                border: 1px solid rgb(143, 143, 143);
+                margin-top: 5px;
+                padding: 10px;
+            }
 
             @media (max-width: 768px) {
                 #form {
                     margin: 30px 10px 30px 10px;
                 }
+
+                .buttonExcluir img {
+                    height: 25px;
+                }
             }
         </style>
         <div id="form">
             <div id="form-container">
-                <form action="">
-                    <div class="form-row">
+                <div id="formsContainer">
+                    <div class="form-row" id="formTemplate">
+                        <div class="form-row-wrapper"> <!-- Novo contêiner para o botão -->
+                            <a class="buttonExcluir remove-btn d-none" onclick="removeForm(this)">
+                                <img src="{{ asset('storage/images/excluir2.png') }}" alt="">
+                            </a>
+                        </div>
                         <div class="form-group col-md-3">
                             <label>Material:</label>
                             <input type="text" name="material" class="form-control" required>
@@ -105,21 +136,61 @@
                             <input type="number" class="form-control tempoUsinagem" required>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
+
             <div class="d-flex justify-content-end">
-                <button type="submit"
-                    class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1">Adicionar</button>
+                <button id="addFormBtn" type="button"
+                    class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
+                    onclick="addForm()">Adicionar</button>
                 <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1">Enviar</button>
             </div>
-            <button type="submit"
-                class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none mt-2">Adicionar</button>
+            <button id="addFormBtn" type="button"
+                class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none mt-2"
+                onclick="addForm()">Adicionar</button>
             <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none">Enviar</button>
         </div>
     @endsection
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Adiciona um novo formulário ao container
+        function addForm() {
+            const formsContainer = document.getElementById('formsContainer');
+            const formTemplate = document.getElementById('formTemplate');
+            const newForm = formTemplate.cloneNode(true);
+
+            newForm.querySelectorAll('input').forEach(input => {
+                input.value = '';
+                input.classList.remove('is-invalid', 'is-valid');
+            });
+
+            newForm.querySelector('.remove-btn').classList.remove('d-none');
+            newForm.querySelector('.remove-btn').onclick = () => removeForm(newForm.querySelector('.remove-btn'));
+
+            formsContainer.appendChild(newForm);
+            updateRemoveButtons();
+        }
+
+        // Remove um formulário
+        function removeForm(button) {
+            button.closest('.form-row').remove();
+            updateRemoveButtons();
+        }
+
+        // Controla visibilidade dos botões "Remover"
+        function updateRemoveButtons() {
+            const forms = document.querySelectorAll('.form-row');
+            const showRemove = forms.length > 1;
+
+            forms.forEach(form => {
+                const removeButton = form.querySelector('.remove-btn');
+                showRemove ? removeButton.classList.remove('d-none') : removeButton.classList.add('d-none');
+            });
+        }
+    </script>
+
 </body>
 
 </html>
