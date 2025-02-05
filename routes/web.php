@@ -25,6 +25,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/cadastroClientes', function () {
         return view('cadastroClientes');
     })->name('cadastroClientes');
+
+    Route::get('/cadastroProdutos', function () {
+        return view('cadastroProdutos');
+    })->name('cadastroProdutos');
+
+    Route::get('/cadastroEstoque', function () {
+        return view('cadastroEstoque');
+    })->name('cadastroEstoque');
 });
 
 Route::get('/', function () {

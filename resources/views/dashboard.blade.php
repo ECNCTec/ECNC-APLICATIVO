@@ -324,17 +324,17 @@
                     <a href="#" id="produtosDropdownToggle" class="produtos-dropdown" aria-expanded="false"
                         style="padding-left: 21px;">Produtos</a>
                     <div id="produtosSubmenu" class="submenu">
-                        <a href="#" style="padding-left: 39px;">Cadastrar</a>
+                        <a href="{{ route('cadastroProdutos')}}" style="padding-left: 39px;">Cadastrar</a>
                         <a href="#" style="padding-left: 39px;">Cadastrados</a>
                         <a href="#" style="padding-left: 39px;">Relatório</a>
                     </div>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 6px 0px 12px;"></i> Clientes
-                        Cadastrados</a>
+                    <a href="{{ route('cadastroEstoque')}}"><i class="fas fa-box" style="margin: 0px 10px 0px 12px;"></i> Estoque</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-box" style="margin: 0px 10px 0px 12px;"></i> Pedidos</a>
+                    <a href="#"><i class="fas fa-user-plus" style="margin: 0px 6px 0px 12px;"></i> Clientes
+                        Cadastrados</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-chart-line" style="margin: 0px 10px 0px 12px;"></i>

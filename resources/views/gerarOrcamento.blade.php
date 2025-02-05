@@ -129,11 +129,11 @@
                         <input type="text" name="material" class="form-control" required>
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Comprimento:</label>
+                        <label>Comprimento da Arte:</label>
                         <input type="number" class="form-control comprimentoCalculo" required>
                     </div>
                     <div class="form-group col-md-3">
-                        <label>Largura:</label>
+                        <label>Largura da Arte:</label>
                         <input type="number" class="form-control larguraCalculo" required>
                     </div>
                     <div class="form-group col-md-3">
