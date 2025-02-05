@@ -118,6 +118,11 @@
             background: #fff;
         }
 
+        .content {
+            max-height: 100vh;;
+            overflow-y: auto;
+        }
+
         .clientes-dropdown {
             border-bottom: 0.3px solid rgba(255, 255, 255, 0.526);
         }
@@ -359,7 +364,7 @@
                 </li>
             </ul>
         </nav>
-        <div id="content">
+        <div id="content" class="content">
             <nav class="top-container navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <a href="#" id="sidebarCollapse" class="buttonSideBar">
