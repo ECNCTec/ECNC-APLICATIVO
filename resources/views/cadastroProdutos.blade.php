@@ -123,10 +123,10 @@
             }
 
             .crm-table-container h6 {
-                font-size: 20px;
+                font-size: 13px;
                 font-weight: 600;
                 color: #333;
-                margin-bottom: 20px;
+                margin-bottom: 5px;
             }
 
             .crm-table-container table.table {
@@ -144,7 +144,7 @@
             }
 
             .crm-table-container table.table th {
-                background-color: #007bff;
+                background: linear-gradient(to bottom, #c0c0c0, #808080);
                 color: #fff;
                 font-weight: 600;
                 text-transform: uppercase;
@@ -163,7 +163,7 @@
             }
 
             .crm-table-container table.table td button {
-                font-size: 14px;
+                font-size: 5px;
                 padding: 8px 12px;
                 margin: 0 5px;
                 border: none;
