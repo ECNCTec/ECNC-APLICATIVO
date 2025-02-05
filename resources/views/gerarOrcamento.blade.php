@@ -111,49 +111,48 @@
             }
         </style>
         <div id="form">
+        </div>
+        <div id="form-container">
+            <div class="lucro-multiplicador col-md-2">
+                <label>Lucro Miltiplicador:</label>
+                <input type="number" name="lucro" class="form-control" required>
             </div>
-            <div id="form-container">
-                    <div class="lucro-multiplicador col-md-2">
-                        <label>Lucro Miltiplicador:</label>
-                        <input type="number" name="lucro" class="form-control" required>
+            <div id="formsContainer">
+                <div class="form-row" id="formTemplate">
+                    <div class="form-row-wrapper"> <!-- Novo contêiner para o botão -->
+                        <a class="buttonExcluir remove-btn d-none" onclick="removeForm(this)">
+                            <img src="{{ asset('storage/images/excluir2.png') }}" alt="">
+                        </a>
                     </div>
-                <div id="formsContainer">
-                    <div class="form-row" id="formTemplate">
-                        <div class="form-row-wrapper"> <!-- Novo contêiner para o botão -->
-                            <a class="buttonExcluir remove-btn d-none" onclick="removeForm(this)">
-                                <img src="{{ asset('storage/images/excluir2.png') }}" alt="">
-                            </a>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Material:</label>
-                            <input type="text" name="material" class="form-control" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Comprimento:</label>
-                            <input type="number" class="form-control comprimentoCalculo" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Largura:</label>
-                            <input type="number" class="form-control larguraCalculo" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Tempo de Usinagem (min):</label>
-                            <input type="number" class="form-control tempoUsinagem" required>
-                        </div>
+                    <div class="form-group col-md-3">
+                        <label>Material:</label>
+                        <input type="text" name="material" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Comprimento:</label>
+                        <input type="number" class="form-control comprimentoCalculo" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Largura:</label>
+                        <input type="number" class="form-control larguraCalculo" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>Tempo de Usinagem (min):</label>
+                        <input type="number" class="form-control tempoUsinagem" required>
                     </div>
                 </div>
             </div>
-
-            <div class="d-flex justify-content-end">
-                <button id="addFormBtn" type="button"
-                    class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
-                    onclick="addForm()">Adicionar</button>
-                <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-4 mb-3">Enviar</button>
-            </div>
-            <button id="addFormBtn" type="button"
-                class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none mt-2"
+        </div>
+        <div class="d-flex justify-content-end">
+            <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
                 onclick="addForm()">Adicionar</button>
-            <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none">Enviar</button>
+            <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-4 mb-3">Gerar Orçamento</button>
+        </div>
+        <div class="mt-2 ml-2 mr-2">
+            <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none"
+                onclick="addForm()">Adicionar</button>
+            <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none mb-3">Gerar Orçamento</button>
+        </div>
         </div>
     @endsection
 
