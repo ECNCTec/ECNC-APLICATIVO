@@ -303,10 +303,12 @@
             </div>
             <ul class="list-unstyled components">
                 <li class="{{ request()->routeIs('gerarOrcamento') ? 'active' : '' }}">
-                    <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt" style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
+                    <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt"
+                            style="margin: 0px 10px 0px 12px;"></i> Gerar Orçamento</a>
                 </li>
                 <li>
-                    <a href="#" id="clientesDropdownToggle" class="clientes-dropdown" aria-expanded="false" style="padding-left: 21px;">Clientes</a>
+                    <a href="#" id="clientesDropdownToggle" class="clientes-dropdown" aria-expanded="false"
+                        style="padding-left: 21px;">Clientes</a>
                     <div id="clientesSubmenu" class="submenu">
                         <a href="{{ route('cadastroClientes') }}" style="padding-left: 39px;">Cadastrar</a>
                         <a href="#" style="padding-left: 39px;">Cadastrados</a>
@@ -314,7 +316,8 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#" id="produtosDropdownToggle" class="produtos-dropdown" aria-expanded="false" style="padding-left: 21px;">Produtos</a>
+                    <a href="#" id="produtosDropdownToggle" class="produtos-dropdown" aria-expanded="false"
+                        style="padding-left: 21px;">Produtos</a>
                     <div id="produtosSubmenu" class="submenu">
                         <a href="#" style="padding-left: 39px;">Cadastrar</a>
                         <a href="#" style="padding-left: 39px;">Cadastrados</a>
@@ -408,27 +411,28 @@
             });
         });
     </script>
+    <!-- Código para controlar a abertura e fechamento dos dropdowns -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    var clientesDropdownToggle = document.getElementById('clientesDropdownToggle');
-    var produtosDropdownToggle = document.getElementById('produtosDropdownToggle');
-    var clientesSubmenu = document.getElementById('clientesSubmenu');
-    var produtosSubmenu = document.getElementById('produtosSubmenu');
+            var clientesDropdownToggle = document.getElementById('clientesDropdownToggle');
+            var produtosDropdownToggle = document.getElementById('produtosDropdownToggle');
+            var clientesSubmenu = document.getElementById('clientesSubmenu');
+            var produtosSubmenu = document.getElementById('produtosSubmenu');
 
-    clientesDropdownToggle.addEventListener('click', function(e) {
-        e.preventDefault(); // Impede o comportamento padrão do link
-        clientesSubmenu.classList.toggle('open');
-        var isExpanded = clientesSubmenu.classList.contains('open');
-        clientesDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-    });
+            clientesDropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault(); // Impede o comportamento padrão do link
+                clientesSubmenu.classList.toggle('open');
+                var isExpanded = clientesSubmenu.classList.contains('open');
+                clientesDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            });
 
-    produtosDropdownToggle.addEventListener('click', function(e) {
-        e.preventDefault(); // Impede o comportamento padrão do link
-        produtosSubmenu.classList.toggle('open');
-        var isExpanded = produtosSubmenu.classList.contains('open');
-        produtosDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-    });
-});
+            produtosDropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault(); // Impede o comportamento padrão do link
+                produtosSubmenu.classList.toggle('open');
+                var isExpanded = produtosSubmenu.classList.contains('open');
+                produtosDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            });
+        });
     </script>
 </body>
 
