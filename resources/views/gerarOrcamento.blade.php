@@ -45,6 +45,39 @@
                 font-size: 12px;
             }
 
+            .button-adicionar {
+                background: linear-gradient(to bottom, #3387fb, #4242ff, #3387fb);
+                color: #fff;
+                height: 28px;
+                padding: 0 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 13px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                transition: background 0.3s ease;
+            }
+
+            .button-enviar {
+                background: linear-gradient(to bottom, #32d758, #218838,#32d758);
+                color: #fff;
+                height: 28px;
+                padding: 0 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 13px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                transition: background 0.3s ease;
+            }
+
+
             @media (max-width: 768px) {
                 #form {
                     margin: 30px 10px 30px 10px;
@@ -74,6 +107,14 @@
                     </div>
                 </form>
             </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit"
+                    class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1">Adicionar</button>
+                <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1">Enviar</button>
+            </div>
+            <button type="submit"
+                class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none mt-2">Adicionar</button>
+            <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none">Enviar</button>
         </div>
     @endsection
 

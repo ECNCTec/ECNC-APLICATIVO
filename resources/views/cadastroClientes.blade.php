@@ -46,6 +46,22 @@
                 font-size: 12px;
             }
 
+            .button-cadastrar {
+                background: linear-gradient(to bottom, #3387fb, #4242ff, #3387fb);
+                color: #fff;
+                height: 28px;
+                padding: 0 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 13px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                transition: background 0.3s ease;
+            }
+
             @media (max-width: 768px) {
                 #form {
                     margin: 30px 10px 30px 10px;
@@ -177,8 +193,10 @@
                             <input type="text" class="form-control">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-sm btn-block d-block d-sm-none">Cadastrar</button>
-                    <button type="submit" class="btn btn-primary btn-sm d-none d-sm-inline-block">Cadastrar</button>
+                    <div class="text-right">
+                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block mr-0">Cadastrar</button>
+                    </div>
+                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar</button>
                 </form>
             </div>
         </div>
