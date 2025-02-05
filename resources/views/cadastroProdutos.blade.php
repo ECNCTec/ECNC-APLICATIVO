@@ -70,36 +70,38 @@
         </style>
         <div id="form">
             <div id="form-container">
-                <form>
+                <form action="{{ route('produtos.store') }}" method="POST">
+                    @csrf
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="descricao_produto">Descrição do Produto:</label>
-                            <input type="text" id="descricao_produto" name="descricao_produto" class="form-control" required>
+                            <input type="text" id="descricao_produto" name="descricaoProduto" class="form-control" value="{{ old('descricaoProduto') }}" required>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="comprimento_mm">Comprimento do Produto (mm):</label>
-                            <input type="text" id="comprimento_mm" name="comprimento_mm" class="form-control" required>
+                            <label for="comprimento_produto">Comprimento do Produto (mm):</label>
+                            <input type="text" id="comprimento_mm" name="comprimentoProduto" class="form-control" value="{{ old('comprimentoProduto') }}" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="largura_mm">Largura do Produto (mm):</label>
-                            <input type="text" id="largura_mm" name="largura_mm" class="form-control" required>
+                            <input type="text" id="largura_mm" name="larguraProduto" class="form-control" value="{{ old('larguraProduto') }}" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="tipo_medida">Tipo de Medida:</label>
-                            <select id="tipo_medida" name="tipo_medida" class="form-control" required>
+                            <select id="tipo_medida" name="tipoMedidaProduto" class="form-control" required>
                                 <option disabled selected>Selecione uma opção:</option>
-                                <option value="unidade">Unidade</option>
-                                <option value="peso">Peso</option>
+                                <option value="unidade" {{ old('tipoMedidaProduto') == 'unidade' ? 'selected' : '' }}>Unidade</option>
+                                <option value="peso" {{ old('tipoMedidaProduto') == 'peso' ? 'selected' : '' }}>Peso</option>
                             </select>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Cadastrar</button>
+                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Cadastrar Produto</button>
                     </div>
-                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar</button>
-                </form>
+                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar Produto</button>
+                </form>                
             </div>
         </div>
+        @include('produtos.listagemProdutos', ['produtos' => $produtos])
     @endsection
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
