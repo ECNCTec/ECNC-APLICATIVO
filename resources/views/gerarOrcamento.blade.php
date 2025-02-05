@@ -146,7 +146,7 @@
         <div class="d-flex justify-content-end">
             <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
                 onclick="addForm()">Adicionar</button>
-            <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-4 mb-3">Gerar Orçamento</button>
+            <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-2 mb-3">Gerar Orçamento</button>
         </div>
         <div class="mt-2 ml-2 mr-2">
             <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none"
