@@ -120,6 +120,31 @@
             background: #fff;
         }
 
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            /* Transição suave */
+        }
+
+        .submenu.open {
+            max-height: 500px;
+            /* Limite máximo para a abertura */
+        }
+
+        .submenu.closing {
+            max-height: 0;
+            /* Garantir que feche suavemente */
+            transition: max-height 0.5s ease-in;
+            /* Duração mais rápida para o fechamento */
+        }
+
+
+        .submenu.open {
+            max-height: 500px;
+            /* ou qualquer valor que seja suficiente para o submenu */
+        }
+
         a[data-toggle="collapse"] {
             position: relative;
         }
@@ -284,18 +309,11 @@
                             style="margin: 0px 10px 0px 12px;"></i> Cadastro Clientes</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
+                    <a href="#" id="dropdownToggle" aria-expanded="false">Pages</a>
+                    <ul id="pageSubmenu" class="submenu">
+                        <li><a href="#">Page 1</a></li>
+                        <li><a href="#">Page 2</a></li>
+                        <li><a href="#">Page 3</a></li>
                     </ul>
                 </li>
                 <li>
@@ -382,6 +400,23 @@
                     });
                     this.classList.add('active');
                 });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toggleButton = document.getElementById('dropdownToggle');
+            var submenu = document.getElementById('pageSubmenu');
+
+            toggleButton.addEventListener('click', function(e) {
+                e.preventDefault(); // Impede o comportamento padrão do link
+
+                // Alterna a classe 'open' para controlar a visibilidade com o efeito suave
+                submenu.classList.toggle('open');
+
+                // Atualiza o atributo aria-expanded com base na visibilidade
+                var isExpanded = submenu.classList.contains('open');
+                toggleButton.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             });
         });
     </script>
