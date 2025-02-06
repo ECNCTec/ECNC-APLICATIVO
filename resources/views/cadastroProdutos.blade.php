@@ -267,9 +267,10 @@
             .alert-success,
             .alert-warning,
             .alert-danger {
-                background: linear-gradient(to bottom, #c8d8f1b9, #84a1c4, #c8d8f1b9);
+                background: linear-gradient(10deg,#84a1c4, #c8d8f1d3, #84a1c4, #c8d8f1b9);
                 color: rgb(40, 40, 40);
                 font-weight: bold;
+                border: none;
             }
 
             @media (max-width: 768px) {
