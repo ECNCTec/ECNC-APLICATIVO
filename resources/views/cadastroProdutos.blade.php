@@ -118,7 +118,7 @@
                 border: 1px solid #ddd;
                 padding: 5px;
                 margin: 10px 0;
-                background-color: #ffffff;
+                background: #f8f9fa;
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
 
@@ -163,8 +163,8 @@
             }
 
             .crm-table-container table.table td button {
-                font-size: 5px;
-                padding: 8px 12px;
+                font-size: 13px;
+                padding: 5px 12px;
                 margin: 0 5px;
                 border: none;
                 border-radius: 4px;
@@ -173,7 +173,7 @@
             }
 
             .crm-table-container table.table td button.btn-warning {
-                background-color: #ffc107;
+                background-color: #f1b500;
                 color: #fff;
             }
 
@@ -184,6 +184,20 @@
 
             .crm-table-container table.table td button:hover {
                 opacity: 0.9;
+            }
+
+            .descricao_produto,
+            .comprimento_produto,
+            .largura_produto,
+            .tipoMedidaProduto {
+                font-size: 13px;
+            }
+
+
+            .buttonAction {
+                border-radius: 25px;
+                margin: 0px;
+                padding: 0px;
             }
 
             /* Responsividade para dispositivos móveis */
@@ -275,7 +289,8 @@
                         <th>Comprimento (mm)</th>
                         <th>Largura (mm)</th>
                         <th>Tipo de Medida</th>
-                        <th></th>
+                        <th>Editar</th>
+                        <th>Excluir</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -288,11 +303,10 @@
                             <td>{{ ucfirst($produto->tipo_medida) }}</td>
                             <td>
                                 <!-- Botão de Edição - Abre o Modal -->
-                                <a type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
                                     data-target="#editModal{{ $produto->id }}">
-                                    Editar
+                                    <img src="{{ asset('storage/images/buttonEditar4.png') }}" alt="">
                                 </a>
-
                                 <!-- Modal de Edição -->
                                 <div class="modal fade" id="editModal{{ $produto->id }}" tabindex="-1" role="dialog"
                                     aria-labelledby="editModalLabel{{ $produto->id }}" aria-hidden="true">
@@ -303,7 +317,7 @@
                                                     Produto</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Fechar">
-                                                    <span aria-hidden="true">&times;</span>
+                                                    <span aria-hidden="true"><img src="{{ asset('storage/images/buttonExcluir2.png') }}" alt=""></span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
@@ -313,26 +327,28 @@
                                                     <div class="form-group">
                                                         <label for="descricao_produto">Descrição do Produto:</label>
                                                         <input type="text" id="descricao_produto" name="descricaoProduto"
-                                                            class="form-control" value="{{ $produto->descricao }}"
-                                                            required>
+                                                            class="descricao_produto form-control"
+                                                            value="{{ $produto->descricao }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="comprimento_produto">Comprimento do Produto
                                                             (mm)
                                                             :</label>
                                                         <input type="number" id="comprimento_produto"
-                                                            name="comprimentoProduto" class="form-control"
+                                                            name="comprimentoProduto"
+                                                            class="comprimento_produto form-control"
                                                             value="{{ $produto->comprimento }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="largura_produto">Largura do Produto (mm):</label>
                                                         <input type="number" id="largura_produto" name="larguraProduto"
-                                                            class="form-control" value="{{ $produto->largura }}" required>
+                                                            class="largura_produto form-control"
+                                                            value="{{ $produto->largura }}" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tipo_medida">Tipo de Medida:</label>
                                                         <select id="tipo_medida" name="tipoMedidaProduto"
-                                                            class="form-control" required>
+                                                            class="tipoMedidaProduto form-control" required>
                                                             <option value="unidade"
                                                                 {{ $produto->tipo_medida == 'unidade' ? 'selected' : '' }}>
                                                                 Unidade</option>
@@ -352,11 +368,12 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            </td>
+                            <td>
                                 <!-- Botão de Exclusão - Abre o Modal -->
-                                <a type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
                                     data-target="#deleteModal{{ $produto->id }}">
-                                    Excluir
+                                    <img src="{{ asset('storage/images/buttonExcluir2.png') }}" alt="">
                                 </a>
 
                                 <!-- Modal de Confirmação de Exclusão -->
@@ -370,7 +387,7 @@
                                                     Confirmar Exclusão</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Fechar">
-                                                    <span aria-hidden="true">&times;</span>
+                                                    <span aria-hidden="true"><img src="{{ asset('storage/images/buttonExcluir2.png') }}" alt=""></span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
