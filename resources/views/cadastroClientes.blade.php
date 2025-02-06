@@ -194,9 +194,9 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Cadastrar</button>
+                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Cadastrar Cliente</button>
                     </div>
-                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar</button>
+                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar Cliente</button>
                 </form>
             </div>
         </div>

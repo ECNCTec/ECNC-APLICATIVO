@@ -424,7 +424,7 @@
         </div>
         <div id="form" class="crm-table-container">
             <div class="search-container">
-                <h6>Atualmente, há {{ $quantidadeProdutos }} produtos cadastrados no sistema.</h6>
+                <h6>Atualmente, {{ $quantidadeProdutos }} produtos estão cadastrados.</h6>
 
                 <form action="{{ route('cadastroProdutos') }}" method="GET" class="search-form">
                     <div class="container-search">
