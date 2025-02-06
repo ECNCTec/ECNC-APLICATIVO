@@ -249,6 +249,29 @@
                 background: linear-gradient(to bottom, #d9d9d9, #6b6b6b, #acacac);
             }
 
+            .message {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                border-radius: 1px;
+                z-index: 1000;
+                min-width: 200px;
+                text-align: center;
+                font-size: 16px;
+                opacity: 1;
+                transition: opacity 1s ease-out;
+            }
+
+            .alert-success,
+            .alert-warning,
+            .alert-danger {
+                background: linear-gradient(to bottom, #c8d8f1b9, #84a1c4, #c8d8f1b9);
+                color: rgb(40, 40, 40);
+                font-weight: bold;
+            }
+
             @media (max-width: 768px) {
                 #form {
                     margin: 30px 10px -25px 10px;
@@ -562,37 +585,6 @@
                     </div>
                 </div>
             </div>
-            <style>
-                .message {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    padding: 20px;
-                    border-radius: 5px;
-                    z-index: 1000;
-                    min-width: 200px;
-                    text-align: center;
-                    font-size: 16px;
-                    opacity: 1;
-                    transition: opacity 1s ease-out;
-                }
-
-                .alert-success {
-                    background-color: #4CAF50;
-                    color: white;
-                }
-
-                .alert-danger {
-                    background-color: #f44336;
-                    color: white;
-                }
-
-                .alert-warning {
-                    background-color: #ff9800;
-                    color: white;
-                }
-            </style>
             <div>
                 @if (session('success'))
                     <div class="alert alert-success message">
@@ -621,18 +613,15 @@
     {{-- script para controle do tempo de aparição das mensagens no sistema --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Verifica se há mensagens para mostrar
             const messages = document.querySelectorAll('.message');
             messages.forEach(function(message) {
-                // Espera 5 segundos antes de desaparecer a mensagem
                 setTimeout(function() {
-                    message.style.opacity = '0'; // Efeito de fade
-                }, 3000); // 5 segundos
+                    message.style.opacity = '0';
+                }, 3000);
 
-                // Remove a mensagem completamente após o fade
                 setTimeout(function() {
                     message.remove();
-                }, 4000); // Espera 1 segundo depois do fade
+                }, 5000);
             });
         });
     </script>
