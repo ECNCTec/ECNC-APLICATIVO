@@ -190,6 +190,10 @@
                 padding: 0px;
             }
 
+            .buttonAction img {
+                width: 16px;
+            }
+
             .modal-dialog {
                 display: flex;
                 align-items: center;
@@ -330,6 +334,10 @@
                     padding: 0;
                 }
 
+                .buttonAction img {
+                    width: 22px;
+                }
+
                 .modal-dialog {
                     min-height: 100vh;
                 }
@@ -416,13 +424,13 @@
                                 <td>
                                     <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
                                         data-target="#editModal{{ $produto->id }}">
-                                        <img src="{{ asset('storage/images/buttonEditar4.png') }}" alt="">
+                                        <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
                                     </a>
                                 </td>
                                 <td>
                                     <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
                                         data-target="#deleteModal{{ $produto->id }}">
-                                        <img src="{{ asset('storage/images/buttonExcluir2.png') }}" alt="">
+                                        <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
                                     </a>
                                 </td>
                             </tr>
@@ -444,12 +452,12 @@
                     <p><strong>Largura (mm):</strong> {{ $produto->largura }}</p>
                     <p><strong>Tipo de Medida:</strong> {{ ucfirst($produto->tipo_medida) }}</p>
                     <div class="actions" style="position: absolute; top: 10px; right: 10px;">
-                        <a class="buttonAction btn btn-sm" data-toggle="modal" data-target="#editModal{{ $produto->id }}">
-                            <img src="{{ asset('storage/images/buttonEditar4.png') }}" alt="">
+                        <a class="buttonAction btn btn-sm mr-2" data-toggle="modal" data-target="#editModal{{ $produto->id }}">
+                            <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
                         </a>
                         <a class="buttonAction btn btn-sm" data-toggle="modal"
                             data-target="#deleteModal{{ $produto->id }}">
-                            <img src="{{ asset('storage/images/buttonExcluir2.png') }}" alt="">
+                            <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -526,7 +534,8 @@
                             Tem certeza que deseja excluir o produto "{{ $produto->descricao }}"?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="button-cancelar-modal btn" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="button-cancelar-modal btn"
+                                data-dismiss="modal">Cancelar</button>
                             <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
