@@ -218,7 +218,7 @@
 
                 .crm-table-container table.table th,
                 .crm-table-container table.table td {
-                    padding: 10px 15px;
+                    padding: 2px 15px;
                 }
 
                 .crm-table-container table.table td {
@@ -228,7 +228,7 @@
                     padding-right: 20px;
                     border: none;
                     border-bottom: 1px solid #f2f2f2;
-                    margin-bottom: 15px;
+                    margin-bottom: 2px;
                 }
 
                 .crm-table-container table.table th {
@@ -253,7 +253,6 @@
                 }
             }
 
-            @media (max-width: 768px) {}
         </style>
         <div id="form">
             <div id="form-container">
