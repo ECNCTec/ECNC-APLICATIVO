@@ -113,6 +113,11 @@
                 transform: translateY(-50%);
             }
 
+            .input-container input:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
 
             .crm-table-container table.table {
                 width: 100%;
