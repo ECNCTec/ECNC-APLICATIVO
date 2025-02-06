@@ -189,6 +189,20 @@
                 padding: 0px;
             }
 
+            .modal-dialog {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 70vh;
+            }
+
+            .modal-content {
+                width: 100%;
+                max-width: 800px;
+                margin: auto;
+                border-radius: 10px;
+            }
+
             @media (max-width: 768px) {
                 #form {
                     margin: 30px 10px -25px 10px;
@@ -252,14 +266,6 @@
                     padding: 5px 10px;
                 }
 
-                /* .crm-table-container {
-                        overflow-x: auto;
-                        padding: 5px;
-                        background: #f8f9fa;
-                        border: 1px solid #ddd;
-                        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                    } */
-
                 .mobile-table {
                     background: #f8f9fa;
                     border: 1px solid #ddd;
@@ -292,6 +298,14 @@
                     border: none;
                     cursor: pointer;
                     padding: 0;
+                }
+
+                .modal-dialog {
+                    min-height: 100vh;
+                }
+
+                .modal-content {
+                    max-width: 100%;
                 }
             }
         </style>
