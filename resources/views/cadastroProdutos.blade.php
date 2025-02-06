@@ -139,13 +139,13 @@
             .crm-table-container table.table td {
                 padding: 2px 8px;
                 text-align: center;
-                font-size: 14px;
+                font-size: 12px;
                 border-bottom: 1px solid #f2f2f2;
             }
 
             .crm-table-container table.table th {
-                background: linear-gradient(to bottom, #c0c0c0, #808080);
-                color: #fff;
+                background: linear-gradient(to bottom, #dcdcdc, #ffffff, #e7e7e7);
+                color: #333;
                 font-weight: 600;
                 text-transform: uppercase;
             }
@@ -275,7 +275,7 @@
                         <th>Comprimento (mm)</th>
                         <th>Largura (mm)</th>
                         <th>Tipo de Medida</th>
-                        <th>Ações</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
