@@ -400,17 +400,12 @@
         </div>
         <div id="form" class="crm-table-container">
             <div class="search-container">
-                <h6>Atualmente, há {{$quantidadeProdutos}} produtos cadastrados no sistema.</h6>
+                <h6>Atualmente, há {{ $quantidadeProdutos }} produtos cadastrados no sistema.</h6>
 
                 <form action="{{ route('cadastroProdutos') }}" method="GET" class="search-form">
                     <div class="container-search">
-                        <input 
-                            type="text" 
-                            class="input-container-search" 
-                            name="search" 
-                            placeholder="Pesquisar..."
-                            value="{{ request('search') }}" 
-                        >
+                        <input type="text" class="input-container-search" name="search" placeholder="Pesquisar..."
+                            value="{{ request('search') }}">
                         <button type="submit" aria-label="Pesquisar" class="submit-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
                                 class="bi bi-search" viewBox="0 0 16 16">
@@ -419,7 +414,7 @@
                             </svg>
                         </button>
                     </div>
-                </form>                
+                </form>
             </div>
             <div class="d-none d-md-block">
                 <table class="table table-bordered">
@@ -567,10 +562,80 @@
                     </div>
                 </div>
             </div>
+            <style>
+                .message {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    padding: 20px;
+                    border-radius: 5px;
+                    z-index: 1000;
+                    min-width: 200px;
+                    text-align: center;
+                    font-size: 16px;
+                    opacity: 1;
+                    transition: opacity 1s ease-out;
+                }
+
+                .alert-success {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+                .alert-danger {
+                    background-color: #f44336;
+                    color: white;
+                }
+
+                .alert-warning {
+                    background-color: #ff9800;
+                    color: white;
+                }
+            </style>
+            <div>
+                @if (session('success'))
+                    <div class="alert alert-success message">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger message">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('deleted'))
+                    <div class="alert alert-warning message">
+                        {{ session('deleted') }}
+                    </div>
+                @endif
+            </div>
         @endforeach
     @endsection
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- script para controle do tempo de aparição das mensagens no sistema --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Verifica se há mensagens para mostrar
+            const messages = document.querySelectorAll('.message');
+            messages.forEach(function(message) {
+                // Espera 5 segundos antes de desaparecer a mensagem
+                setTimeout(function() {
+                    message.style.opacity = '0'; // Efeito de fade
+                }, 3000); // 5 segundos
+
+                // Remove a mensagem completamente após o fade
+                setTimeout(function() {
+                    message.remove();
+                }, 4000); // Espera 1 segundo depois do fade
+            });
+        });
+    </script>
 </body>
 
 </html>

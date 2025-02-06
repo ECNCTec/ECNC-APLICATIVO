@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'required' => 'Este campo é obrigatório.',
+    'custom' => [
+        'tipoMedidaProduto' => [
+            'required' => 'Por favor, selecione uma opção para o Tipo de Medida.',
+        ],
+    ],
+];
