@@ -403,7 +403,13 @@
                 <h6>Produtos Cadastrados</h6>
                 <form action="{{ route('cadastroProdutos') }}" method="GET" class="search-form">
                     <div class="container-search">
-                        <input type="text" class="input-container-search" name="search" placeholder="Pesquisar...">
+                        <input 
+                            type="text" 
+                            class="input-container-search" 
+                            name="search" 
+                            placeholder="Pesquisar..."
+                            value="{{ request('search') }}" 
+                        >
                         <button type="submit" aria-label="Pesquisar" class="submit-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
                                 class="bi bi-search" viewBox="0 0 16 16">
@@ -412,7 +418,7 @@
                             </svg>
                         </button>
                     </div>
-                </form>
+                </form>                
             </div>
             <div class="d-none d-md-block">
                 <table class="table table-bordered">
