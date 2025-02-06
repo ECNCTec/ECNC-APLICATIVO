@@ -52,7 +52,7 @@
                 height: 28px;
                 padding: 0 20px;
                 border: none;
-                border-radius: 5px;
+                border-radius: 3px;
                 font-size: 13px;
                 cursor: pointer;
                 display: flex;

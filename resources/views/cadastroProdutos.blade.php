@@ -52,7 +52,7 @@
                 height: 28px;
                 padding: 0 20px;
                 border: none;
-                border-radius: 5px;
+                border-radius: 3px;
                 font-size: 13px;
                 cursor: pointer;
                 display: flex;
@@ -66,54 +66,6 @@
                 background-color: rgba(0, 0, 0, 0.2);
             }
 
-            @media (max-width: 768px) {
-                #form {
-                    margin: 30px 10px 30px 10px;
-                }
-            }
-        </style>
-        <div id="form">
-            <div id="form-container">
-                <form action="{{ route('produtos.store') }}" method="POST">
-                    @csrf
-                    <div class="form-row">
-                        <div class="form-group col-md-3">
-                            <label for="descricao_produto">Descrição do Produto:</label>
-                            <input type="text" id="descricao_produto" name="descricaoProduto" class="form-control"
-                                value="{{ old('descricaoProduto') }}" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="comprimento_produto">Comprimento do Produto (mm):</label>
-                            <input type="text" id="comprimento_mm" name="comprimentoProduto" class="form-control"
-                                value="{{ old('comprimentoProduto') }}" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="largura_mm">Largura do Produto (mm):</label>
-                            <input type="text" id="largura_mm" name="larguraProduto" class="form-control"
-                                value="{{ old('larguraProduto') }}" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label for="tipo_medida">Tipo de Medida:</label>
-                            <select id="tipo_medida" name="tipoMedidaProduto" class="form-control" required>
-                                <option disabled selected>Selecione uma opção:</option>
-                                <option value="unidade" {{ old('tipoMedidaProduto') == 'unidade' ? 'selected' : '' }}>
-                                    Unidade</option>
-                                <option value="peso" {{ old('tipoMedidaProduto') == 'peso' ? 'selected' : '' }}>Peso
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Cadastrar
-                            Produto</button>
-                    </div>
-                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar
-                        Produto</button>
-                </form>
-            </div>
-        </div>
-        <style>
-            /* Estilos Gerais da Tabela */
             .crm-table-container {
                 border: 1px solid #ddd;
                 padding: 5px;
@@ -122,12 +74,45 @@
                 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             }
 
-            .crm-table-container h6 {
+            .search-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            .search-container h6 {
                 font-size: 13px;
                 font-weight: 600;
                 color: #333;
-                margin-bottom: 5px;
+                margin-bottom: 0;
             }
+
+            .input-container {
+                position: relative;
+                display: flex;
+                align-items: center;
+                width: auto;
+            }
+
+            .input-container input {
+                padding-right: 30px;
+                height: 25px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                font-size: 13px;
+                line-height: 25px;
+                width: 100%;
+            }
+
+            .input-container svg {
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
 
             .crm-table-container table.table {
                 width: 100%;
@@ -193,17 +178,32 @@
                 font-size: 13px;
             }
 
-
             .buttonAction {
                 border-radius: 25px;
                 margin: 0px;
                 padding: 0px;
             }
 
-            /* Responsividade para dispositivos móveis */
             @media (max-width: 768px) {
+                #form {
+                    margin: 30px 10px -25px 10px;
+                }
+
+                .search-container {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+
+                .input-container {
+                    width: 100%;
+                    margin-top: 5px;
+                }
+
+                .input-container input {
+                    width: 100%;
+                }
+
                 .crm-table-container {
-                    padding: 10px;
                     margin: 10px 0;
                 }
 
@@ -248,37 +248,63 @@
                 }
             }
 
-            /* Estilo para a paginação, caso esteja implementada */
-            .pagination {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-            }
+            @media (max-width: 768px) {}
+        </style>
+        <div id="form">
+            <div id="form-container">
+                <form action="{{ route('produtos.store') }}" method="POST">
+                    @csrf
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="descricao_produto">Descrição do Produto:</label>
+                            <input type="text" id="descricao_produto" name="descricaoProduto" class="form-control"
+                                value="{{ old('descricaoProduto') }}" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="comprimento_produto">Comprimento do Produto (mm):</label>
+                            <input type="text" id="comprimento_mm" name="comprimentoProduto" class="form-control"
+                                value="{{ old('comprimentoProduto') }}" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="largura_mm">Largura do Produto (mm):</label>
+                            <input type="text" id="largura_mm" name="larguraProduto" class="form-control"
+                                value="{{ old('larguraProduto') }}" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="tipo_medida">Tipo de Medida:</label>
+                            <select id="tipo_medida" name="tipoMedidaProduto" class="form-control" required>
+                                <option disabled selected>Selecione uma opção:</option>
+                                <option value="unidade" {{ old('tipoMedidaProduto') == 'unidade' ? 'selected' : '' }}>
+                                    Unidade</option>
+                                <option value="peso" {{ old('tipoMedidaProduto') == 'peso' ? 'selected' : '' }}>Peso
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Cadastrar
+                            Produto</button>
+                    </div>
+                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar
+                        Produto</button>
+                </form>
+            </div>
+        </div>
+        <style>
 
-            .pagination li {
-                list-style-type: none;
-                margin: 0 5px;
-            }
-
-            .pagination li a {
-                padding: 10px 20px;
-                background-color: #007bff;
-                color: #fff;
-                text-decoration: none;
-                border-radius: 4px;
-                font-weight: 600;
-            }
-
-            .pagination li a:hover {
-                background-color: #0056b3;
-            }
-
-            .pagination li a.active {
-                background-color: #0056b3;
-            }
         </style>
         <div id="form" class="crm-table-container">
-            <h6>Produtos Cadastrados</h6>
+            <div class="search-container">
+                <h6>Produtos Cadastrados</h6>
+                <div class="input-container">
+                    <input type="text" placeholder="Pesquisar..." />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
+                        class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                </div>
+            </div>
 
             <!-- Tabela para exibir produtos -->
             <table class="table table-bordered">
@@ -317,7 +343,9 @@
                                                     Produto</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Fechar">
-                                                    <span aria-hidden="true"><img src="{{ asset('storage/images/buttonExcluir2.png') }}" alt=""></span>
+                                                    <span aria-hidden="true"><img
+                                                            src="{{ asset('storage/images/buttonExcluir2.png') }}"
+                                                            alt=""></span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
@@ -387,7 +415,9 @@
                                                     Confirmar Exclusão</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Fechar">
-                                                    <span aria-hidden="true"><img src="{{ asset('storage/images/buttonExcluir2.png') }}" alt=""></span>
+                                                    <span aria-hidden="true"><img
+                                                            src="{{ asset('storage/images/buttonExcluir2.png') }}"
+                                                            alt=""></span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
