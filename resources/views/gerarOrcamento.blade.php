@@ -121,7 +121,7 @@
                 <div class="form-row" id="formTemplate">
                     <div class="form-row-wrapper"> <!-- Novo contêiner para o botão -->
                         <a class="buttonExcluir remove-btn d-none" onclick="removeForm(this)">
-                            <img src="{{ asset('storage/images/excluir2.png') }}" alt="">
+                            <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
                         </a>
                     </div>
                     <div class="form-group col-md-3">
