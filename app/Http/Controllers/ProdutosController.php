@@ -9,10 +9,13 @@ class ProdutosController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->input('search'); 
+        $search = $request->input('search');
 
         $produtos = Produto::when($search, function ($query, $search) {
-            return $query->where('descricao', 'like', '%' . $search . '%');
+            return $query->where(function ($query) use ($search) {
+                $query->where('descricao', 'like', '%' . $search . '%')
+                    ->orWhere('id', '=', $search);
+            });
         })->get();
 
         return view('cadastroProdutos', compact('produtos'));
