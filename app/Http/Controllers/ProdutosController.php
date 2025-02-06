@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class ProdutosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Produto::paginate(20);
+        $search = $request->input('search'); 
+
+        $produtos = Produto::when($search, function ($query, $search) {
+            return $query->where('descricao', 'like', '%' . $search . '%');
+        })->get();
+
         return view('cadastroProdutos', compact('produtos'));
     }
 

@@ -119,6 +119,13 @@
                 box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
             }
 
+            .submit-btn {
+                position: absolute;
+                top: 50%;
+                right: 2px;
+                border: none;
+            }
+
             .crm-table-container table.table {
                 width: 100%;
                 border-collapse: collapse;
@@ -390,16 +397,20 @@
         <div id="form" class="crm-table-container">
             <div class="search-container">
                 <h6>Produtos Cadastrados</h6>
-                <div class="input-container">
-                    <input type="text" placeholder="Pesquisar..." />
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
-                        class="bi bi-search" viewBox="0 0 16 16">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                </div>
+                <form action="{{ route('cadastroProdutos') }}" method="GET" class="search-form">
+                    <div class="input-container">
+                        <input type="text" class="input-container" name="search" placeholder="Pesquisar..."
+                            value="{{ request()->input('search') }}" />
+                        <button type="submit" aria-label="Pesquisar" class="submit-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
+                                class="bi bi-search" viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
             </div>
-
             <div class="d-none d-md-block">
                 <table class="table table-bordered">
                     <thead>
@@ -452,7 +463,8 @@
                     <p><strong>Largura (mm):</strong> {{ $produto->largura }}</p>
                     <p><strong>Tipo de Medida:</strong> {{ ucfirst($produto->tipo_medida) }}</p>
                     <div class="actions" style="position: absolute; top: 10px; right: 10px;">
-                        <a class="buttonAction btn btn-sm mr-2" data-toggle="modal" data-target="#editModal{{ $produto->id }}">
+                        <a class="buttonAction btn btn-sm mr-2" data-toggle="modal"
+                            data-target="#editModal{{ $produto->id }}">
                             <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
                         </a>
                         <a class="buttonAction btn btn-sm" data-toggle="modal"
