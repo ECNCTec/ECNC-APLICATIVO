@@ -89,14 +89,14 @@
                 margin-bottom: 0;
             }
 
-            .input-container {
+            .container-search {
                 position: relative;
                 display: flex;
                 align-items: center;
                 width: auto;
             }
 
-            .input-container input {
+            .container-search input {
                 padding-right: 30px;
                 height: 25px;
                 border: 1px solid #ccc;
@@ -106,14 +106,14 @@
                 width: 100%;
             }
 
-            .input-container svg {
+            .container-search svg {
                 position: absolute;
                 right: 8px;
                 top: 50%;
                 transform: translateY(-50%);
             }
 
-            .input-container input:focus {
+            .container-search input:focus {
                 border-color: #007bff;
                 outline: none;
                 box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
@@ -122,8 +122,13 @@
             .submit-btn {
                 position: absolute;
                 top: 50%;
-                right: 2px;
+                right: 3px;
+                transform: translateY(-50%);
+                background: none;
                 border: none;
+                cursor: pointer;
+                padding: 0;
+                outline: none;
             }
 
             .crm-table-container table.table {
@@ -249,18 +254,17 @@
                     margin: 30px 10px -25px 10px;
                 }
 
-                .search-container {
-                    flex-direction: column;
-                    align-items: flex-start;
+                .search-form {
+                    width: 100%;
                 }
 
-                .input-container {
-                    width: 100%;
+                .container-search {
                     margin-top: 5px;
                 }
 
-                .input-container input {
-                    width: 100%;
+                .search-container {
+                    flex-direction: column;
+                    align-items: flex-start;
                 }
 
                 .crm-table-container {
@@ -398,9 +402,8 @@
             <div class="search-container">
                 <h6>Produtos Cadastrados</h6>
                 <form action="{{ route('cadastroProdutos') }}" method="GET" class="search-form">
-                    <div class="input-container">
-                        <input type="text" class="input-container" name="search" placeholder="Pesquisar..."
-                            value="{{ request()->input('search') }}" />
+                    <div class="container-search">
+                        <input type="text" class="input-container-search" name="search" placeholder="Pesquisar...">
                         <button type="submit" aria-label="Pesquisar" class="submit-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
                                 class="bi bi-search" viewBox="0 0 16 16">
