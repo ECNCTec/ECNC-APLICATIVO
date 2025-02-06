@@ -267,7 +267,7 @@
             .alert-success,
             .alert-warning,
             .alert-danger {
-                background: linear-gradient(10deg,#84a1c4, #c8d8f1d3, #84a1c4, #c8d8f1b9);
+                background: linear-gradient(10deg,#c8d8f1d3, #dee9f9d3, #c8d8f1d3, #dee9f9d3);
                 color: rgb(40, 40, 40);
                 font-weight: bold;
                 border: none;
@@ -618,11 +618,11 @@
             messages.forEach(function(message) {
                 setTimeout(function() {
                     message.style.opacity = '0';
-                }, 3000);
+                }, 2000);
 
                 setTimeout(function() {
                     message.remove();
-                }, 5000);
+                }, 15000);
             });
         });
     </script>
