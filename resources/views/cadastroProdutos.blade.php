@@ -179,7 +179,8 @@
             .descricao_produto,
             .comprimento_produto,
             .largura_produto,
-            .tipoMedidaProduto {
+            .tipoMedidaProduto,
+            .modal-body {
                 font-size: 13px;
             }
 
@@ -200,7 +201,7 @@
                 width: 100%;
                 max-width: 800px;
                 margin: auto;
-                border-radius: 10px;
+                border-radius: 3px;
             }
 
             @media (max-width: 768px) {
@@ -433,7 +434,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $produto->id }}">Editar Produto</h5>
+                            <h6 class="modal-title" id="editModalLabel{{ $produto->id }}">Editar Produto</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -443,24 +444,24 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label for="descricao_produto">Descrição do Produto:</label>
+                                    <label for="descricao_produto" class="descricao_produto">Descrição do Produto:</label>
                                     <input type="text" id="descricao_produto" name="descricaoProduto"
                                         class="descricao_produto form-control" value="{{ $produto->descricao }}"
                                         required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="comprimento_produto">Comprimento (mm):</label>
+                                    <label for="comprimento_produto" class="comprimento_produto">Comprimento (mm):</label>
                                     <input type="number" id="comprimento_produto" name="comprimentoProduto"
                                         class="comprimento_produto form-control" value="{{ $produto->comprimento }}"
                                         required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="largura_produto">Largura (mm):</label>
+                                    <label for="largura_produto" class="largura_produto">Largura (mm):</label>
                                     <input type="number" id="largura_produto" name="larguraProduto"
                                         class="largura_produto form-control" value="{{ $produto->largura }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tipo_medida">Tipo de Medida:</label>
+                                    <label for="tipo_medida" class="tipoMedidaProduto">Tipo de Medida:</label>
                                     <select id="tipo_medida" name="tipoMedidaProduto"
                                         class="tipoMedidaProduto form-control" required>
                                         <option value="unidade"
@@ -487,7 +488,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel{{ $produto->id }}">Confirmar Exclusão</h5>
+                            <h6 class="modal-title" id="deleteModalLabel{{ $produto->id }}">Confirmar Exclusão</h6>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                 <span aria-hidden="true">&times;</span>
                             </button>
