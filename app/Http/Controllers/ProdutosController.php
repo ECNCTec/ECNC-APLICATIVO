@@ -18,7 +18,9 @@ class ProdutosController extends Controller
             });
         })->get();
 
-        return view('cadastroProdutos', compact('produtos'));
+        $quantidadeProdutos = $produtos->count();
+
+        return view('cadastroProdutos', compact('produtos', 'quantidadeProdutos'));
     }
 
     public function create()
@@ -29,10 +31,17 @@ class ProdutosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'descricaoProduto' => 'required|string|max:255',
+            'descricaoProduto' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:produtos,descricao', 
+            ],
             'comprimentoProduto' => 'required|numeric',
             'larguraProduto' => 'required|numeric',
             'tipoMedidaProduto' => 'required|in:unidade,peso',
+        ], [
+            'descricaoProduto.unique' => 'Já existe um produto com essa descrição. Por favor, escolha outro nome.',
         ]);
 
         Produto::create([
