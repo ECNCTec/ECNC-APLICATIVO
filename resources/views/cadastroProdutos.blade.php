@@ -204,6 +204,35 @@
                 border-radius: 3px;
             }
 
+            .button-atualizar-modal,
+            .button-excluir-modal,
+            .button-cancelar-modal {
+                color: #fff;
+                height: 26px;
+                padding: 0 15px;
+                border: none;
+                border-radius: 3px;
+                font-size: 13px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                transition: background 0.3s ease;
+            }
+
+            .button-atualizar-modal {
+                background: linear-gradient(to bottom, #3387fb, #4242ff, #3387fb);
+            }
+
+            .button-excluir-modal {
+                background: linear-gradient(to bottom, #ff7272, #d60909, #ff7272);
+            }
+
+            .button-cancelar-modal {
+                background: linear-gradient(to bottom, #d9d9d9, #6b6b6b, #acacac);
+            }
+
             @media (max-width: 768px) {
                 #form {
                     margin: 30px 10px -25px 10px;
@@ -474,9 +503,9 @@
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
+                                    <button type="button" class="button-cancelar-modal btn"
                                         data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-warning">Atualizar Produto</button>
+                                    <button type="submit" class="button-atualizar-modal btn">Atualizar Produto</button>
                                 </div>
                             </form>
                         </div>
@@ -497,11 +526,11 @@
                             Tem certeza que deseja excluir o produto "{{ $produto->descricao }}"?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="button-cancelar-modal btn" data-dismiss="modal">Cancelar</button>
                             <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                <button type="submit" class="button-excluir-modal btn">Excluir</button>
                             </form>
                         </div>
                     </div>
