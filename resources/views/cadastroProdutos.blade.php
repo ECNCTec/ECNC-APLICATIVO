@@ -464,9 +464,6 @@
                             <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="">
                         </a>
                     </div>
-                    <style>
-
-                    </style>
                     <div class="modal fade" id="filtroModal" tabindex="-1" role="dialog"
                         aria-labelledby="filtroModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -482,42 +479,48 @@
                                         <div class="form-group">
                                             <label for="idDescricao">ID ou Descrição</label>
                                             <div class="input-group">
-                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição">
+                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" 
+                                                    placeholder="Digite ID ou descrição"
+                                                    value="{{ request()->input('search') }}">
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="maiorComprimento">Comprimento máximo:</label>
-                                                <input type="number" name="maiorComprimento" class="form-control" id="maiorComprimento">
+                                                <input type="number" name="maiorComprimento" class="form-control" id="maiorComprimento"
+                                                    value="{{ request()->input('maiorComprimento') }}">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="menorComprimento">Comprimento mínimo</label>
-                                                <input type="number" name="menorComprimento" class="form-control" id="menorComprimento">
+                                                <input type="number" name="menorComprimento" class="form-control" id="menorComprimento"
+                                                    value="{{ request()->input('menorComprimento') }}">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="maiorLargura">Largura máxima:</label>
-                                                <input type="number" name="maiorLargura" class="form-control" id="maiorLargura">
+                                                <input type="number" name="maiorLargura" class="form-control" id="maiorLargura"
+                                                    value="{{ request()->input('maiorLargura') }}">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="menorLargura">Largura máxima:</label>
-                                                <input type="number" name="menorLargura" class="form-control" id="menorLargura">
+                                                <label for="menorLargura">Largura mínima:</label>
+                                                <input type="number" name="menorLargura" class="form-control" id="menorLargura"
+                                                    value="{{ request()->input('menorLargura') }}">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="tipoMedida">Tipo de Medida</label>
                                             <select name="tipoMedida" class="form-control" id="tipoMedida">
                                                 <option value="" disabled selected>Selecione uma opção:</option>
-                                                <option value="Unidade">Unidade</option>
-                                                <option value="Peso">Peso</option>
+                                                <option value="Unidade" {{ request()->input('tipoMedida') == 'Unidade' ? 'selected' : '' }}>Unidade</option>
+                                                <option value="Peso" {{ request()->input('tipoMedida') == 'Peso' ? 'selected' : '' }}>Peso</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
                                         </div>
-                                    </form>                                    
+                                    </form>                                                                    
                                 </div>
                             </div>
                         </div>
