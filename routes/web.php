@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\EstoqueController;
+use App\Http\Controllers\FornecedorController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login.form');
 
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/cadastroFornecedor', function () {
         return view('cadastroFornecedor');
     })->name('cadastroFornecedor');
+
+    Route::resource('cadastroFornecedores', FornecedorController::class);
 
     Route::get('/cadastroProdutos', [ProdutosController::class, 'index'])->name('cadastroProdutos');
     Route::resource('produtos', ProdutosController::class)->except(['index']);

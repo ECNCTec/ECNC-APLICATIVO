@@ -70,7 +70,7 @@
         </style>
         <div id="form">
             <div id="form-container">
-                <form>
+                <form method="POST" action="{{ route('cadastroFornecedores.store') }}">
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>CNPJ/CPF:</label>
