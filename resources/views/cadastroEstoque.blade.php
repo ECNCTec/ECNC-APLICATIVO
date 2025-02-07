@@ -72,9 +72,13 @@
             <div id="form-container">
                 <form>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label for="descricao_produto">Descrição do Produto:</label>
                             <input type="text" id="descricao_produto" name="descricao_produto" class="form-control" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="comprimento_mm">Fornecedor:</label>
+                            <input type="text" id="comprimento_mm" name="comprimento_mm" class="form-control" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="comprimento_mm">Quantidade de Peças:</label>

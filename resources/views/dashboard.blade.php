@@ -119,7 +119,7 @@
         }
 
         .content {
-            max-height: 100vh;;
+            max-height: 100vh;
             overflow-y: auto;
         }
 
@@ -324,13 +324,24 @@
                     <a href="#" id="produtosDropdownToggle" class="produtos-dropdown" aria-expanded="false"
                         style="padding-left: 21px;">Produtos</a>
                     <div id="produtosSubmenu" class="submenu">
-                        <a href="{{ route('cadastroProdutos')}}" style="padding-left: 39px;">Cadastrar</a>
+                        <a href="{{ route('cadastroProdutos') }}" style="padding-left: 39px;">Cadastrar</a>
                         <a href="#" style="padding-left: 39px;">Cadastrados</a>
                         <a href="#" style="padding-left: 39px;">Relatório</a>
                     </div>
                 </li>
                 <li>
-                    <a href="{{ route('cadastroEstoque')}}"><i class="fas fa-box" style="margin: 0px 10px 0px 12px;"></i> Estoque</a>
+                    <a href="#" id="fornecedorDropdownToggle" class="produtos-dropdown" aria-haspopup="false"
+                        style="padding-left: 21px;" aria-expanded="false">Fornecedores</a>
+                    <div id="fornecedorSubmenu" class="submenu">
+                        <!-- Itens de Fornecedores -->
+                        <a href="#" style="padding-left: 39px;">Cadastrar</a>
+                        <a href="#" style="padding-left: 39px;">Item 2</a>
+                        <a href="#" style="padding-left: 39px;">Item 3</a>
+                    </div>
+                </li>                
+                <li>
+                    <a href="{{ route('cadastroEstoque') }}"><i class="fas fa-box"
+                            style="margin: 0px 10px 0px 12px;"></i> Estoque</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-user-plus" style="margin: 0px 6px 0px 12px;"></i> Clientes
@@ -421,8 +432,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             var clientesDropdownToggle = document.getElementById('clientesDropdownToggle');
             var produtosDropdownToggle = document.getElementById('produtosDropdownToggle');
+            var fornecedorDropdownToggle = document.getElementById('fornecedorDropdownToggle');
             var clientesSubmenu = document.getElementById('clientesSubmenu');
             var produtosSubmenu = document.getElementById('produtosSubmenu');
+            var fornecedorSubmenu = document.getElementById('fornecedorSubmenu');
 
             clientesDropdownToggle.addEventListener('click', function(e) {
                 e.preventDefault(); // Impede o comportamento padrão do link
@@ -436,6 +449,13 @@
                 produtosSubmenu.classList.toggle('open');
                 var isExpanded = produtosSubmenu.classList.contains('open');
                 produtosDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            });
+
+            fornecedorDropdownToggle.addEventListener('click', function(e) { // Novo evento para fornecedores
+                e.preventDefault(); // Impede o comportamento padrão do link
+                fornecedorSubmenu.classList.toggle('open');
+                var isExpanded = fornecedorSubmenu.classList.contains('open');
+                fornecedorDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             });
         });
     </script>
