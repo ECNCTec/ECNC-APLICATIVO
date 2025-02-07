@@ -59,13 +59,13 @@ class ProdutosController extends Controller
                 'required',
                 'string',
                 'max:255',
-                'unique:produtos,descricao',
+                'unique:produtos,descricao,NULL,id,user_id,' . auth()->id(),
             ],
             'tipoMedidaProduto' => 'required|in:unidade,peso',
             'comprimentoProduto' => 'required_if:tipoMedidaProduto,unidade|nullable|numeric',
             'larguraProduto' => 'required_if:tipoMedidaProduto,unidade|nullable|numeric',
         ], [
-            'descricaoProduto.unique' => 'Já existe um produto com essa descrição. Por favor, escolha outro nome.',
+            'descricaoProduto.unique' => 'Você já cadastrou um produto com essa descrição. Por favor, escolha outro nome.',
             'comprimentoProduto.required_if' => 'O comprimento do produto é obrigatório quando o tipo de medida for unidade.',
             'larguraProduto.required_if' => 'A largura do produto é obrigatória quando o tipo de medida for unidade.',
         ]);
@@ -108,7 +108,7 @@ class ProdutosController extends Controller
         ]);
 
         $produto = Produto::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
-        
+
         $produto->update([
             'descricao' => $request->descricaoProduto,
             'comprimento' => $request->comprimentoProduto,

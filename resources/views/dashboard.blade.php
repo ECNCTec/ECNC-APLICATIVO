@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* DEMO STYLE */
         body {
             font-family: 'Poppins', sans-serif;
             background: #fafafa;
@@ -375,6 +374,7 @@
             </ul>
         </nav>
         <div id="content" class="content">
+            <p>Bem-vindo, {{ auth()->user()->email }}!</p>
             <nav class="top-container navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <a href="#" id="sidebarCollapse" class="buttonSideBar">
