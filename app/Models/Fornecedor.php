@@ -12,6 +12,7 @@ class Fornecedor extends Model
     protected $table = 'fornecedores';
 
     protected $fillable = [
+        'user_id',
         'cpf_cnpj',
         'tipo_pessoa',
         'sexo',
@@ -32,4 +33,9 @@ class Fornecedor extends Model
         'contribuinte_icms',
         'operacao_consumidor_final',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class); // Cada fornecedor pertence a um usuário
+    }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Fornecedor;
+use App\Models\User;  
 use Faker\Factory as Faker;
 
 class FornecedorSeeder extends Seeder
@@ -13,7 +14,10 @@ class FornecedorSeeder extends Seeder
         $faker = Faker::create();
 
         for ($i = 0; $i < 50; $i++) {
+            $user = User::inRandomOrder()->first();
+
             Fornecedor::create([
+                'user_id' => $user->id, 
                 'cpf_cnpj' => $faker->numerify('###.###.###-##'), 
                 'tipo_pessoa' => $faker->randomElement(['fisica', 'juridica']),
                 'sexo' => $faker->randomElement(['masculino', 'feminino']),

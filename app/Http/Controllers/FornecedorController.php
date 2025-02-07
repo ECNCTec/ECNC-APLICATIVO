@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Fornecedor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FornecedorController extends Controller
 {
     public function index()
     {
-        $fornecedores = Fornecedor::all(); 
+        $fornecedores = Fornecedor::where('user_id', Auth::id())->get();
+        
         return view('cadastroFornecedor', compact('fornecedores'));
     }
 
@@ -37,14 +39,15 @@ class FornecedorController extends Controller
             'status' => 'required',
         ]);
 
-        Fornecedor::create($request->all());
+        Fornecedor::create(array_merge($request->all(), ['user_id' => Auth::id()]));
 
         return redirect()->route('cadastroFornecedor')->with('success', 'Fornecedor cadastrado com sucesso!');
     }
 
     public function edit($id)
     {
-        $fornecedor = Fornecedor::findOrFail($id); 
+        $fornecedor = Fornecedor::where('user_id', Auth::id())->findOrFail($id);
+        
         return view('cadastroFornecedor', compact('fornecedor'));
     }
 
@@ -67,7 +70,7 @@ class FornecedorController extends Controller
             'status' => 'required',
         ]);
 
-        $fornecedor = Fornecedor::findOrFail($id);
+        $fornecedor = Fornecedor::where('user_id', Auth::id())->findOrFail($id);
         $fornecedor->update($request->all());
 
         return redirect()->route('cadastroFornecedor')->with('success', 'Fornecedor atualizado com sucesso!');
@@ -75,7 +78,7 @@ class FornecedorController extends Controller
 
     public function destroy($id)
     {
-        $fornecedor = Fornecedor::findOrFail($id);
+        $fornecedor = Fornecedor::where('user_id', Auth::id())->findOrFail($id);
         $fornecedor->delete();
 
         return redirect()->route('cadastroFornecedor')->with('success', 'Fornecedor excluído com sucesso!');
@@ -83,7 +86,8 @@ class FornecedorController extends Controller
 
     public function show($id)
     {
-        $fornecedor = Fornecedor::findOrFail($id);
+        $fornecedor = Fornecedor::where('user_id', Auth::id())->findOrFail($id);
+        
         return view('cadastroFornecedor', compact('fornecedor'));
     }
 }

@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('fornecedores', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); 
             $table->string('cpf_cnpj')->unique();
             $table->enum('tipo_pessoa', ['fisica', 'juridica']);
             $table->enum('sexo', ['masculino', 'feminino'])->nullable();
@@ -30,6 +31,8 @@ return new class extends Migration
             $table->string('contribuinte_icms')->nullable();
             $table->string('operacao_consumidor_final')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

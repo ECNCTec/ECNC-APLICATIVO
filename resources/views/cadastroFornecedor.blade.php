@@ -96,6 +96,7 @@
             <div id="form-container">
                 <form method="POST" action="{{ route('cadastroFornecedores.store') }}">
                     @csrf
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>CNPJ/CPF:</label>
