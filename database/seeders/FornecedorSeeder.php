@@ -14,7 +14,7 @@ class FornecedorSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++) {
             Fornecedor::create([
-                'cpf_cnpj' => $faker->numerify('###.###.###-##'), // Gera um CPF no formato
+                'cpf_cnpj' => $faker->numerify('###.###.###-##'), 
                 'tipo_pessoa' => $faker->randomElement(['fisica', 'juridica']),
                 'sexo' => $faker->randomElement(['masculino', 'feminino']),
                 'inscricao_rg' => $faker->word,
