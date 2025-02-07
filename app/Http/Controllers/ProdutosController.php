@@ -16,12 +16,15 @@ class ProdutosController extends Controller
         $menorLargura = $request->input('menorLargura');
         $tipoMedida = $request->input('tipoMedida');
 
-        $produtos = Produto::when($search, function ($query, $search) {
-            return $query->where(function ($query) use ($search) {
-                $query->where('descricao', 'like', '%' . $search . '%')
-                    ->orWhere('id', '=', $search);
-            });
-        })
+        $userId = auth()->id();
+
+        $produtos = Produto::where('user_id', $userId)
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('descricao', 'like', '%' . $search . '%')
+                        ->orWhere('id', '=', $search);
+                });
+            })
             ->when($maiorComprimento, function ($query, $maiorComprimento) {
                 return $query->where('comprimento', '<=', $maiorComprimento);
             })
@@ -77,6 +80,7 @@ class ProdutosController extends Controller
             'comprimento' => $validatedData['comprimentoProduto'],
             'largura' => $validatedData['larguraProduto'],
             'tipo_medida' => $validatedData['tipoMedidaProduto'],
+            'user_id' => auth()->id(), 
         ]);
 
         return redirect()->route('cadastroProdutos')->with('success', 'Produto cadastrado com sucesso!');
@@ -84,13 +88,13 @@ class ProdutosController extends Controller
 
     public function show($id)
     {
-        $produto = Produto::findOrFail($id);
+        $produto = Produto::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
         return view('cadastroProdutos', compact('produto'));
     }
 
     public function edit($id)
     {
-        $produto = Produto::findOrFail($id);
+        $produto = Produto::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
         return view('cadastroProdutos', compact('produto'));
     }
 
@@ -103,7 +107,8 @@ class ProdutosController extends Controller
             'tipoMedidaProduto' => 'required|in:unidade,peso',
         ]);
 
-        $produto = Produto::findOrFail($id);
+        $produto = Produto::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        
         $produto->update([
             'descricao' => $request->descricaoProduto,
             'comprimento' => $request->comprimentoProduto,
@@ -116,7 +121,7 @@ class ProdutosController extends Controller
 
     public function destroy($id)
     {
-        $produto = Produto::findOrFail($id);
+        $produto = Produto::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
         $produto->delete();
 
         return redirect()->route('cadastroProdutos')->with('success', 'Produto excluído com sucesso!');

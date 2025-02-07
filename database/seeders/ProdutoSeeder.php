@@ -12,8 +12,11 @@ class ProdutoSeeder extends Seeder
     {
         $faker = Faker::create(); 
 
+        $user_id = 1; 
+
         foreach (range(1, 20) as $index) {
             Produto::create([
+                'user_id' => $user_id, 
                 'descricao' => $faker->word, 
                 'comprimento' => $faker->numberBetween(50, 300), 
                 'largura' => $faker->numberBetween(30, 150), 

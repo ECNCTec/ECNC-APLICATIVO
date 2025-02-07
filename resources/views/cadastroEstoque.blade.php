@@ -75,7 +75,7 @@
                         <div class="form-group col-md-4">
                             <label for="produto_id">Selecione um Produto:</label>
                             <select id="produto_id" name="produto_id" class="form-control" required>
-                                <option value=""></option>
+                                <option value="" disabled selected>Selecione uma opção:</option>
                                 @foreach ($produtos as $produto)
                                     <option value="{{ $produto->id }}">{{ $produto->id }} - {{ $produto->descricao }}
                                     </option>
@@ -85,7 +85,7 @@
                         <div class="form-group col-md-4">
                             <label for="fornecedor_id">Selecione um Fornecedor:</label>
                             <select id="fornecedor_id" name="fornecedor_id" class="form-control" required>
-                                <option value=""></option>
+                                <option value="" disabled selected>Selecione uma opção:</option>
                                 @foreach ($fornecedores as $fornecedor)
                                     <option value="{{ $fornecedor->id }}">{{ $fornecedor->cpf_cnpj }} - {{ $fornecedor->razao_social }}</option>
                                 @endforeach

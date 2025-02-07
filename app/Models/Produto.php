@@ -12,6 +12,7 @@ class Produto extends Model
     protected $table = 'produtos';
 
     protected $fillable = [
+        'user_id',
         'descricao',
         'comprimento',
         'largura',
@@ -22,4 +23,9 @@ class Produto extends Model
         'comprimento' => 'integer',
         'largura' => 'integer',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

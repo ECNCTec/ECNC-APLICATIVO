@@ -415,6 +415,7 @@
             <div id="form-container">
                 <form action="{{ route('produtos.store') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="descricao_produto">Descrição do Produto:</label>
@@ -448,12 +449,12 @@
                     </div>
                     <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Cadastrar
                         Produto</button>
-                </form>
+                </form>                
             </div>
         </div>
         <div id="form" class="crm-table-container">
             <div class="search-container">
-                <h6>Atualmente, a lista contém {{ $quantidadeProdutos }} produtos.</h6>
+                <h6>Atualmente, a lista contém {{ $quantidadeProdutos }} produto(s).</h6>
                 <div class="filtro">
                     <div>
                         <a href="{{ route('cadastroProdutos') }}">
