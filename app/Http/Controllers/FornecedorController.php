@@ -10,12 +10,12 @@ class FornecedorController extends Controller
     public function index()
     {
         $fornecedores = Fornecedor::all(); 
-        return view('fornecedores.index', compact('fornecedores'));
+        return view('cadastroFornecedor', compact('fornecedores'));
     }
 
     public function create()
     {
-        return view('fornecedores.create');
+        return view('cadastroFornecedor');
     }
 
     public function store(Request $request)
@@ -39,13 +39,13 @@ class FornecedorController extends Controller
 
         Fornecedor::create($request->all());
 
-        return redirect()->route('fornecedores.index')->with('success', 'Fornecedor cadastrado com sucesso!');
+        return redirect()->route('cadastroFornecedor')->with('success', 'Fornecedor cadastrado com sucesso!');
     }
 
     public function edit($id)
     {
         $fornecedor = Fornecedor::findOrFail($id); 
-        return view('fornecedores.edit', compact('fornecedor'));
+        return view('cadastroFornecedor', compact('fornecedor'));
     }
 
     public function update(Request $request, $id)
@@ -70,7 +70,7 @@ class FornecedorController extends Controller
         $fornecedor = Fornecedor::findOrFail($id);
         $fornecedor->update($request->all());
 
-        return redirect()->route('fornecedores.index')->with('success', 'Fornecedor atualizado com sucesso!');
+        return redirect()->route('cadastroFornecedor')->with('success', 'Fornecedor atualizado com sucesso!');
     }
 
     public function destroy($id)
@@ -78,12 +78,12 @@ class FornecedorController extends Controller
         $fornecedor = Fornecedor::findOrFail($id);
         $fornecedor->delete();
 
-        return redirect()->route('fornecedores.index')->with('success', 'Fornecedor excluído com sucesso!');
+        return redirect()->route('cadastroFornecedor')->with('success', 'Fornecedor excluído com sucesso!');
     }
 
     public function show($id)
     {
         $fornecedor = Fornecedor::findOrFail($id);
-        return view('fornecedores.show', compact('fornecedor'));
+        return view('cadastroFornecedor', compact('fornecedor'));
     }
 }

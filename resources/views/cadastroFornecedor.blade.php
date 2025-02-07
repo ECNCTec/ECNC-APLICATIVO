@@ -71,6 +71,7 @@
         <div id="form">
             <div id="form-container">
                 <form method="POST" action="{{ route('cadastroFornecedores.store') }}">
+                    @csrf
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>CNPJ/CPF:</label>
