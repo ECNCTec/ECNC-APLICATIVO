@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Produto;
+use App\Models\Fornecedor;
 
 class EstoqueController extends Controller
 {
-    public function informacoesProduto()
+    public function informacoesDoSistema()
     {
         $produtos = Produto::all();
-        return view('cadastroEstoque', compact('produtos'));
+        $fornecedores = Fornecedor::all();
+        return view('cadastroEstoque', compact('produtos', 'fornecedores'));
     }
 }

@@ -83,9 +83,14 @@
                             </select>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="comprimento_mm">Selecione um Fornecedor:</label>
-                            <input type="text" id="comprimento_mm" name="comprimento_mm" class="form-control" required>
-                        </div>
+                            <label for="fornecedor_id">Selecione um Fornecedor:</label>
+                            <select id="fornecedor_id" name="fornecedor_id" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                @foreach ($fornecedores as $fornecedor)
+                                    <option value="{{ $fornecedor->id }}">{{ $fornecedor->cpf_cnpj }} - {{ $fornecedor->razao_social }}</option>
+                                @endforeach
+                            </select>
+                        </div>                        
                         <div class="form-group col-md-3">
                             <label for="comprimento_mm">Quantidade de Peças:</label>
                             <input type="text" id="comprimento_mm" name="comprimento_mm" class="form-control" required>
