@@ -73,11 +73,11 @@
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="descricao_produto">Descrição do Produto:</label>
+                            <label for="descricao_produto">Selecione um Produto:</label>
                             <input type="text" id="descricao_produto" name="descricao_produto" class="form-control" required>
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="comprimento_mm">Fornecedor:</label>
+                            <label for="comprimento_mm">Selecione um Fornecedor:</label>
                             <input type="text" id="comprimento_mm" name="comprimento_mm" class="form-control" required>
                         </div>
                         <div class="form-group col-md-3">

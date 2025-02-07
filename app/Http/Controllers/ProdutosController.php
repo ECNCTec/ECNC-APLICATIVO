@@ -51,25 +51,32 @@ class ProdutosController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'descricaoProduto' => [
                 'required',
                 'string',
                 'max:255',
                 'unique:produtos,descricao',
             ],
-            'comprimentoProduto' => 'required|numeric',
-            'larguraProduto' => 'required|numeric',
             'tipoMedidaProduto' => 'required|in:unidade,peso',
+            'comprimentoProduto' => 'required_if:tipoMedidaProduto,unidade|nullable|numeric',
+            'larguraProduto' => 'required_if:tipoMedidaProduto,unidade|nullable|numeric',
         ], [
             'descricaoProduto.unique' => 'Já existe um produto com essa descrição. Por favor, escolha outro nome.',
+            'comprimentoProduto.required_if' => 'O comprimento do produto é obrigatório quando o tipo de medida for unidade.',
+            'larguraProduto.required_if' => 'A largura do produto é obrigatória quando o tipo de medida for unidade.',
         ]);
 
+        if ($validatedData['tipoMedidaProduto'] === 'peso') {
+            $validatedData['comprimentoProduto'] = $validatedData['comprimentoProduto'] ?? 0;
+            $validatedData['larguraProduto'] = $validatedData['larguraProduto'] ?? 0;
+        }
+
         Produto::create([
-            'descricao' => $request->descricaoProduto,
-            'comprimento' => $request->comprimentoProduto,
-            'largura' => $request->larguraProduto,
-            'tipo_medida' => $request->tipoMedidaProduto,
+            'descricao' => $validatedData['descricaoProduto'],
+            'comprimento' => $validatedData['comprimentoProduto'],
+            'largura' => $validatedData['larguraProduto'],
+            'tipo_medida' => $validatedData['tipoMedidaProduto'],
         ]);
 
         return redirect()->route('cadastroProdutos')->with('success', 'Produto cadastrado com sucesso!');
