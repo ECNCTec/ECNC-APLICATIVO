@@ -8,3 +8,10 @@ return [
         ],
     ],
 ];
+
+return [
+    'cpf_cnpj' => [
+        'unique' => 'O CPF ou CNPJ já foi registrado.',
+    ],
+    // Outras traduções de validação
+];

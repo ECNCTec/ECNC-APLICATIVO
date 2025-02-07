@@ -208,6 +208,27 @@
                 </form>
             </div>
         </div>
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success message">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger message">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session('deleted'))
+                <div class="alert alert-warning message">
+                    {{ session('deleted') }}
+                </div>
+            @endif
+        </div>        
     @endsection
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
