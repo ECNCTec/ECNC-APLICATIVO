@@ -35,6 +35,10 @@ Route::middleware('auth')->group(function () {
         return view('cadastroEstoque');
     })->name('cadastroEstoque');
 
+    Route::get('/cadastroFornecedor', function () {
+        return view('cadastroFornecedor');
+    })->name('cadastroFornecedor');
+
     Route::get('/cadastroProdutos', [ProdutosController::class, 'index'])->name('cadastroProdutos');
     Route::resource('produtos', ProdutosController::class)->except(['index']);
 });

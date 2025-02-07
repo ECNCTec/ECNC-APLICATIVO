@@ -321,6 +321,15 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#" id="fornecedorDropdownToggle" class="produtos-dropdown" aria-haspopup="false"
+                        style="padding-left: 21px;" aria-expanded="false">Fornecedores</a>
+                    <div id="fornecedorSubmenu" class="submenu">
+                        <a href="{{ route('cadastroFornecedor')}}" style="padding-left: 39px;">Cadastrar</a>
+                        <a href="#" style="padding-left: 39px;">Item 2</a>
+                        <a href="#" style="padding-left: 39px;">Item 3</a>
+                    </div>
+                </li>   
+                <li>
                     <a href="#" id="produtosDropdownToggle" class="produtos-dropdown" aria-expanded="false"
                         style="padding-left: 21px;">Produtos</a>
                     <div id="produtosSubmenu" class="submenu">
@@ -328,17 +337,7 @@
                         <a href="#" style="padding-left: 39px;">Cadastrados</a>
                         <a href="#" style="padding-left: 39px;">Relatório</a>
                     </div>
-                </li>
-                <li>
-                    <a href="#" id="fornecedorDropdownToggle" class="produtos-dropdown" aria-haspopup="false"
-                        style="padding-left: 21px;" aria-expanded="false">Fornecedores</a>
-                    <div id="fornecedorSubmenu" class="submenu">
-                        <!-- Itens de Fornecedores -->
-                        <a href="#" style="padding-left: 39px;">Cadastrar</a>
-                        <a href="#" style="padding-left: 39px;">Item 2</a>
-                        <a href="#" style="padding-left: 39px;">Item 3</a>
-                    </div>
-                </li>                
+                </li>             
                 <li>
                     <a href="{{ route('cadastroEstoque') }}"><i class="fas fa-box"
                             style="margin: 0px 10px 0px 12px;"></i> Estoque</a>
