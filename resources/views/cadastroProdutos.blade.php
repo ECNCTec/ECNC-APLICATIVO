@@ -456,9 +456,10 @@
                 <h6>Atualmente, {{ $quantidadeProdutos }} produtos estão cadastrados.</h6>
                 <div class="filtro">
                     <div>
-                        <a href=""><img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}"
-                                alt=""></a>
-                    </div>
+                        <a href="{{ route('cadastroProdutos') }}">
+                            <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}" alt="Recarregar Filtros">
+                        </a>
+                    </div>                    
                     <div>
                         <a href="#" data-toggle="modal" data-target="#filtroModal">
                             <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="">
