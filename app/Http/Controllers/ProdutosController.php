@@ -10,13 +10,34 @@ class ProdutosController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
+        $maiorComprimento = $request->input('maiorComprimento');
+        $menorComprimento = $request->input('menorComprimento');
+        $maiorLargura = $request->input('maiorLargura');
+        $menorLargura = $request->input('menorLargura');
+        $tipoMedida = $request->input('tipoMedida');
 
         $produtos = Produto::when($search, function ($query, $search) {
             return $query->where(function ($query) use ($search) {
                 $query->where('descricao', 'like', '%' . $search . '%')
                     ->orWhere('id', '=', $search);
             });
-        })->get();
+        })
+            ->when($maiorComprimento, function ($query, $maiorComprimento) {
+                return $query->where('comprimento', '<=', $maiorComprimento);
+            })
+            ->when($menorComprimento, function ($query, $menorComprimento) {
+                return $query->where('comprimento', '>=', $menorComprimento);
+            })
+            ->when($maiorLargura, function ($query, $maiorLargura) {
+                return $query->where('largura', '<=', $maiorLargura);
+            })
+            ->when($menorLargura, function ($query, $menorLargura) {
+                return $query->where('largura', '>=', $menorLargura);
+            })
+            ->when($tipoMedida, function ($query, $tipoMedida) {
+                return $query->where('tipo_medida', '=', $tipoMedida);
+            })
+            ->get();
 
         $quantidadeProdutos = $produtos->count();
 
@@ -35,7 +56,7 @@ class ProdutosController extends Controller
                 'required',
                 'string',
                 'max:255',
-                'unique:produtos,descricao', 
+                'unique:produtos,descricao',
             ],
             'comprimentoProduto' => 'required|numeric',
             'larguraProduto' => 'required|numeric',

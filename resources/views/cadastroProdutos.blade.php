@@ -478,47 +478,46 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
+                                    <form action="{{ route('cadastroProdutos') }}" method="GET">
                                         <div class="form-group">
                                             <label for="idDescricao">ID ou Descrição</label>
                                             <div class="input-group">
-                                                <input type="text" class="filtro-id-descricao form-control"
-                                                    id="idDescricao" placeholder="Digite ID ou descrição">
+                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição">
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label for="maiorComprimento">Maior Comprimento</label>
-                                                <input type="number" class="form-control" id="maiorComprimento">
+                                                <label for="maiorComprimento">Comprimento máximo:</label>
+                                                <input type="number" name="maiorComprimento" class="form-control" id="maiorComprimento">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="menorComprimento">Menor Comprimento</label>
-                                                <input type="number" class="form-control" id="menorComprimento">
+                                                <label for="menorComprimento">Comprimento mínimo</label>
+                                                <input type="number" name="menorComprimento" class="form-control" id="menorComprimento">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label for="maiorLargura">Maior Largura</label>
-                                                <input type="number" class="form-control" id="maiorLargura">
+                                                <label for="maiorLargura">Largura máxima:</label>
+                                                <input type="number" name="maiorLargura" class="form-control" id="maiorLargura">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="menorLargura">Menor Largura</label>
-                                                <input type="number" class="form-control" id="menorLargura">
+                                                <label for="menorLargura">Largura máxima:</label>
+                                                <input type="number" name="menorLargura" class="form-control" id="menorLargura">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="tipoMedida">Tipo de Medida</label>
-                                            <select class="form-control" id="tipoMedida">
+                                            <select name="tipoMedida" class="form-control" id="tipoMedida">
                                                 <option value="" disabled selected>Selecione uma opção:</option>
                                                 <option value="Unidade">Unidade</option>
                                                 <option value="Peso">Peso</option>
                                             </select>
                                         </div>
-                                        <div class="modal-footer"><button type="submit"
-                                                class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
                                         </div>
-                                    </form>
+                                    </form>                                    
                                 </div>
                             </div>
                         </div>
