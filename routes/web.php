@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\EstoqueController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login.form');
 
@@ -31,9 +32,7 @@ Route::middleware('auth')->group(function () {
         return view('cadastroProdutos');
     })->name('cadastroProdutos');
 
-    Route::get('/cadastroEstoque', function () {
-        return view('cadastroEstoque');
-    })->name('cadastroEstoque');
+    Route::get('/cadastroEstoque', [EstoqueController::class, 'informacoesProduto'])->name('cadastroEstoque');
 
     Route::get('/cadastroFornecedor', function () {
         return view('cadastroFornecedor');

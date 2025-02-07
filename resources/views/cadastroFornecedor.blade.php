@@ -174,6 +174,13 @@
                             <label>Telefone:</label>
                             <input type="text" name="telefone" class="form-control" required>
                         </div>
+                        <div class="form-group col-md-4">
+                            <label>Status:</label>
+                            <select name="status" class="form-control" required>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">

@@ -73,8 +73,14 @@
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="descricao_produto">Selecione um Produto:</label>
-                            <input type="text" id="descricao_produto" name="descricao_produto" class="form-control" required>
+                            <label for="produto_id">Selecione um Produto:</label>
+                            <select id="produto_id" name="produto_id" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                @foreach ($produtos as $produto)
+                                    <option value="{{ $produto->id }}">{{ $produto->id }} - {{ $produto->descricao }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="comprimento_mm">Selecione um Fornecedor:</label>
@@ -86,14 +92,17 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="largura_mm">Valor de Custo:</label>
-                            <input type="number" id="largura_mm" name="largura_mm" class="form-control" placeholder="0.00" step="0.01" required>
-                        </div>                        
+                            <input type="number" id="largura_mm" name="largura_mm" class="form-control" placeholder="0.00"
+                                step="0.01" required>
+                        </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Registrar Entrada</button>
+                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Registrar
+                            Entrada</button>
                     </div>
-                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Registrar Entrada</button>
-                </form>                
+                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Registrar
+                        Entrada</button>
+                </form>
             </div>
         </div>
     @endsection
