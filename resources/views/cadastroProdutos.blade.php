@@ -82,41 +82,72 @@
                 margin-bottom: 5px;
             }
 
-            .search-container h6 {
-                font-size: 13px;
-                font-weight: 600;
-                color: #333;
-                margin-bottom: 0;
-            }
-
-            .container-search {
-                position: relative;
+            .filtro {
                 display: flex;
-                align-items: center;
-                width: auto;
             }
 
-            .container-search input {
+            .filtro img {
+                height: 18px;
+            }
+
+            .modal-content {
+                font-size: 14px;
+            }
+
+            .form-control,
+            .form-control option {
+                height: 30px;
+                font-size: 12px;
+                border-radius: 1px;
+                padding: 5px 10px;
+            }
+
+            .form-control::placeholder {
+                font-size: 12px;
+            }
+
+            select.form-control {
+                padding: 3px 10px;
+            }
+
+            .input-group {
+                position: relative;
+            }
+
+            .input-group .form-control {
                 padding-right: 30px;
-                height: 25px;
-                border: 1px solid #ccc;
-                border-radius: 3px;
-                font-size: 13px;
-                line-height: 25px;
-                width: 100%;
             }
 
-            .container-search svg {
+            .input-group .fa-search {
                 position: absolute;
-                right: 8px;
+                right: 12px;
                 top: 50%;
                 transform: translateY(-50%);
+                color: gray;
+                font-size: 14px;
+                cursor: pointer;
             }
 
-            .container-search input:focus {
-                border-color: #007bff;
+            .button-filtrar {
+                height: 30px;
+                font-size: 14px;
+                padding: 5px 15px;
+                border-radius: 3px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
                 outline: none;
-                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+                box-shadow: none;
+            }
+
+            .button-filtrar:hover {
+                background-color: #0056b3;
+            }
+
+            .button-filtrar:focus {
+                outline: none;
+                box-shadow: none;
             }
 
             .submit-btn {
@@ -188,11 +219,16 @@
                 opacity: 0.9;
             }
 
+            .modal-title {
+                font-size: 18px;
+            }
+
             .descricao_produto,
             .comprimento_produto,
             .largura_produto,
             .tipoMedidaProduto,
-            .modal-body {
+            .modal-body,
+            .filtro-id-descricao {
                 font-size: 13px;
             }
 
@@ -222,7 +258,8 @@
 
             .button-atualizar-modal,
             .button-excluir-modal,
-            .button-cancelar-modal {
+            .button-cancelar-modal,
+            .button-filtrar {
                 color: #fff;
                 height: 26px;
                 padding: 0 15px;
@@ -237,7 +274,8 @@
                 transition: background 0.3s ease;
             }
 
-            .button-atualizar-modal {
+            .button-atualizar-modal,
+            .button-filtrar {
                 background: linear-gradient(to bottom, #3387fb, #4242ff, #3387fb);
             }
 
@@ -267,7 +305,7 @@
             .alert-success,
             .alert-warning,
             .alert-danger {
-                background: linear-gradient(10deg,#c8d8f1d3, #dee9f9d3, #c8d8f1d3, #dee9f9d3);
+                background: linear-gradient(10deg, #c8d8f1d3, #dee9f9d3, #c8d8f1d3, #dee9f9d3);
                 color: rgb(40, 40, 40);
                 font-weight: bold;
                 border: none;
@@ -278,17 +316,8 @@
                     margin: 30px 10px -25px 10px;
                 }
 
-                .search-form {
-                    width: 100%;
-                }
-
-                .container-search {
-                    margin-top: 5px;
-                }
-
-                .search-container {
-                    flex-direction: column;
-                    align-items: flex-start;
+                .filtro img {
+                    height: 25px;
                 }
 
                 .crm-table-container {
@@ -425,20 +454,76 @@
         <div id="form" class="crm-table-container">
             <div class="search-container">
                 <h6>Atualmente, {{ $quantidadeProdutos }} produtos estão cadastrados.</h6>
-
-                <form action="{{ route('cadastroProdutos') }}" method="GET" class="search-form">
-                    <div class="container-search">
-                        <input type="text" class="input-container-search" name="search" placeholder="Pesquisar..."
-                            value="{{ request('search') }}">
-                        <button type="submit" aria-label="Pesquisar" class="submit-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg>
-                        </button>
+                <div class="filtro">
+                    <div>
+                        <a href=""><img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}"
+                                alt=""></a>
                     </div>
-                </form>
+                    <div>
+                        <a href="#" data-toggle="modal" data-target="#filtroModal">
+                            <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="">
+                        </a>
+                    </div>
+                    <style>
+
+                    </style>
+                    <div class="modal fade" id="filtroModal" tabindex="-1" role="dialog"
+                        aria-labelledby="filtroModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="filtroModalLabel">Filtros</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="idDescricao">ID ou Descrição</label>
+                                            <div class="input-group">
+                                                <input type="text" class="filtro-id-descricao form-control"
+                                                    id="idDescricao" placeholder="Digite ID ou descrição">
+                                                <i class="fas fa-search"></i>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="maiorComprimento">Maior Comprimento</label>
+                                                <input type="number" class="form-control" id="maiorComprimento">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="menorComprimento">Menor Comprimento</label>
+                                                <input type="number" class="form-control" id="menorComprimento">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="maiorLargura">Maior Largura</label>
+                                                <input type="number" class="form-control" id="maiorLargura">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="menorLargura">Menor Largura</label>
+                                                <input type="number" class="form-control" id="menorLargura">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tipoMedida">Tipo de Medida</label>
+                                            <select class="form-control" id="tipoMedida">
+                                                <option value="" disabled selected>Selecione uma opção:</option>
+                                                <option value="Unidade">Unidade</option>
+                                                <option value="Peso">Peso</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer"><button type="submit"
+                                                class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="d-none d-md-block">
                 <table class="table table-bordered">
@@ -580,7 +665,9 @@
                             <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="button-excluir-modal btn">Excluir</button>
+                                <div>
+                                    <button type="submit" class="button-excluir-modal btn">Excluir</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -611,6 +698,8 @@
     @endsection
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     {{-- script para controle do tempo de aparição das mensagens no sistema --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
