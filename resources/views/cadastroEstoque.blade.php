@@ -72,30 +72,30 @@
             <div id="form-container">
                 <form>
                     <div class="form-row">
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="produto_id">Selecione um Produto:</label>
                             <select id="produto_id" name="produto_id" class="form-control" required>
-                                <option value="">Selecione...</option>
+                                <option value=""></option>
                                 @foreach ($produtos as $produto)
                                     <option value="{{ $produto->id }}">{{ $produto->id }} - {{ $produto->descricao }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="fornecedor_id">Selecione um Fornecedor:</label>
                             <select id="fornecedor_id" name="fornecedor_id" class="form-control" required>
-                                <option value="">Selecione...</option>
+                                <option value=""></option>
                                 @foreach ($fornecedores as $fornecedor)
                                     <option value="{{ $fornecedor->id }}">{{ $fornecedor->cpf_cnpj }} - {{ $fornecedor->razao_social }}</option>
                                 @endforeach
                             </select>
                         </div>                        
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="comprimento_mm">Quantidade de Peças:</label>
                             <input type="text" id="comprimento_mm" name="comprimento_mm" class="form-control" required>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <label for="largura_mm">Valor de Custo:</label>
                             <input type="number" id="largura_mm" name="largura_mm" class="form-control" placeholder="0.00"
                                 step="0.01" required>
