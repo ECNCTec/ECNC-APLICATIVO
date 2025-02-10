@@ -9,9 +9,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('fornecedores', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained();
             $table->id();
-            $table->unsignedBigInteger('user_id'); 
-            $table->string('cpf_cnpj')->unique();
+            $table->string('cpf_cnpj');
             $table->enum('tipo_pessoa', ['fisica', 'juridica']);
             $table->enum('sexo', ['masculino', 'feminino'])->nullable();
             $table->string('inscricao_rg');
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('operacao_consumidor_final')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unique(['cpf_cnpj', 'user_id']);
         });
     }
 
