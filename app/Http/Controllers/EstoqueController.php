@@ -12,16 +12,16 @@ class EstoqueController extends Controller
 {
     public function informacoesDoSistema()
     {
+        // Carregar os produtos e fornecedores do usuário autenticado
         $produtos = Produto::where('user_id', Auth::id())->get();
         $fornecedores = Fornecedor::where('user_id', Auth::id())->get();
-        
-        return view('cadastroEstoque', compact('produtos', 'fornecedores'));
-    }
 
-    public function index()
-    {
-        $estoques = Estoque::where('user_id', Auth::id())->get();
-        return view('cadastroEstoque', compact('estoques'));
+        // Carregar os estoques com os produtos e fornecedores relacionados
+        $estoques = Estoque::with(['produto', 'fornecedor'])
+            ->where('user_id', Auth::id())
+            ->get();
+
+        return view('cadastroEstoque', compact('produtos', 'fornecedores', 'estoques'));
     }
 
     public function create()
