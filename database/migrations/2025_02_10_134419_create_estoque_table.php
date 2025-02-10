@@ -15,8 +15,8 @@ class CreateEstoqueTable extends Migration
             $table->foreignId('fornecedor_id')->constrained('fornecedores');
             $table->unsignedInteger('quantidade_pecas');
             $table->decimal('custo', 10, 2);
-            $table->string('operacao'); // "entrada" ou "saida"
-            $table->unsignedInteger('quant_atual')->default(0); // Quantidade Atual
+            $table->string('operacao');
+            $table->unsignedInteger('quant_atual')->default(0); 
             $table->timestamps();
         });
     }

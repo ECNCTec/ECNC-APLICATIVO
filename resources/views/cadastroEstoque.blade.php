@@ -552,12 +552,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Produto</th>
-                            <th>Fornecedor</th>
                             <th>Custo</th>
                             <th>Quant. Peças</th>
-                            <th>Quant. Atual</th>
-                            <th>Operação</th>
-                            <th>Data do Registro</th>
                             <th>Editar</th>
                             <th>Excluir</th>
                         </tr>
@@ -565,14 +561,10 @@
                     <tbody>
                         @forelse($estoques as $estoque)
                             <tr>
-                                <td>{{ $estoque->id }}</td>
+                                <td>{{ $estoque->produto_id }}</td>
                                 <td>{{ $estoque->produto->descricao }}</td>
-                                <td>{{ $estoque->fornecedor->razao_social }}</td>
-                                <td>{{ $estoque->custo }}</td>
-                                <td>{{ $estoque->quantidade_pecas }}</td>
-                                <td>{{ $estoque->quant_atual }}</td>
-                                <td>{{ $estoque->operacao }}</td>
-                                <td>{{ $estoque->created_at }}</td>
+                                <td>{{ $estoque->total_custo }}</td>
+                                <td>{{ $estoque->total_quantidade }}</td>
                                 <td>
                                     <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
                                         data-target="#editModal{{ $estoque->id }}">
@@ -600,7 +592,6 @@
                 <div class="mobile-table">
                     <p><strong>ID:</strong> {{ $estoque->id }}</p>
                     <p><strong>Produto:</strong> {{ $estoque->produto->descricao }}</p>
-                    <p><strong>Fornecedor:</strong> {{ $estoque->fornecedor->razao_social }}</p>
                     <p><strong>Custo:</strong> {{ $estoque->custo }}</p>
                     <p><strong>Quant. Peças:</strong> {{ $estoque->quantidade_pecas }}</p>
                     <p><strong>Quant. Atual</strong> {{ $estoque->produto->nome }}</p>
