@@ -590,13 +590,10 @@
         <div id="form" class="d-md-none mb-2">
             @forelse($estoques as $estoque)
                 <div class="mobile-table">
-                    <p><strong>ID:</strong> {{ $estoque->id }}</p>
+                    <p><strong>ID:</strong> {{ $estoque->produto_id }}</p>
                     <p><strong>Produto:</strong> {{ $estoque->produto->descricao }}</p>
-                    <p><strong>Custo:</strong> {{ $estoque->custo }}</p>
-                    <p><strong>Quant. Peças:</strong> {{ $estoque->quantidade_pecas }}</p>
-                    <p><strong>Quant. Atual</strong> {{ $estoque->produto->nome }}</p>
-                    <p><strong>Operação</strong> {{ $estoque->produto->nome }}</p>
-                    <p><strong>Data do Registro</strong> {{ $estoque->created_at }}</p>
+                    <p><strong>Custo:</strong> {{ $estoque->total_custo }}</p>
+                    <p><strong>Quant. Peças:</strong> {{ $estoque->total_quantidade }}</p>
                     <div class="actions" style="position: absolute; top: 10px; right: 10px;">
                         <a class="buttonAction btn btn-sm mr-2" data-toggle="modal"
                             data-target="#editModal{{ $produto->id }}">
