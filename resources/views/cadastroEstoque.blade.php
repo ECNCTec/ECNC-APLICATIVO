@@ -562,8 +562,8 @@
                         @forelse($estoques as $estoque)
                             <tr>
                                 <td>{{ $estoque->id }}</td>
-                                <td>{{ $estoque->produto_id ?? }}</td>
-                                <td>{{ $estoque->fornecedor_id }}</td>
+                                <td>{{ $estoque->produto->descricao ?? 'Sem produto' }}</td>
+                                <td>{{ $estoque->fornecedor->razao_social ?? 'Sem fornecedor' }}</td>
                                 <td>{{ $estoque->quantidade_pecas }}</td>
                                 <td>{{ $estoque->custo }}</td>
                                 <td>{{ $estoque->produto->nome }}</td>

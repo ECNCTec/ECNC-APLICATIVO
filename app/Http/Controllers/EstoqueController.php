@@ -15,7 +15,10 @@ class EstoqueController extends Controller
         $produtos = Produto::where('user_id', Auth::id())->get();
         $fornecedores = Fornecedor::where('user_id', Auth::id())->get();
 
-        $estoques = Estoque::where('user_id', Auth::id())->get();
+        $estoques = Estoque::with([
+            'produto:id,descricao', 
+            'fornecedor:id,razao_social' 
+        ])->where('user_id', Auth::id())->get();
 
         return view('cadastroEstoque', compact('produtos', 'fornecedores', 'estoques'));
     }
