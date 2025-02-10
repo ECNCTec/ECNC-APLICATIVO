@@ -46,6 +46,30 @@
                 font-size: 12px;
             }
 
+            .message {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                border-radius: 1px;
+                z-index: 1000;
+                min-width: 200px;
+                text-align: center;
+                font-size: 16px;
+                opacity: 1;
+                transition: opacity 1s ease-out;
+            }
+
+            .alert-success,
+            .alert-warning,
+            .alert-danger {
+                background: linear-gradient(10deg, #c8d8f1d3, #dee9f9d3, #c8d8f1d3, #dee9f9d3);
+                color: rgb(40, 40, 40);
+                font-weight: bold;
+                border: none;
+            }
+
             .button-cadastrar {
                 background: linear-gradient(to bottom, #3387fb, #4242ff, #3387fb);
                 color: #fff;
@@ -70,7 +94,9 @@
         </style>
         <div id="form">
             <div id="form-container">
-                <form>
+                <form action="entradaEstoque" method="POST">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="produto_id">Selecione um Produto:</label>
@@ -92,12 +118,12 @@
                             </select>
                         </div>                        
                         <div class="form-group col-md-2">
-                            <label for="comprimento_mm">Quantidade de Peças:</label>
-                            <input type="text" id="comprimento_mm" name="comprimento_mm" class="form-control" required>
+                            <label for="quantidade_pecas">Quantidade de Peças:</label>
+                            <input type="text" id="quantidade_pecas" name="quantidade_pecas" class="form-control" required>
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="largura_mm">Valor de Custo:</label>
-                            <input type="number" id="largura_mm" name="largura_mm" class="form-control" placeholder="0.00"
+                            <label for="custo">Valor de Custo:</label>
+                            <input type="number" id="custo" name="custo" class="form-control" placeholder="0.00"
                                 step="0.01" required>
                         </div>
                     </div>
@@ -110,10 +136,46 @@
                 </form>
             </div>
         </div>
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success message">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger message">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session('deleted'))
+                <div class="alert alert-warning message">
+                    {{ session('deleted') }}
+                </div>
+            @endif
+        </div>        
     @endsection
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- script para controle do tempo de aparição das mensagens no sistema --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const messages = document.querySelectorAll('.message');
+            messages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.opacity = '0';
+                }, 2000);
+
+                setTimeout(function() {
+                    message.remove();
+                }, 15000);
+            });
+        });
+    </script>
 </body>
 
 </html>
