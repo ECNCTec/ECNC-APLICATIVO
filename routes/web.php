@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\FornecedorController;
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/cadastroClientes', function () {
         return view('cadastroClientes');
     })->name('cadastroClientes');
+
+    Route::resource('clientes', ClienteController::class);
 
     Route::get('/cadastroProdutos', function () {
         return view('cadastroProdutos');

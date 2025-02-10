@@ -70,127 +70,104 @@
         </style>
         <div id="form">
             <div id="form-container">
-                <form>
+                <form action="{{ route('clientes.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>CNPJ/CPF:</label>
-                            <input type="text" name="cpf_cnpj" class="form-control" required>
+                            <input type="text" name="cpf_cnpj" class="form-control" value="{{ old('cpf_cnpj') }}" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label>Tipo de Pessoa:</label>
                             <select name="tipo_pessoa" class="form-control" required>
                                 <option disabled selected>Selecione uma opção:</option>
-                                <option value="fisica">Física</option>
-                                <option value="juridica">Jurídica</option>
+                                <option value="fisica" {{ old('tipo_pessoa') == 'fisica' ? 'selected' : '' }}>Física</option>
+                                <option value="juridica" {{ old('tipo_pessoa') == 'juridica' ? 'selected' : '' }}>Jurídica</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label>Sexo:</label>
                             <select name="sexo" class="form-control">
                                 <option disabled selected>Selecione uma opção:</option>
-                                <option value="masculino">Masculino</option>
-                                <option value="feminino">Feminino</option>
+                                <option value="masculino" {{ old('sexo') == 'masculino' ? 'selected' : '' }}>Masculino</option>
+                                <option value="feminino" {{ old('sexo') == 'feminino' ? 'selected' : '' }}>Feminino</option>
                             </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label>Inscrição Estadual/RG:</label>
-                            <input type="text" name="inscricao_rg" class="form-control" required>
+                            <input type="text" name="inscricao_rg" class="form-control" value="{{ old('inscricao_rg') }}" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Razão Social:</label>
-                            <input type="text" name="razao_social" class="form-control" required>
+                            <input type="text" name="razao_social" class="form-control" value="{{ old('razao_social') }}" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Nome Fantasia:</label>
-                            <input type="text" name="nome_fantasia" class="form-control" required>
+                            <input type="text" name="nome_fantasia" class="form-control" value="{{ old('nome_fantasia') }}" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>CEP:</label>
-                            <input type="text" name="cep" class="form-control" required>
+                            <input type="text" name="cep" class="form-control" value="{{ old('cep') }}" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Endereço:</label>
-                            <input type="text" name="endereco" class="form-control" required>
+                            <input type="text" name="endereco" class="form-control" value="{{ old('endereco') }}" required>
                         </div>
                         <div class="form-group col-md-3">
                             <label>Complemento:</label>
-                            <input type="text" name="complemento" class="form-control" placeholder="Ex: lote 3 sala 1"
-                                required>
+                            <input type="text" name="complemento" class="form-control" value="{{ old('complemento') }}" placeholder="Ex: lote 3 sala 1" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>Bairro:</label>
-                            <input type="text" name="bairro" class="form-control" required>
+                            <input type="text" name="bairro" class="form-control" value="{{ old('bairro') }}" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Estado:</label>
                             <select name="estado" class="form-control" required>
                                 <option disabled selected>Selecione uma opção:</option>
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="TO">Tocantins</option>
+                                @foreach(['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'] as $estado)
+                                    <option value="{{ $estado }}" {{ old('estado') == $estado ? 'selected' : '' }}>{{ $estado }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Cidade:</label>
-                            <input type="text" name="cidade" class="form-control" required>
+                            <input type="text" name="cidade" class="form-control" value="{{ old('cidade') }}" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>E-mail:</label>
-                            <input type="email" name="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Telefone:</label>
-                            <input type="text" name="telefone" class="form-control" required>
+                            <input type="text" name="telefone" class="form-control" value="{{ old('telefone') }}" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label>Inscrição Municipal:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="inscricao_municipal" class="form-control" value="{{ old('inscricao_municipal') }}">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Regime Tributário:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="regime_tributario" class="form-control" value="{{ old('regime_tributario') }}">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Contribuinte ICMS:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="contribuinte_icms" class="form-control" value="{{ old('contribuinte_icms') }}">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Operação Consumidor Final:</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="operacao_consumidor_final" class="form-control" value="{{ old('operacao_consumidor_final') }}">
                         </div>
                     </div>
                     <div class="text-right">
@@ -200,6 +177,27 @@
                 </form>
             </div>
         </div>
+        <div>
+            @if (session('success'))
+                <div class="alert alert-success message">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger message">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session('deleted'))
+                <div class="alert alert-warning message">
+                    {{ session('deleted') }}
+                </div>
+            @endif
+        </div>   
     @endsection
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
