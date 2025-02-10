@@ -4,6 +4,7 @@ return [
     'required' => 'O campo :attribute é obrigatório.',
     'unique' => 'O campo :attribute já foi registrado.',
     'regex' => 'O formato do campo :attribute é inválido.',
+    'in' => 'A opção selecionada para :attribute é inválida.',  // Adicionei esta linha para traduzir a validação "in"
 
     'custom' => [
         'cpf_cnpj' => [
@@ -26,5 +27,6 @@ return [
         'tipo_pessoa' => 'tipo de pessoa',
         'cep' => 'CEP',
         'telefone' => 'telefone',
+        'operacao' => 'operação', // Adicionei 'operacao' para garantir que o campo seja traduzido corretamente
     ],
 ];

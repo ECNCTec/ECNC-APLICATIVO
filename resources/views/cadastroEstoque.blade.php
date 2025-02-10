@@ -416,13 +416,16 @@
                 <form action="entradaEstoque" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                    <input type="hidden" name="operacao" value="Entrada">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="produto_id">Selecione um Produto:</label>
                             <select id="produto_id" name="produto_id" class="form-control" required>
                                 <option value="" disabled selected>Selecione uma opção:</option>
                                 @foreach ($produtos as $produto)
-                                    <option value="{{ $produto->id }}">{{ $produto->id }} - {{ $produto->descricao }}
+                                    <option value="{{ $produto->id }}" 
+                                        {{ old('produto_id') == $produto->id ? 'selected' : '' }}>
+                                        {{ $produto->id }} - {{ $produto->descricao }}
                                     </option>
                                 @endforeach
                             </select>
@@ -432,28 +435,28 @@
                             <select id="fornecedor_id" name="fornecedor_id" class="form-control" required>
                                 <option value="" disabled selected>Selecione uma opção:</option>
                                 @foreach ($fornecedores as $fornecedor)
-                                    <option value="{{ $fornecedor->id }}">{{ $fornecedor->cpf_cnpj }} -
-                                        {{ $fornecedor->razao_social }}</option>
+                                    <option value="{{ $fornecedor->id }}" 
+                                        {{ old('fornecedor_id') == $fornecedor->id ? 'selected' : '' }}>
+                                        {{ $fornecedor->cpf_cnpj }} - {{ $fornecedor->razao_social }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="quantidade_pecas">Quantidade de Peças:</label>
-                            <input type="text" id="quantidade_pecas" name="quantidade_pecas" class="form-control"
-                                required>
+                            <input type="text" id="quantidade_pecas" name="quantidade_pecas" class="form-control" required 
+                                value="{{ old('quantidade_pecas') }}">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="custo">Valor de Custo:</label>
-                            <input type="number" id="custo" name="custo" class="form-control" placeholder="0.00"
-                                step="0.01" required>
+                            <input type="number" id="custo" name="custo" class="form-control" placeholder="0.00" step="0.01" required 
+                                value="{{ old('custo') }}">
                         </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Registrar
-                            Entrada</button>
+                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Registrar Entrada</button>
                     </div>
-                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Registrar
-                        Entrada</button>
+                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Registrar Entrada</button>
                 </form>
             </div>
         </div>
@@ -567,8 +570,8 @@
                                 <td>{{ $estoque->fornecedor->razao_social }}</td>
                                 <td>{{ $estoque->custo }}</td>
                                 <td>{{ $estoque->quantidade_pecas }}</td>
-                                <td>{{ $estoque->produto->nome }}</td>
-                                <td>{{ $estoque->produto->nome }}</td>
+                                <td>{{ $estoque->quant_atual }}</td>
+                                <td>{{ $estoque->operacao }}</td>
                                 <td>{{ $estoque->created_at }}</td>
                                 <td>
                                     <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"

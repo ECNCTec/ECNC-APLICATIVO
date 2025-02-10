@@ -14,7 +14,8 @@ class Estoque extends Model
         'produto_id',
         'fornecedor_id',
         'quantidade_pecas',
-        'custo'
+        'custo',
+        'operacao',
     ];
 
     public function produto()
