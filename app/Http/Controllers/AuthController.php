@@ -23,16 +23,28 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+            'access_level' => 'required|in:usuario', 
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $request->session()->regenerate();
-            return redirect()->intended('/gerarOrcamento')->with('success', 'Login realizado com sucesso!');
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+        ])) {
+            $user = Auth::user();
+            if ($user && $request->access_level === 'usuario') {
+                $request->session()->regenerate();
+                return redirect()->intended('/gerarOrcamento')->with('success', 'Login realizado com sucesso!');
+            } else {
+                Auth::logout(); 
+                return back()->withErrors([
+                    'email' => 'Você não tem permissão para acessar esta área.',
+                ])->withInput();
+            }
         }
 
         return back()->withErrors([
             'email' => 'Credenciais inválidas ou você não está cadastrado.',
-        ])->withInput();        
+        ])->withInput();
     }
 
     public function showRegisterForm()
@@ -66,6 +78,7 @@ class AuthController extends Controller
         User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'access_level' => 'usuario',
         ]);
 
         return redirect()->route('telaPrincipal')->with('success', 'Cadastro realizado com sucesso! Faça login.');

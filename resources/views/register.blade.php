@@ -198,10 +198,10 @@
                     <input type="password" name="password_confirmation" required>
                     <label for="password_confirmation">Confirme a Senha:</label>
                 </div>
+                <input type="hidden" name="access_level" value="usuario">
                 <div class="button">
                     <button type="submit">Cadastrar</button>
                 </div>
-
                 <div>
                     @if ($errors->any())
                         <div class="message error">
@@ -213,7 +213,7 @@
                         </div>
                     @endif
                 </div>
-            </form>
+            </form>            
             <p>Já tem uma conta? <a href="{{ route('telaPrincipal') }}">Faça login</a></p>
         </div>
     </div>

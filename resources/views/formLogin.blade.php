@@ -170,6 +170,7 @@
                     <input type="password" name="password" required>
                     <label for="password">Senha:</label>
                 </div>
+                <input type="hidden" name="access_level" value="usuario">
                 <div class="button">
                     <button type="submit">Entrar</button>
                 </div>
@@ -190,7 +191,7 @@
                         <div class="message error">{{ session('error') }}</div>
                     @endif
                 </div>
-            </form>
+            </form>            
             <p>Não tem uma conta? <a href="{{ route('register.form') }}">Cadastre-se</a></p>
         </div>
     </div>
