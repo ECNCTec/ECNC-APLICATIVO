@@ -548,10 +548,11 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nome Produto</th>
+                            <th>Produto</th>
                             <th>Fornecedor</th>
-                            <th>Quantidade Peças</th>
                             <th>Custo</th>
+                            <th>Quant. Peças</th>
+                            <th>Quant. Atual</th>
                             <th>Operação</th>
                             <th>Data do Registro</th>
                             <th>Editar</th>
@@ -562,10 +563,11 @@
                         @forelse($estoques as $estoque)
                             <tr>
                                 <td>{{ $estoque->id }}</td>
-                                <td>{{ $estoque->produto->descricao ?? 'Sem produto' }}</td>
-                                <td>{{ $estoque->fornecedor->razao_social ?? 'Sem fornecedor' }}</td>
-                                <td>{{ $estoque->quantidade_pecas }}</td>
+                                <td>{{ $estoque->produto->descricao }}</td>
+                                <td>{{ $estoque->fornecedor->razao_social }}</td>
                                 <td>{{ $estoque->custo }}</td>
+                                <td>{{ $estoque->quantidade_pecas }}</td>
+                                <td>{{ $estoque->produto->nome }}</td>
                                 <td>{{ $estoque->produto->nome }}</td>
                                 <td>{{ $estoque->created_at }}</td>
                                 <td>
@@ -589,6 +591,32 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div id="form" class="d-md-none mb-2">
+            @forelse($estoques as $estoque)
+                <div class="mobile-table">
+                    <p><strong>ID:</strong> {{ $estoque->id }}</p>
+                    <p><strong>Produto:</strong> {{ $estoque->produto->descricao }}</p>
+                    <p><strong>Fornecedor:</strong> {{ $estoque->fornecedor->razao_social }}</p>
+                    <p><strong>Custo:</strong> {{ $estoque->custo }}</p>
+                    <p><strong>Quant. Peças:</strong> {{ $estoque->quantidade_pecas }}</p>
+                    <p><strong>Quant. Atual</strong> {{ $estoque->produto->nome }}</p>
+                    <p><strong>Operação</strong> {{ $estoque->produto->nome }}</p>
+                    <p><strong>Data do Registro</strong> {{ $estoque->created_at }}</p>
+                    <div class="actions" style="position: absolute; top: 10px; right: 10px;">
+                        <a class="buttonAction btn btn-sm mr-2" data-toggle="modal"
+                            data-target="#editModal{{ $produto->id }}">
+                            <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
+                        </a>
+                        <a class="buttonAction btn btn-sm" data-toggle="modal"
+                            data-target="#deleteModal{{ $produto->id }}">
+                            <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
+                        </a>
+                    </div>
+                </div>
+            @empty
+                <p class="text-center">Nenhum produto encontrado</p>
+            @endforelse
         </div>
         <div>
             @if (session('success'))
