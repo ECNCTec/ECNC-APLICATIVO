@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cadastroEstoque', [EstoqueController::class, 'informacoesDoSistema'])->name('cadastroEstoque');
 
     Route::get('/estoque', [EstoqueController::class, 'produtosNoEstoque'])->name('estoque');
+    Route::post('/cadastroEstoque/{id}', [EstoqueController::class, 'storeOrUpdate'])->name('cadastroEstoque');
 
     Route::get('/cadastroFornecedor', function () {
         return view('cadastroFornecedor');

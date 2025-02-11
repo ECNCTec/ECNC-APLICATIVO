@@ -444,25 +444,88 @@
                     <tbody>
                         @forelse($registrosEstoque as $estoque)
                             <tr>
-                                <td>{{ $estoque->produto_id }}</td>
+                                <td>{{ $estoque->id }}</td>
                                 <td>{{ $estoque->produto->descricao }}</td>
                                 <td>{{ $estoque->quantidade_pecas }}</td>
                                 <td>{{ number_format($estoque->custo, 2, ',', '.') }}</td>
                                 <td>{{ $estoque->operacao }}</td>
                                 <td>{{ $estoque->created_at }}</td>
                                 <td>
-                                    <a type="button" class="buttonAction btn btn-sm" data-toggle="modal" 
-                                        data-target="#editModal{{ $estoque->produto_id }}">
+                                    <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
+                                        data-target="#editModal{{ $estoque->id }}">
                                         <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="Editar">
                                     </a>
                                 </td>
                                 <td>
-                                    <a type="button" class="buttonAction btn btn-sm" data-toggle="modal" 
-                                        data-target="#deleteModal{{ $estoque->produto_id }}">
+                                    <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
+                                        data-target="#deleteModal{{ $estoque->id }}">
                                         <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="Excluir">
                                     </a>
-                                </td>                                
+                                </td>
                             </tr>
+                            <div class="modal fade" id="editModal{{ $estoque->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="editModalLabel{{ $estoque->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel{{ $estoque->id }}">Editar Estoque</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}" method="POST">
+                                                @csrf
+                                                {{-- @method('PUT') --}}
+                                                <div class="form-group">
+                                                    <label for="descricao">Descrição</label>
+                                                    <input type="text" class="form-control" id="descricao" name="descricao"
+                                                        value="{{ $estoque->produto->descricao }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="quantidade_pecas">Quantidade de Peças</label>
+                                                    <input type="number" class="form-control" id="quantidade_pecas"
+                                                        name="quantidade_pecas" value="{{ $estoque->quantidade_pecas }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="custo">Custo</label>
+                                                    <input type="text" class="form-control" id="custo" name="custo"
+                                                        value="{{ number_format($estoque->custo, 2, ',', '.') }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="operacao">Operação</label>
+                                                    <input type="text" class="form-control" id="operacao" name="operacao"
+                                                        value="{{ $estoque->operacao }}" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="deleteModal{{ $estoque->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="deleteModalLabel{{ $estoque->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel{{ $estoque->produto_id }}">Excluir Estoque</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Tem certeza de que deseja excluir este registro de "{{ $estoque->produto->descricao }}?</p>
+                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
                         @empty
                             <tr>
                                 <td colspan="5">Nenhum estoque encontrado.</td>
@@ -471,6 +534,7 @@
                     </tbody>
                 </table>
             </div>
+            
         </div>
         <div id="form" class="d-md-none mb-2">
             @forelse($registrosEstoque as $estoque)
@@ -496,7 +560,7 @@
                 <p class="text-center">Nenhum estoque encontrado.</p>
             @endforelse
         </div>
-        @foreach ($registrosEstoque as $estoque)
+        {{-- @foreach ($registrosEstoque as $estoque)
             <div class="modal fade" id="editModal{{ $estoque->produto_id }}" tabindex="-1" role="dialog"
                 aria-labelledby="editModalLabel{{ $estoque->produto_id }}" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -519,12 +583,11 @@
                                         value="{{ $estoque->produto->descricao }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="comprimento_produto_{{ $estoque->produto_id }}">Comprimento
-                                        (mm)
+                                    <label for="comprimento_produto_{{ $estoque->quantidade_pecas }}">Quantidade Peças
                                         :</label>
                                     <input type="number" id="comprimento_produto_{{ $estoque->produto_id }}"
                                         name="comprimentoProduto" class="form-control"
-                                        value="{{ $estoque->produto->comprimento }}" required>
+                                        value="{{ $estoque->quantidade_pecas }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="largura_produto_{{ $estoque->produto_id }}">Largura (mm):</label>
@@ -547,17 +610,15 @@
                                     </select>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
+                                    <button type="button" class="button-cancelar-modal"
                                         data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Atualizar Produto</button>
+                                    <button type="submit" class="button-atualizar-modal btn">Atualizar Produto</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {{-- Modal de Exclusão --}}
             <div class="modal fade" id="deleteModal{{ $estoque->produto_id }}" tabindex="-1" role="dialog"
                 aria-labelledby="deleteModalLabel{{ $estoque->produto_id }}" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -573,11 +634,11 @@
                             Tem certeza que deseja excluir o produto "{{ $estoque->produto->descricao }}"?
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="button-cancelar-modal" data-dismiss="modal">Cancelar</button>
                             <form action="{{ route('produtos.destroy', $estoque->produto_id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                <button type="submit" class="button-excluir-modal btn">Excluir</button>
                             </form>
                         </div>
                     </div>
@@ -604,7 +665,7 @@
                     </div>
                 @endif
             </div>
-        @endforeach
+        @endforeach --}}
     @endsection
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
