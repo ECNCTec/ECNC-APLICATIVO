@@ -525,7 +525,6 @@
                                     </div>
                                 </div>
                             </div>
-            
                         @empty
                             <tr>
                                 <td colspan="5">Nenhum estoque encontrado.</td>
@@ -534,15 +533,14 @@
                     </tbody>
                 </table>
             </div>
-            
         </div>
         <div id="form" class="d-md-none mb-2">
             @forelse($registrosEstoque as $estoque)
                 <div class="mobile-table">
-                    <p><strong>ID:</strong> {{ $estoque->produto_id }}</p>
+                    <p><strong>ID:</strong> {{ $estoque->id }}</p>
                     <p><strong>Descrição:</strong> {{ $estoque->produto->descricao }}</p>
                     <p><strong>Quant. Peças:</strong> {{ $estoque->total_quantidade }}</p>
-                    <p><strong>Custo:</strong> {{ number_format($estoque->total_custo, 2, ',', '.') }}</p>
+                    <p><strong>Custo:</strong> {{ number_format($estoque->custo, 2, ',', '.') }}</p>
                     <p><strong>Operação:</strong> {{ $estoque->operacao }}</p>
                     <p><strong>Data Registro:</strong> {{ $estoque->created_at }}</p>
                     <div class="actions" style="position: absolute; top: 10px; right: 10px;">
@@ -560,112 +558,6 @@
                 <p class="text-center">Nenhum estoque encontrado.</p>
             @endforelse
         </div>
-        {{-- @foreach ($registrosEstoque as $estoque)
-            <div class="modal fade" id="editModal{{ $estoque->produto_id }}" tabindex="-1" role="dialog"
-                aria-labelledby="editModalLabel{{ $estoque->produto_id }}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="editModalLabel{{ $estoque->produto_id }}">Editar Produto</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('produtos.update', $estoque->produto_id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="form-group">
-                                    <label for="descricao_produto_{{ $estoque->produto_id }}">Descrição do
-                                        Produto:</label>
-                                    <input type="text" id="descricao_produto_{{ $estoque->produto_id }}"
-                                        name="descricaoProduto" class="form-control"
-                                        value="{{ $estoque->produto->descricao }}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comprimento_produto_{{ $estoque->quantidade_pecas }}">Quantidade Peças
-                                        :</label>
-                                    <input type="number" id="comprimento_produto_{{ $estoque->produto_id }}"
-                                        name="comprimentoProduto" class="form-control"
-                                        value="{{ $estoque->quantidade_pecas }}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="largura_produto_{{ $estoque->produto_id }}">Largura (mm):</label>
-                                    <input type="number" id="largura_produto_{{ $estoque->produto_id }}"
-                                        name="larguraProduto" class="form-control" value="{{ $estoque->produto->largura }}"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tipo_medida_{{ $estoque->produto_id }}">Tipo de Medida:</label>
-                                    <select id="tipo_medida_{{ $estoque->produto_id }}" name="tipoMedidaProduto"
-                                        class="form-control" required>
-                                        <option value="unidade"
-                                            {{ $estoque->produto->tipo_medida == 'unidade' ? 'selected' : '' }}>
-                                            Unidade
-                                        </option>
-                                        <option value="peso"
-                                            {{ $estoque->produto->tipo_medida == 'peso' ? 'selected' : '' }}>
-                                            Peso
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="button-cancelar-modal"
-                                        data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="button-atualizar-modal btn">Atualizar Produto</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="deleteModal{{ $estoque->produto_id }}" tabindex="-1" role="dialog"
-                aria-labelledby="deleteModalLabel{{ $estoque->produto_id }}" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="deleteModalLabel{{ $estoque->produto_id }}">Confirmar
-                                Exclusão</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Tem certeza que deseja excluir o produto "{{ $estoque->produto->descricao }}"?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="button-cancelar-modal" data-dismiss="modal">Cancelar</button>
-                            <form action="{{ route('produtos.destroy', $estoque->produto_id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="button-excluir-modal btn">Excluir</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                @if (session('success'))
-                    <div class="alert alert-success message">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger message">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if (session('deleted'))
-                    <div class="alert alert-warning message">
-                        {{ session('deleted') }}
-                    </div>
-                @endif
-            </div>
-        @endforeach --}}
     @endsection
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
