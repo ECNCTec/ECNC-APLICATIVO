@@ -483,76 +483,6 @@
                             <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="">
                         </a>
                     </div>
-                    {{-- <div class="modal fade" id="filtroModal" tabindex="-1" role="dialog"
-                        aria-labelledby="filtroModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="filtroModalLabel">Filtros</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('cadastroProdutos') }}" method="GET">
-                                        <div class="form-group">
-                                            <label for="idDescricao">ID ou Descrição</label>
-                                            <div class="input-group">
-                                                <input type="text" name="search"
-                                                    class="filtro-id-descricao form-control" id="idDescricao"
-                                                    placeholder="Digite ID ou descrição"
-                                                    value="{{ request()->input('search') }}">
-                                                <i class="fas fa-search"></i>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="maiorComprimento">Comprimento máximo:</label>
-                                                <input type="number" name="maiorComprimento" class="form-control"
-                                                    id="maiorComprimento"
-                                                    value="{{ request()->input('maiorComprimento') }}">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="menorComprimento">Comprimento mínimo</label>
-                                                <input type="number" name="menorComprimento" class="form-control"
-                                                    id="menorComprimento"
-                                                    value="{{ request()->input('menorComprimento') }}">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="maiorLargura">Largura máxima:</label>
-                                                <input type="number" name="maiorLargura" class="form-control"
-                                                    id="maiorLargura" value="{{ request()->input('maiorLargura') }}">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="menorLargura">Largura mínima:</label>
-                                                <input type="number" name="menorLargura" class="form-control"
-                                                    id="menorLargura" value="{{ request()->input('menorLargura') }}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="tipoMedida">Tipo de Medida</label>
-                                            <select name="tipoMedida" class="form-control" id="tipoMedida">
-                                                <option value="" disabled selected>Selecione uma opção:</option>
-                                                <option value="Unidade"
-                                                    {{ request()->input('tipoMedida') == 'Unidade' ? 'selected' : '' }}>
-                                                    Unidade</option>
-                                                <option value="Peso"
-                                                    {{ request()->input('tipoMedida') == 'Peso' ? 'selected' : '' }}>Peso
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit"
-                                                class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar
-                                                Filtros</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
             <div class="d-none d-md-block">
@@ -563,7 +493,6 @@
                             <th>Produto</th>
                             <th>Custo</th>
                             <th>Quant. Peças</th>
-                            <th>Registros</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -573,12 +502,6 @@
                                 <td>{{ $estoque->produto->descricao }}</td>
                                 <td>{{ $estoque->total_custo }}</td>
                                 <td>{{ $estoque->total_quantidade }}</td>
-                                <td>
-                                    <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
-                                        data-target="#editModal" onclick="carregarModal({{ $estoque->id }})">
-                                        <img src="{{ asset('storage/images/registros.png') }}" alt="">
-                                    </a>
-                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -587,34 +510,6 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Informações do Estoque</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        @foreach ($estoqueModal as $estoque)
-                            <p><strong>Descrição do Produto:</strong> {{ $estoque->produto->descricao }}</p>
-                            <p><strong>Quantidade em Estoque:</strong> {{ $estoque->quantidade_pecas }}</p>
-                            <p><strong>Custo:</strong> {{ $estoque->custo }}</p>
-                            <p><strong>Operação:</strong> {{ $estoque->operacao }}</p>
-                            <hr>
-                        @endforeach
-                        @if ($estoqueModal->isEmpty())
-                            <p>Informações não disponíveis.</p>
-                        @endif
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
             </div>
         </div>
         <div id="form" class="d-md-none mb-2">
