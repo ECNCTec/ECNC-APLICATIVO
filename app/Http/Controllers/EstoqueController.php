@@ -17,6 +17,10 @@ class EstoqueController extends Controller
 
         $informacoesEstoque = Estoque::all();
 
+        $contagemEstoque = Estoque::where('user_id', Auth::id())
+        ->distinct('produto_id')
+        ->count('produto_id');    
+
         $somaEstoque = Estoque::with([
             'produto:id,descricao',
             'fornecedor:id,razao_social'
@@ -26,7 +30,7 @@ class EstoqueController extends Controller
             ->where('user_id', Auth::id())
             ->get();
 
-        return view('cadastroEstoque', compact('produtos', 'fornecedores', 'informacoesEstoque', 'somaEstoque'));
+        return view('cadastroEstoque', compact('produtos', 'fornecedores', 'contagemEstoque', 'informacoesEstoque', 'somaEstoque'));
     }
 
     public function create()

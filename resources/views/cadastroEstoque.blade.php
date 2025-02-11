@@ -464,7 +464,7 @@
         </div>
         <div id="form" class="crm-table-container">
             <div class="search-container">
-                <h6>Atualmente, a lista contém 10 produto(s).</h6>
+                <h6>Atualmente, a lista contém {{ $contagemEstoque }} produto(s).</h6>
                 <div class="filtro">
                     <div>
                         <a href="#" data-toggle="modal" data-target="#estoqueModal">
