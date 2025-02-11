@@ -589,13 +589,6 @@
                 </table>
             </div>
         </div>
-        <td>
-            <a type="button" class="buttonAction btn btn-sm" data-toggle="modal" data-target="#editModal">
-                <img src="{{ asset('storage/images/registros.png') }}" alt="">
-            </a>
-        </td>
-
-        <!-- Modal **********************************************************************************************************-->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
