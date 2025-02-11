@@ -493,6 +493,7 @@
                             <th>Produto</th>
                             <th>Quant. Peças</th>
                             <th>Custo</th>
+                            <th>Última Atualização</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -502,10 +503,12 @@
                                 <td>{{ $estoque->produto->descricao }}</td>
                                 <td>{{ $estoque->total_quantidade }}</td>
                                 <td>{{ $estoque->total_custo }}</td>
+                                <td>{{ $estoque->dataUltimaAtualizacao ? $estoque->dataUltimaAtualizacao->format('d/m/Y H:i') : 'Sem atualização' }}
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center">Nenhum registro encontrado</td>
+                                <td colspan="5">Nenhum estoque encontrado.</td>
                             </tr>
                         @endforelse
                     </tbody>

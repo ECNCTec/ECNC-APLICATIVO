@@ -7,6 +7,8 @@ use App\Models\Produto;
 use App\Models\Fornecedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class EstoqueController extends Controller
 {
@@ -18,8 +20,14 @@ class EstoqueController extends Controller
         $informacoesEstoque = Estoque::all();
 
         $contagemEstoque = Estoque::where('user_id', Auth::id())
-        ->distinct('produto_id')
-        ->count('produto_id');    
+            ->distinct('produto_id')
+            ->count('produto_id');
+
+        $dataUltimaAtualizacao = DB::table('estoques')
+            ->select('produto_id', DB::raw('MAX(updated_at) AS ultima_atualizacao'))
+            ->where('user_id', Auth::id())
+            ->groupBy('produto_id')
+            ->get();
 
         $somaEstoque = Estoque::with([
             'produto:id,descricao',
@@ -28,9 +36,14 @@ class EstoqueController extends Controller
             ->selectRaw('produto_id, sum(quantidade_pecas) as total_quantidade, sum(quantidade_pecas * custo) as total_custo')
             ->groupBy('produto_id')
             ->where('user_id', Auth::id())
-            ->get();
+            ->get()
+            ->map(function ($estoque) use ($dataUltimaAtualizacao) {
+                $data = $dataUltimaAtualizacao->firstWhere('produto_id', $estoque->produto_id);
+                $estoque->dataUltimaAtualizacao = $data ? Carbon::parse($data->ultima_atualizacao) : null;
+                return $estoque;
+            });
 
-        return view('cadastroEstoque', compact('produtos', 'fornecedores', 'contagemEstoque', 'informacoesEstoque', 'somaEstoque'));
+        return view('cadastroEstoque', compact('produtos', 'fornecedores', 'contagemEstoque', 'informacoesEstoque', 'somaEstoque', 'dataUltimaAtualizacao'));
     }
 
     public function create()
