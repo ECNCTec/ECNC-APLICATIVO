@@ -423,7 +423,7 @@
                             <select id="produto_id" name="produto_id" class="form-control" required>
                                 <option value="" disabled selected>Selecione uma opção:</option>
                                 @foreach ($produtos as $produto)
-                                    <option value="{{ $produto->id }}" 
+                                    <option value="{{ $produto->id }}"
                                         {{ old('produto_id') == $produto->id ? 'selected' : '' }}>
                                         {{ $produto->id }} - {{ $produto->descricao }}
                                     </option>
@@ -435,7 +435,7 @@
                             <select id="fornecedor_id" name="fornecedor_id" class="form-control" required>
                                 <option value="" disabled selected>Selecione uma opção:</option>
                                 @foreach ($fornecedores as $fornecedor)
-                                    <option value="{{ $fornecedor->id }}" 
+                                    <option value="{{ $fornecedor->id }}"
                                         {{ old('fornecedor_id') == $fornecedor->id ? 'selected' : '' }}>
                                         {{ $fornecedor->cpf_cnpj }} - {{ $fornecedor->razao_social }}
                                     </option>
@@ -444,19 +444,21 @@
                         </div>
                         <div class="form-group col-md-2">
                             <label for="quantidade_pecas">Quantidade de Peças:</label>
-                            <input type="text" id="quantidade_pecas" name="quantidade_pecas" class="form-control" required 
-                                value="{{ old('quantidade_pecas') }}">
+                            <input type="text" id="quantidade_pecas" name="quantidade_pecas" class="form-control"
+                                required value="{{ old('quantidade_pecas') }}">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="custo">Valor de Custo:</label>
-                            <input type="number" id="custo" name="custo" class="form-control" placeholder="0.00" step="0.01" required 
-                                value="{{ old('custo') }}">
+                            <input type="number" id="custo" name="custo" class="form-control" placeholder="0.00"
+                                step="0.01" required value="{{ old('custo') }}">
                         </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Registrar Entrada</button>
+                        <button type="submit" class="button-cadastrar btn btn-sm d-none d-sm-inline-block">Registrar
+                            Entrada</button>
                     </div>
-                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Registrar Entrada</button>
+                    <button type="submit" class="button-cadastrar btn btn-sm btn-block d-inline-block d-sm-none">Registrar
+                        Entrada</button>
                 </form>
             </div>
         </div>
@@ -465,8 +467,15 @@
                 <h6>Atualmente, a lista contém 10 produto(s).</h6>
                 <div class="filtro">
                     <div>
+                        <a href="#" data-toggle="modal" data-target="#estoqueModal">
+                            <img class="mr-2" src="{{ asset('storage/images/iconEstoque.png') }}"
+                                alt="Recarregar Filtros">
+                        </a>
+                    </div>
+                    <div>
                         <a href="#">
-                            <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}" alt="Recarregar Filtros">
+                            <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}"
+                                alt="Recarregar Filtros">
                         </a>
                     </div>
                     <div>
@@ -567,7 +576,7 @@
                                 <td>{{ $estoque->total_quantidade }}</td>
                                 <td>
                                     <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
-                                        data-target="#editModal{{ $estoque->id }}">
+                                        data-target="#editModal" onclick="carregarModal({{ $estoque->id }})">
                                         <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
                                     </a>
                                 </td>
@@ -608,6 +617,57 @@
             @empty
                 <p class="text-center">Nenhum produto encontrado</p>
             @endforelse
+        </div>
+        <div class="modal fade" id="estoqueModal" tabindex="-1" role="dialog" aria-labelledby="estoqueModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="estoqueModalLabel">Informações de Estoque</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Produto</th>
+                                    <th>Fornecedor</th>
+                                    <th>Quantidade</th>
+                                    <th>Custo</th>
+                                    <th>Operação</th>
+                                    <th>Atual</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($informacoesEstoque as $estoque)
+                                    <tr>
+                                        <td>{{ $estoque->id }}</td>
+                                        <td>{{ $estoque->produto_id }}</td>
+                                        <td>{{ $estoque->fornecedor_id }}</td>
+                                        <td>{{ $estoque->quantidade_pecas }}</td>
+                                        <td>{{ $estoque->custo }}</td>
+                                        <td>{{ $estoque->operacao }}</td>
+                                        <td>{{ $estoque->quant_atual }}</td>
+                                        <td>
+                                            <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
+                                                data-target="#editModal{{ $estoque->id }}">
+                                                <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div>
             @if (session('success'))
