@@ -46,6 +46,15 @@ class EstoqueController extends Controller
         return view('cadastroEstoque', compact('produtos', 'fornecedores', 'contagemEstoque', 'informacoesEstoque', 'somaEstoque', 'dataUltimaAtualizacao'));
     }
 
+    public function produtosNoEstoque()
+    {
+        $contagemEstoque = Estoque::where('user_id', Auth::id())
+            ->distinct('produto_id')
+            ->count('produto_id');
+
+        return view('estoque', compact('contagemEstoque'));
+    }
+
     public function create()
     {
         $produtos = Produto::where('user_id', Auth::id())->get();

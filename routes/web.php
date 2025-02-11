@@ -40,6 +40,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cadastroEstoque', [EstoqueController::class, 'informacoesDoSistema'])->name('cadastroEstoque');
 
+    Route::get('/estoque', function () {
+        return view('estoque');
+    })->name('estoque');
+
     Route::get('/cadastroFornecedor', function () {
         return view('cadastroFornecedor');
     })->name('cadastroFornecedor');

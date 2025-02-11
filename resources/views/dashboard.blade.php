@@ -336,11 +336,16 @@
                         <a href="#" style="padding-left: 39px;">Cadastrados</a>
                         <a href="#" style="padding-left: 39px;">Relatório</a>
                     </div>
-                </li>             
+                </li> 
                 <li>
-                    <a href="{{ route('cadastroEstoque') }}"><i class="fas fa-box"
-                            style="margin: 0px 10px 0px 12px;"></i> Estoque</a>
-                </li>
+                    <a href="#" id="estoqueDropdownToggle" class="estoque-dropdown" aria-expanded="false"
+                        style="padding-left: 21px;">Estoque</a>
+                    <div id="estoqueSubmenu" class="submenu">
+                        <a href="{{ route('cadastroEstoque') }}" style="padding-left: 39px;">Cadastrar</a>
+                        <a href="{{ route('estoque') }}" style="padding-left: 39px;">Produtos em Estoque</a>
+                        <a href="#" style="padding-left: 39px;">Relatório</a>
+                    </div>
+                </li>          
                 <li>
                     <a href="#"><i class="fas fa-user-plus" style="margin: 0px 6px 0px 12px;"></i> Clientes
                         Cadastrados</a>
@@ -427,34 +432,44 @@
         });
     </script>
     <!-- Código para controlar a abertura e fechamento dos dropdowns -->
-    <script>
+    <script> 
         document.addEventListener('DOMContentLoaded', function() {
             var clientesDropdownToggle = document.getElementById('clientesDropdownToggle');
             var produtosDropdownToggle = document.getElementById('produtosDropdownToggle');
             var fornecedorDropdownToggle = document.getElementById('fornecedorDropdownToggle');
+            var estoqueDropdownToggle = document.getElementById('estoqueDropdownToggle'); 
+    
             var clientesSubmenu = document.getElementById('clientesSubmenu');
             var produtosSubmenu = document.getElementById('produtosSubmenu');
             var fornecedorSubmenu = document.getElementById('fornecedorSubmenu');
-
+            var estoqueSubmenu = document.getElementById('estoqueSubmenu');
+    
             clientesDropdownToggle.addEventListener('click', function(e) {
-                e.preventDefault(); // Impede o comportamento padrão do link
+                e.preventDefault();
                 clientesSubmenu.classList.toggle('open');
                 var isExpanded = clientesSubmenu.classList.contains('open');
                 clientesDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             });
-
+    
             produtosDropdownToggle.addEventListener('click', function(e) {
-                e.preventDefault(); // Impede o comportamento padrão do link
+                e.preventDefault();
                 produtosSubmenu.classList.toggle('open');
                 var isExpanded = produtosSubmenu.classList.contains('open');
                 produtosDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             });
-
-            fornecedorDropdownToggle.addEventListener('click', function(e) { // Novo evento para fornecedores
-                e.preventDefault(); // Impede o comportamento padrão do link
+    
+            fornecedorDropdownToggle.addEventListener('click', function(e) {
+                e.preventDefault();
                 fornecedorSubmenu.classList.toggle('open');
                 var isExpanded = fornecedorSubmenu.classList.contains('open');
                 fornecedorDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            });
+    
+            estoqueDropdownToggle.addEventListener('click', function(e) { 
+                e.preventDefault();
+                estoqueSubmenu.classList.toggle('open');
+                var isExpanded = estoqueSubmenu.classList.contains('open');
+                estoqueDropdownToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             });
         });
     </script>
