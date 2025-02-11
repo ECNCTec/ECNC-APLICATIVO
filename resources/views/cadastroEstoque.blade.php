@@ -491,8 +491,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Produto</th>
-                            <th>Custo</th>
                             <th>Quant. Peças</th>
+                            <th>Custo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -500,8 +500,8 @@
                             <tr>
                                 <td>{{ $estoque->produto_id }}</td>
                                 <td>{{ $estoque->produto->descricao }}</td>
-                                <td>{{ $estoque->total_custo }}</td>
                                 <td>{{ $estoque->total_quantidade }}</td>
+                                <td>{{ $estoque->total_custo }}</td>
                             </tr>
                         @empty
                             <tr>
