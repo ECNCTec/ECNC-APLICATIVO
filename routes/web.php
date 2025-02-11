@@ -38,7 +38,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('entradaEstoque', EstoqueController::class);
 
-    // Correção da rota para permitir o parâmetro 'id' opcional
+    Route::get('/cadastroEstoque', [EstoqueController::class, 'informacoesDoSistema'])->name('cadastroEstoque');
+
     Route::match(['get', 'post'], '/cadastroEstoque/{id?}', [EstoqueController::class, 'storeOrUpdate'])->name('cadastroEstoque');
 
     Route::get('/estoque', [EstoqueController::class, 'produtosNoEstoque'])->name('estoque');

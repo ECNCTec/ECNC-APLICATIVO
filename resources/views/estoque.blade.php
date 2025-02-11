@@ -476,7 +476,7 @@
                                         <div class="modal-body">
                                             <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}" method="POST">
                                                 @csrf
-                                                {{-- @method('PUT') --}}
+                                                @method($estoque ? 'PUT' : 'POST')
                                                 <div class="form-group">
                                                     <label for="descricao">Descrição</label>
                                                     <input type="text" class="form-control" id="descricao" name="descricao"
