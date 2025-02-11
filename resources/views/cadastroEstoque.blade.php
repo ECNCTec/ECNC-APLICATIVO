@@ -503,8 +503,7 @@
                                 <td>{{ $estoque->produto->descricao }}</td>
                                 <td>{{ $estoque->total_quantidade }}</td>
                                 <td>{{ number_format($estoque->total_custo, 2, ',', '.') }}</td>
-                                <td>{{ $estoque->dataUltimaAtualizacao ? $estoque->dataUltimaAtualizacao->format('d/m/Y H:i') : 'Sem atualização' }}
-                                </td>
+                                <td>{{ $estoque->dataUltimaAtualizacao ? $estoque->dataUltimaAtualizacao->format('d/m/Y H:i') : 'Sem atualização' }}</td>
                             </tr>
                         @empty
                             <tr>

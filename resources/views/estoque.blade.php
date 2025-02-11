@@ -416,12 +416,6 @@
                 <h6>Atualmente, a lista contém {{ $contagemEstoque }} produto(s).</h6>
                 <div class="filtro">
                     <div>
-                        <a href="#" data-toggle="modal" data-target="#estoqueModal">
-                            <img class="mr-2" src="{{ asset('storage/images/iconEstoque.png') }}"
-                                alt="Recarregar Filtros">
-                        </a>
-                    </div>
-                    <div>
                         <a href="#">
                             <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}"
                                 alt="Recarregar Filtros">
@@ -439,53 +433,70 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Produto</th>
+                            <th>Descrição</th>
                             <th>Quant. Peças</th>
                             <th>Custo</th>
-                            <th>Última Atualização</th>
+                            <th>Operação</th>
+                            <th>Data Registro</th>
+                            <th>Editar</th>
+                            <th>Excluir</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @forelse($somaEstoque as $estoque)
+                        @forelse($registrosEstoque as $estoque)
                             <tr>
                                 <td>{{ $estoque->produto_id }}</td>
                                 <td>{{ $estoque->produto->descricao }}</td>
-                                <td>{{ $estoque->total_quantidade }}</td>
-                                <td>{{ number_format($estoque->total_custo, 2, ',', '.') }}</td>
-                                <td>{{ $estoque->dataUltimaAtualizacao ? $estoque->dataUltimaAtualizacao->format('d/m/Y H:i') : 'Sem atualização' }}
+                                <td>{{ $estoque->quantidade_pecas }}</td>
+                                <td>{{ number_format($estoque->custo, 2, ',', '.') }}</td>
+                                <td>{{ $estoque->operacao }}</td>
+                                <td>{{ $estoque->created_at }}</td>
+                                <td>
+                                    <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
+                                        data-target="#editModal">
+                                        <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
+                                        data-target="#deleteModal">
+                                        <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
+                                    </a>
                                 </td>
                             </tr>
                         @empty
                             <tr>
                                 <td colspan="5">Nenhum estoque encontrado.</td>
                             </tr>
-                        @endforelse --}}
+                        @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
         <div id="form" class="d-md-none mb-2">
-            {{-- @forelse($somaEstoque as $estoque)
+            @forelse($registrosEstoque as $estoque)
                 <div class="mobile-table">
                     <p><strong>ID:</strong> {{ $estoque->produto_id }}</p>
-                    <p><strong>Produto:</strong> {{ $estoque->produto->descricao }}</p>
-                    <p><strong>Custo:</strong> {{ $estoque->total_custo }}</p>
+                    <p><strong>Descrição:</strong> {{ $estoque->produto->descricao }}</p>
                     <p><strong>Quant. Peças:</strong> {{ $estoque->total_quantidade }}</p>
+                    <p><strong>Custo:</strong> {{ number_format($estoque->total_custo, 2, ',', '.') }}</p>
+                    <p><strong>Operação:</strong> {{ $estoque->operacao }}</p>
+                    <p><strong>Data Registro:</strong> {{ $estoque->created_at }}</p>
                     <div class="actions" style="position: absolute; top: 10px; right: 10px;">
                         <a class="buttonAction btn btn-sm mr-2" data-toggle="modal"
-                            data-target="#editModal{{ $produto->id }}">
+                            data-target="#editModal{{ $estoque->produto_id }}">
                             <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
                         </a>
                         <a class="buttonAction btn btn-sm" data-toggle="modal"
-                            data-target="#deleteModal{{ $produto->id }}">
+                            data-target="#deleteModal{{ $estoque->produto_id }}">
                             <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
                         </a>
                     </div>
                 </div>
             @empty
-                <p class="text-center">Nenhum produto encontrado</p>
-            @endforelse --}}
-        </div>
+                <p class="text-center">Nenhum estoque encontrado.</p>
+            @endforelse
+        </div>        
         <div>
             @if (session('success'))
                 <div class="alert alert-success message">

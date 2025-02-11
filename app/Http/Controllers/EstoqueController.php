@@ -48,11 +48,12 @@ class EstoqueController extends Controller
 
     public function produtosNoEstoque()
     {
+        $registrosEstoque = Estoque::all();
+
         $contagemEstoque = Estoque::where('user_id', Auth::id())
-            ->distinct('produto_id')
             ->count('produto_id');
 
-        return view('estoque', compact('contagemEstoque'));
+        return view('estoque', compact('registrosEstoque', 'contagemEstoque'));
     }
 
     public function create()
