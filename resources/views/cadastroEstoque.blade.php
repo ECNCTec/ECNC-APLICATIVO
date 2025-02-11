@@ -559,7 +559,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($estoques as $estoque)
+                        @forelse($somaEstoque as $estoque)
                             <tr>
                                 <td>{{ $estoque->produto_id }}</td>
                                 <td>{{ $estoque->produto->descricao }}</td>
@@ -588,7 +588,7 @@
             </div>
         </div>
         <div id="form" class="d-md-none mb-2">
-            @forelse($estoques as $estoque)
+            @forelse($somaEstoque as $estoque)
                 <div class="mobile-table">
                     <p><strong>ID:</strong> {{ $estoque->produto_id }}</p>
                     <p><strong>Produto:</strong> {{ $estoque->produto->descricao }}</p>
