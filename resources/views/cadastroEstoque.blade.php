@@ -589,6 +589,41 @@
                 </table>
             </div>
         </div>
+        <td>
+            <a type="button" class="buttonAction btn btn-sm" data-toggle="modal" data-target="#editModal">
+                <img src="{{ asset('storage/images/registros.png') }}" alt="">
+            </a>
+        </td>
+
+        <!-- Modal **********************************************************************************************************-->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Informações do Estoque</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @foreach ($estoqueModal as $estoque)
+                            <p><strong>Descrição do Produto:</strong> {{ $estoque->produto->descricao }}</p>
+                            <p><strong>Quantidade em Estoque:</strong> {{ $estoque->quantidade_pecas }}</p>
+                            <p><strong>Custo:</strong> {{ $estoque->custo }}</p>
+                            <p><strong>Operação:</strong> {{ $estoque->operacao }}</p>
+                            <hr>
+                        @endforeach
+                        @if ($estoqueModal->isEmpty())
+                            <p>Informações não disponíveis.</p>
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="form" class="d-md-none mb-2">
             @forelse($somaEstoque as $estoque)
                 <div class="mobile-table">
