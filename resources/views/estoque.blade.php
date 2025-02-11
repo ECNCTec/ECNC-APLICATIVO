@@ -468,24 +468,28 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="editModalLabel{{ $estoque->id }}">Editar Estoque</h5>
+                                            <h5 class="modal-title" id="editModalLabel{{ $estoque->id }}">Editar Estoque
+                                            </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}" method="POST">
+                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method($estoque ? 'PUT' : 'POST')
                                                 <div class="form-group">
                                                     <label for="descricao">Descrição</label>
-                                                    <input type="text" class="form-control" id="descricao" name="descricao"
-                                                        value="{{ $estoque->produto->descricao }}" required>
+                                                    <input type="text" class="form-control" id="descricao"
+                                                        name="descricao" value="{{ $estoque->produto->descricao }}"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="quantidade_pecas">Quantidade de Peças</label>
                                                     <input type="number" class="form-control" id="quantidade_pecas"
-                                                        name="quantidade_pecas" value="{{ $estoque->quantidade_pecas }}" required>
+                                                        name="quantidade_pecas" value="{{ $estoque->quantidade_pecas }}"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="custo">Custo</label>
@@ -494,10 +498,13 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="operacao">Operação</label>
-                                                    <input type="text" class="form-control" id="operacao" name="operacao"
-                                                        value="{{ $estoque->operacao }}" required>
+                                                    <input type="text" class="form-control" id="operacao"
+                                                        name="operacao" value="{{ $estoque->operacao }}" required>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="button-atualizar-modal btn">Atualizar
+                                                        Produto</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -508,18 +515,23 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel{{ $estoque->produto_id }}">Excluir Estoque</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <h5 class="modal-title" id="deleteModalLabel{{ $estoque->produto_id }}">Excluir
+                                                Estoque</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Fechar">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            <p>Tem certeza de que deseja excluir este registro de "{{ $estoque->produto->descricao }}?</p>
-                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}" method="POST">
+                                        <div class="modal-footer">
+                                            <p>Tem certeza de que deseja excluir este registro de
+                                                "{{ $estoque->produto->descricao }}?</p>
+                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Sim, excluir</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="button-cancelar-modal btn"
+                                                    data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="button-excluir-modal btn">Excluir</button>
                                             </form>
                                         </div>
                                     </div>
