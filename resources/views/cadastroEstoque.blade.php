@@ -653,6 +653,7 @@
                                         <td>{{ $estoque->operacao }}</td>
                                         <td>{{ $estoque->quant_atual }}</td>
                                         <td>
+                                            <!-- Botão para abrir o modal de edição -->
                                             <a type="button" class="buttonAction btn btn-sm" data-toggle="modal"
                                                 data-target="#editModal{{ $estoque->id }}">
                                                 <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
@@ -669,6 +670,65 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal de Edição Dinâmica -->
+        @foreach ($informacoesEstoque as $estoque)
+            <div class="modal fade" id="editModal{{ $estoque->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="editModalLabel{{ $estoque->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel{{ $estoque->id }}">Editar Estoque - ID:
+                                {{ $estoque->id }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('cadastroEstoque', $estoque->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="produto_id">Produto</label>
+                                    <input type="text" class="form-control" id="produto_id" name="produto_id"
+                                        value="{{ $estoque->produto_id }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fornecedor_id">Fornecedor</label>
+                                    <input type="text" class="form-control" id="fornecedor_id" name="fornecedor_id"
+                                        value="{{ $estoque->fornecedor_id }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantidade_pecas">Quantidade</label>
+                                    <input type="number" class="form-control" id="quantidade_pecas"
+                                        name="quantidade_pecas" value="{{ $estoque->quantidade_pecas }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="custo">Custo</label>
+                                    <input type="text" class="form-control" id="custo" name="custo"
+                                        value="{{ $estoque->custo }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="operacao">Operação</label>
+                                    <input type="text" class="form-control" id="operacao" name="operacao"
+                                        value="{{ $estoque->operacao }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quant_atual">Quantidade Atual</label>
+                                    <input type="number" class="form-control" id="quant_atual" name="quant_atual"
+                                        value="{{ $estoque->quant_atual }}" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
         <div>
             @if (session('success'))
                 <div class="alert alert-success message">

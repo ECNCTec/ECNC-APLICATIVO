@@ -73,22 +73,10 @@ class EstoqueController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'produto_id' => 'required|exists:produtos,id',
-            'fornecedor_id' => 'required|exists:fornecedores,id',
-            'quantidade_pecas' => 'required|integer|min:1',
-            'custo' => 'required|numeric|min:0.01',
-        ]);
-
         $estoque = Estoque::findOrFail($id);
-        $estoque->update([
-            'produto_id' => $request->produto_id,
-            'fornecedor_id' => $request->fornecedor_id,
-            'quantidade_pecas' => $request->quantidade_pecas,
-            'custo' => $request->custo,
-        ]);
+        $estoque->update($request->all());
 
-        return redirect()->route('cadastroEstoque')->with('success', 'Estoque atualizado com sucesso!');
+        return redirect()->route('entradaEstoque.index')->with('success', 'Estoque atualizado com sucesso!');
     }
 
     public function destroy($id)
