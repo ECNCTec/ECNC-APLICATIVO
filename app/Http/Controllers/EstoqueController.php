@@ -165,7 +165,6 @@ class EstoqueController extends Controller
         $custo = str_replace(['.', ','], ['', '.'], $request->custo);
         $custo = (float) $custo;
 
-        // Atualizando o registro
         $estoque->update([
             'quantidade_pecas' => $request->quantidade_pecas,
             'custo' => $custo,
