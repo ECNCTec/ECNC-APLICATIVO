@@ -416,7 +416,7 @@
                 <h6>Atualmente, a lista contém {{ $contagemEstoque }} produto(s).</h6>
                 <div class="filtro">
                     <div>
-                        <a href="#">
+                        <a href="{{ route('estoque')}}">
                             <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}" alt="Recarregar Filtros">
                         </a>
                     </div>
