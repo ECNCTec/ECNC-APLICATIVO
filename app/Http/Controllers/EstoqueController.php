@@ -31,19 +31,23 @@ class EstoqueController extends Controller
             ->get();
 
         $somaEstoque = Estoque::with([
-            'produto:id,descricao', 
+            'produto:id,descricao',
             'fornecedor:id,razao_social'
         ])
-            ->selectRaw('produto_id, sum(quantidade_pecas) as total_quantidade, sum(quantidade_pecas * custo) as total_custo')
+            ->selectRaw("
+                    produto_id, 
+                    SUM(CASE WHEN operacao = 'Entrada' THEN quantidade_pecas ELSE -quantidade_pecas END) AS total_quantidade, 
+                    SUM(CASE WHEN operacao = 'Entrada' THEN quantidade_pecas * custo ELSE -quantidade_pecas * custo END) AS total_custo
+                ")
             ->groupBy('produto_id')
             ->where('user_id', $userId)
             ->when($search, function ($query, $search) {
                 $query->where(function ($query) use ($search) {
                     $query->whereHas('produto', function ($q) use ($search) {
-                        $q->where('descricao', 'like', '%' . $search . '%');  
+                        $q->where('descricao', 'like', '%' . $search . '%');
                     })
                         ->orWhere('id', 'like', '%' . $search . '%')
-                        ->orWhere('produto_id', 'like', '%' . $search . '%');  
+                        ->orWhere('produto_id', 'like', '%' . $search . '%');
                 });
             })
             ->get()
