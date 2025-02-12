@@ -324,8 +324,12 @@
             @media (max-width: 768px) {
                 .titulo {
                     margin-top: -25px;
-                    margin-bottom: 0px;
+                    margin-bottom: -5px;
                     z-index: 0;
+                }
+
+                .titulo h6 {
+                    font-size: 18px;
                 }
 
                 #form {

@@ -13,6 +13,16 @@
     @extends('dashboard')
     @section('content')
         <style>
+            .titulo {
+                margin-top: -42px;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                z-index: 9999;
+            }
+
             #form {
                 margin: 0px 10px 0px 10px;
             }
@@ -101,8 +111,18 @@
             }
 
             @media (max-width: 768px) {
+                .titulo {
+                    margin-top: -5px;
+                    margin-bottom: -34px;
+                    z-index: 0;
+                }
+
+                .titulo h6 {
+                    font-size: 18px;
+                }
+
                 #form {
-                    margin: 30px 10px 30px 10px;
+                    margin: 0px 10px 30px 10px;
                 }
 
                 .buttonExcluir img {
@@ -111,6 +131,9 @@
             }
         </style>
         <div id="form">
+            <div class="titulo">
+                <h6>Gerar Orçamento</h6>
+            </div>
         </div>
         <div id="form-container">
             <div class="lucro-multiplicador col-md-2">
@@ -146,12 +169,14 @@
         <div class="d-flex justify-content-end">
             <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
                 onclick="addForm()">Adicionar</button>
-            <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-2 mb-3">Gerar Orçamento</button>
+            <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-2 mb-3">Gerar
+                Orçamento</button>
         </div>
         <div class="mt-2 ml-2 mr-2">
             <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none"
                 onclick="addForm()">Adicionar</button>
-            <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none mb-3">Gerar Orçamento</button>
+            <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none mb-3">Gerar
+                Orçamento</button>
         </div>
         </div>
     @endsection
