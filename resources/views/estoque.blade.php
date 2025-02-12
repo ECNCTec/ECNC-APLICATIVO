@@ -413,7 +413,7 @@
         </style>
         <div id="form" class="crm-table-container">
             <div class="search-container">
-                <h6>Atualmente, a lista contém {{ $contagemEstoque }} produto(s).</h6>
+                <h6>Atualmente, a lista contém {{ $contagemEstoque }} registros.</h6>
                 <div class="filtro">
                     <div>
                         <a href="{{ route('estoque') }}">
@@ -504,6 +504,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Descrição</th>
+                            <th>Fornecedor</th>
                             <th>Quant. Peças</th>
                             <th>Custo</th>
                             <th>Operação</th>
@@ -517,6 +518,7 @@
                             <tr>
                                 <td>{{ $estoque->id }}</td>
                                 <td>{{ $estoque->produto->descricao }}</td>
+                                <td>{{ $estoque->fornecedor->razao_social }}</td>
                                 <td>{{ $estoque->quantidade_pecas }}</td>
                                 <td>{{ number_format($estoque->custo, 2, ',', '.') }}</td>
                                 <td>{{ $estoque->operacao }}</td>
@@ -548,6 +550,7 @@
                 <div class="mobile-table">
                     <p><strong>ID:</strong> {{ $estoque->id }}</p>
                     <p><strong>Descrição:</strong> {{ $estoque->produto->descricao }}</p>
+                    <p><strong>Fornecedor</strong> {{ $estoque->fornecedor->razao_social }}</p>
                     <p><strong>Quant. Peças:</strong> {{ $estoque->quantidade_pecas }}</p>
                     <p><strong>Custo:</strong> {{ number_format($estoque->custo, 2, ',', '.') }}</p>
                     <p><strong>Operação:</strong> {{ $estoque->operacao }}</p>

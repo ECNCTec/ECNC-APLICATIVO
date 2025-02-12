@@ -36,10 +36,11 @@ class EstoqueController extends Controller
         ])
             ->selectRaw("
                     produto_id, 
+                    fornecedor_id,
                     SUM(CASE WHEN operacao = 'Entrada' THEN quantidade_pecas ELSE -quantidade_pecas END) AS total_quantidade, 
                     SUM(CASE WHEN operacao = 'Entrada' THEN quantidade_pecas * custo ELSE -quantidade_pecas * custo END) AS total_custo
                 ")
-            ->groupBy('produto_id')
+            ->groupBy('produto_id', 'fornecedor_id')
             ->where('user_id', $userId)
             ->when($search, function ($query, $search) {
                 $query->where(function ($query) use ($search) {
