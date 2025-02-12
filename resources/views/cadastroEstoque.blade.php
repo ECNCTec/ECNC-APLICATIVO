@@ -473,10 +473,36 @@
                         </a>
                     </div>
                     <div>
-                        <a href="#" data-toggle="modal" data-target="#filtroModal">
+                        <a href="#" data-toggle="modal" data-target="#filtroModalEstoqueCadastro">
                             <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="">
                         </a>
                     </div>
+                    <div class="modal fade" id="filtroModalEstoqueCadastro" tabindex="-1" role="dialog" aria-labelledby="filtroModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="filtroModalLabel">Filtros</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('estoque') }}" method="GET">
+                                        <div class="form-group">
+                                            <label for="idDescricao">ID ou Descrição</label>
+                                            <div class="input-group">
+                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ old('search', request()->input('search')) }}">
+                                                <i class="fas fa-search"></i>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
+                                        </div>
+                                    </form>                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
             <div class="d-none d-md-block">
