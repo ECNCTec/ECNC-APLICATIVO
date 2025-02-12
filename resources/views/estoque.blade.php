@@ -548,7 +548,7 @@
                 <div class="mobile-table">
                     <p><strong>ID:</strong> {{ $estoque->id }}</p>
                     <p><strong>Descrição:</strong> {{ $estoque->produto->descricao }}</p>
-                    <p><strong>Quant. Peças:</strong> {{ $estoque->total_quantidade }}</p>
+                    <p><strong>Quant. Peças:</strong> {{ $estoque->quantidade_pecas }}</p>
                     <p><strong>Custo:</strong> {{ number_format($estoque->custo, 2, ',', '.') }}</p>
                     <p><strong>Operação:</strong> {{ $estoque->operacao }}</p>
                     <p><strong>Data Registro:</strong> {{ $estoque->created_at }}</p>
