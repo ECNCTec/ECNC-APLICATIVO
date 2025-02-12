@@ -475,21 +475,14 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('cadastroEstoque', $estoque->id ?? null) }}" method="POST">
+                                            <form action="{{ route('cadastroEstoque', $estoque->id ?? null) }}"
+                                                method="POST">
                                                 @csrf
                                                 <input type="hidden" name="estoque_id" value="{{ $estoque->id ?? '' }}">
-                                                <div class="form-group">
-                                                    <label for="produto_id">Id Produto</label>
-                                                    <input type="text" class="form-control" id="produto_id"
-                                                        name="produto_id" value="{{ $estoque->id }}"
-                                                        required>
-                                                </div>        
-                                                <div class="form-group">
-                                                    <label for="fornecedor_id">Fornecedor</label>
-                                                    <input type="text" class="form-control" id="fornecedor_id"
-                                                        name="fornecedor_id" value="{{ $estoque->fornecedor_id ?? '' }}"
-                                                        required>
-                                                </div>                                                                                        
+                                                <input type="hidden" name="produto_id"
+                                                    value="{{ $estoque->produto_id ?? '' }}">
+                                                <input type="hidden" name="fornecedor_id"
+                                                    value="{{ $estoque->fornecedor_id ?? '' }}">
                                                 <div class="form-group">
                                                     <label for="descricao">Descrição</label>
                                                     <input type="text" class="form-control" id="descricao"
@@ -526,7 +519,8 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel{{ $estoque->produto_id }}">Excluir
+                                            <h5 class="modal-title" id="deleteModalLabel{{ $estoque->produto_id }}">
+                                                Excluir
                                                 Estoque</h5>
                                             <button type="button" class="close" data-dismiss="modal"
                                                 aria-label="Fechar">
