@@ -325,10 +325,6 @@
                 .titulo {
                     margin-top: -25px;
                     margin-bottom: 0px;
-                    display: flex;
-                    justify-content: center;
-                    text-align: center;
-                    position: relative;
                     z-index: 0;
                 }
 

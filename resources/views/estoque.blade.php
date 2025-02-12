@@ -14,6 +14,16 @@
     @extends('dashboard')
     @section('content')
         <style>
+            .titulo {
+                margin-top: -48px;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                z-index: 9999;
+            }
+
             #form {
                 margin: 0px 10px 0px 10px;
             }
@@ -312,6 +322,12 @@
             }
 
             @media (max-width: 768px) {
+                .titulo {
+                    margin-top: -30px;
+                    margin-bottom: 8px;
+                    z-index: 0;
+                }
+
                 #form {
                     margin: 30px 10px -25px 10px;
                 }
@@ -420,6 +436,9 @@
             }
         </style>
         <div id="form" class="crm-table-container">
+            <div class="titulo">
+                <h6>Estoque</h6>
+            </div>
             <div class="search-container">
                 <h6>Atualmente, a lista contém {{ $contagemEstoque }} registros.</h6>
                 <div class="filtro">
