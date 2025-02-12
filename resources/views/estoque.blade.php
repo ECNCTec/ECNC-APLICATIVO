@@ -416,7 +416,7 @@
                 <h6>Atualmente, a lista contém {{ $contagemEstoque }} produto(s).</h6>
                 <div class="filtro">
                     <div>
-                        <a href="{{ route('estoque')}}">
+                        <a href="{{ route('estoque') }}">
                             <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}" alt="Recarregar Filtros">
                         </a>
                     </div>
@@ -425,7 +425,8 @@
                             <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="Abrir Filtro">
                         </a>
                     </div>
-                    <div class="modal fade" id="filtroModalEstoque" tabindex="-1" role="dialog" aria-labelledby="filtroModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="filtroModalEstoque" tabindex="-1" role="dialog"
+                        aria-labelledby="filtroModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -439,42 +440,58 @@
                                         <div class="form-group">
                                             <label for="idDescricao">ID ou Descrição</label>
                                             <div class="input-group">
-                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ old('search', request()->input('search')) }}">
+                                                <input type="text" name="search"
+                                                    class="filtro-id-descricao form-control" id="idDescricao"
+                                                    placeholder="Digite ID ou descrição"
+                                                    value="{{ old('search', request()->input('search')) }}">
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="quantidadeMaximaPecas">Quantidade Máxima Peças:</label>
-                                                <input type="number" name="quantidadeMaximaPecas" class="form-control" id="quantidadeMaximaPecas" value="{{ old('quantidadeMaximaPecas', request()->input('quantidadeMaximaPecas')) }}">
+                                                <input type="number" name="quantidadeMaximaPecas" class="form-control"
+                                                    id="quantidadeMaximaPecas"
+                                                    value="{{ old('quantidadeMaximaPecas', request()->input('quantidadeMaximaPecas')) }}">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="quantidadeMinimaPecas">Quantidade Mínima Peças:</label>
-                                                <input type="number" name="quantidadeMinimaPecas" class="form-control" id="quantidadeMinimaPecas" value="{{ old('quantidadeMinimaPecas', request()->input('quantidadeMinimaPecas')) }}">
+                                                <input type="number" name="quantidadeMinimaPecas" class="form-control"
+                                                    id="quantidadeMinimaPecas"
+                                                    value="{{ old('quantidadeMinimaPecas', request()->input('quantidadeMinimaPecas')) }}">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="dataInicial">Data Inicial:</label>
-                                                <input type="date" name="dataInicial" class="form-control" id="dataInicial" value="{{ old('dataInicial', request()->input('dataInicial')) }}">
+                                                <input type="date" name="dataInicial" class="form-control"
+                                                    id="dataInicial"
+                                                    value="{{ old('dataInicial', request()->input('dataInicial')) }}">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="dataFinal">Data Final:</label>
-                                                <input type="date" name="dataFinal" class="form-control" id="dataFinal" value="{{ old('dataFinal', request()->input('dataFinal')) }}">
+                                                <input type="date" name="dataFinal" class="form-control" id="dataFinal"
+                                                    value="{{ old('dataFinal', request()->input('dataFinal')) }}">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="operacao">Operação</label>
                                             <select name="operacao" class="form-control" id="operacao">
                                                 <option value="" disabled selected>Selecione uma opção:</option>
-                                                <option value="Entrada" {{ old('operacao', request()->input('operacao')) == 'Entrada' ? 'selected' : '' }}>Entrada</option>
-                                                <option value="Saída" {{ old('operacao', request()->input('operacao')) == 'Saída' ? 'selected' : '' }}>Saída</option>
+                                                <option value="Entrada"
+                                                    {{ old('operacao', request()->input('operacao')) == 'Entrada' ? 'selected' : '' }}>
+                                                    Entrada</option>
+                                                <option value="Saída"
+                                                    {{ old('operacao', request()->input('operacao')) == 'Saída' ? 'selected' : '' }}>
+                                                    Saída</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
+                                            <button type="submit"
+                                                class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar
+                                                Filtros</button>
                                         </div>
-                                    </form>                                    
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -633,12 +650,12 @@
                     <p><strong>Operação:</strong> {{ $estoque->operacao }}</p>
                     <p><strong>Data Registro:</strong> {{ $estoque->created_at }}</p>
                     <div class="actions" style="position: absolute; top: 10px; right: 10px;">
-                        <a class="buttonAction btn btn-sm mr-2" data-toggle="modal"
-                            data-target="#editModal{{ $estoque->produto_id }}">
+                        <a class="buttonAction btn btn-sm mr-2" type="button" class="buttonAction btn btn-sm"
+                            data-toggle="modal" data-target="#editModal{{ $estoque->id }}">
                             <img src="{{ asset('storage/images/buttonEditar.png') }}" alt="">
                         </a>
-                        <a class="buttonAction btn btn-sm" data-toggle="modal"
-                            data-target="#deleteModal{{ $estoque->produto_id }}">
+                        <a class="buttonAction btn btn-sm" type="button" class="buttonAction btn btn-sm"
+                            data-toggle="modal" data-target="#deleteModal{{ $estoque->id }}">
                             <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
                         </a>
                     </div>
