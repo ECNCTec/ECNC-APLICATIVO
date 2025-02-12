@@ -12,30 +12,40 @@ use Carbon\Carbon;
 
 class EstoqueController extends Controller
 {
-    public function informacoesDoSistema()
+    public function informacoesDoSistema(Request $request)
     {
+        $search = $request->input('search');
+        $userId = Auth::id();
+
         $produtos = Produto::where('user_id', Auth::id())->get();
         $fornecedores = Fornecedor::where('user_id', Auth::id())->get();
 
-        $informacoesEstoque = Estoque::all();
-
-        $contagemEstoque = Estoque::where('user_id', Auth::id())
+        $contagemEstoque = Estoque::where('user_id', $userId)
             ->distinct('produto_id')
             ->count('produto_id');
 
         $dataUltimaAtualizacao = DB::table('estoques')
             ->select('produto_id', DB::raw('MAX(updated_at) AS ultima_atualizacao'))
-            ->where('user_id', Auth::id())
+            ->where('user_id', $userId)
             ->groupBy('produto_id')
             ->get();
 
         $somaEstoque = Estoque::with([
-            'produto:id,descricao',
+            'produto:id,descricao', 
             'fornecedor:id,razao_social'
         ])
             ->selectRaw('produto_id, sum(quantidade_pecas) as total_quantidade, sum(quantidade_pecas * custo) as total_custo')
             ->groupBy('produto_id')
-            ->where('user_id', Auth::id())
+            ->where('user_id', $userId)
+            ->when($search, function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->whereHas('produto', function ($q) use ($search) {
+                        $q->where('descricao', 'like', '%' . $search . '%');  
+                    })
+                        ->orWhere('id', 'like', '%' . $search . '%')
+                        ->orWhere('produto_id', 'like', '%' . $search . '%');  
+                });
+            })
             ->get()
             ->map(function ($estoque) use ($dataUltimaAtualizacao) {
                 $data = $dataUltimaAtualizacao->firstWhere('produto_id', $estoque->produto_id);
@@ -43,7 +53,7 @@ class EstoqueController extends Controller
                 return $estoque;
             });
 
-        return view('cadastroEstoque', compact('produtos', 'fornecedores', 'contagemEstoque', 'informacoesEstoque', 'somaEstoque', 'dataUltimaAtualizacao'));
+        return view('cadastroEstoque', compact('produtos', 'fornecedores', 'contagemEstoque', 'somaEstoque', 'dataUltimaAtualizacao'));
     }
 
     public function produtosNoEstoque(Request $request)
@@ -63,7 +73,7 @@ class EstoqueController extends Controller
                     $query->whereHas('produto', function ($q) use ($search) {
                         $q->where('descricao', 'like', '%' . $search . '%');
                     })
-                        ->orWhere('id', '=', $search); 
+                        ->orWhere('id', '=', $search);
                 });
             })
             ->when($quantidadeMaximaPecas, function ($query, $quantidadeMaximaPecas) {

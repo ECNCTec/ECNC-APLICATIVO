@@ -467,9 +467,8 @@
                 <h6>Atualmente, a lista contém {{ $contagemEstoque }} produto(s).</h6>
                 <div class="filtro">
                     <div>
-                        <a href="#">
-                            <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}"
-                                alt="Recarregar Filtros">
+                        <a href="{{ route('cadastroEstoque')}}">
+                            <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}" alt="Recarregar Filtros">
                         </a>
                     </div>
                     <div>
@@ -487,9 +486,9 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('estoque') }}" method="GET">
+                                    <form action="{{ route('cadastroEstoque') }}" method="GET">
                                         <div class="form-group">
-                                            <label for="idDescricao">ID ou Descrição</label>
+                                            <label for="idDescricao">Filtro Descrição</label>
                                             <div class="input-group">
                                                 <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ old('search', request()->input('search')) }}">
                                                 <i class="fas fa-search"></i>
