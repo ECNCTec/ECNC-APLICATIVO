@@ -55,10 +55,12 @@ class EstoqueController extends Controller
 
         $registrosEstoque = \App\Models\Estoque::all();
 
+        $operacao = \App\Models\Estoque::select('operacao')->distinct()->get();
+
         $contagemEstoque = \App\Models\Estoque::where('user_id', Auth::id())
             ->count('produto_id');
 
-        return view('estoque', compact('produtoEstoque', 'registrosEstoque', 'contagemEstoque'));
+        return view('estoque', compact('produtoEstoque', 'registrosEstoque','operacao', 'contagemEstoque'));
     }
 
     public function create()

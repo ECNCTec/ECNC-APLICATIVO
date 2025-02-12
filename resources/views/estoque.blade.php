@@ -508,9 +508,16 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="operacao">Operação</label>
-                                                    <input type="text" class="form-control" id="operacao"
-                                                        name="operacao" value="{{ $estoque->operacao }}" required>
-                                                </div>
+                                                    <select id="operacao" name="operacao" class="form-control" required>
+                                                        <option value="" disabled>Selecione uma opção:</option>
+                                                        @foreach ($operacao as $op)
+                                                            <option value="{{ $op->operacao }}"
+                                                                {{ old('operacao', $estoque->operacao ?? '') == $op->operacao ? 'selected' : '' }}>
+                                                                {{ $op->operacao }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>                                                
                                                 <div class="modal-footer">
                                                     <button type="submit" class="button-atualizar-modal btn">Atualizar
                                                         Produto</button>
