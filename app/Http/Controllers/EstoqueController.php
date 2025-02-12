@@ -67,10 +67,10 @@ class EstoqueController extends Controller
                 });
             })
             ->when($quantidadeMaximaPecas, function ($query, $quantidadeMaximaPecas) {
-                return $query->where('quant_atual', '<=', $quantidadeMaximaPecas);
+                return $query->where('quantidade_pecas', '<=', $quantidadeMaximaPecas);
             })
             ->when($quantidadeMinimaPecas, function ($query, $quantidadeMinimaPecas) {
-                return $query->where('quant_atual', '>=', $quantidadeMinimaPecas);
+                return $query->where('quantidade_pecas', '>=', $quantidadeMinimaPecas);
             })
             ->when($dataInicial, function ($query, $dataInicial) {
                 return $query->where('created_at', '>=', $dataInicial);

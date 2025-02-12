@@ -439,42 +439,42 @@
                                         <div class="form-group">
                                             <label for="idDescricao">ID ou Descrição</label>
                                             <div class="input-group">
-                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ request()->input('search') }}">
+                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ old('search', request()->input('search')) }}">
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="quantidadeMaximaPecas">Quantidade Máxima Peças:</label>
-                                                <input type="number" name="quantidadeMaximaPecaso" class="form-control" id="quantidadeMaximaPecas" value="{{ request()->input('quantidadeMaximaPecaso') }}">
+                                                <input type="number" name="quantidadeMaximaPecas" class="form-control" id="quantidadeMaximaPecas" value="{{ old('quantidadeMaximaPecas', request()->input('quantidadeMaximaPecas')) }}">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="quantidadeMinimaPecas">Quantidade Mínima Peças:</label>
-                                                <input type="number" name="quantidadeMinimaPecas" class="form-control" id="quantidadeMinimaPecas" value="{{ request()->input('quantidadeMinimaPecas') }}">
+                                                <input type="number" name="quantidadeMinimaPecas" class="form-control" id="quantidadeMinimaPecas" value="{{ old('quantidadeMinimaPecas', request()->input('quantidadeMinimaPecas')) }}">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="dataInicial">Data Inicial:</label>
-                                                <input type="date" name="dataInicial" class="form-control" id="dataInicial" value="{{ request()->input('dataInicial') }}">
+                                                <input type="date" name="dataInicial" class="form-control" id="dataInicial" value="{{ old('dataInicial', request()->input('dataInicial')) }}">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="dataFinal">Data Final:</label>
-                                                <input type="date" name="dataFinal" class="form-control" id="dataFinal" value="{{ request()->input('dataFinal') }}">
+                                                <input type="date" name="dataFinal" class="form-control" id="dataFinal" value="{{ old('dataFinal', request()->input('dataFinal')) }}">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="operacao">Operação</label>
                                             <select name="operacao" class="form-control" id="operacao">
                                                 <option value="" disabled selected>Selecione uma opção:</option>
-                                                <option value="Entrada" {{ request()->input('operacao') == 'Entrada' ? 'selected' : '' }}>Entrada</option>
-                                                <option value="Saída" {{ request()->input('operacao') == 'Saída' ? 'selected' : '' }}>Saída</option>
+                                                <option value="Entrada" {{ old('operacao', request()->input('operacao')) == 'Entrada' ? 'selected' : '' }}>Entrada</option>
+                                                <option value="Saída" {{ old('operacao', request()->input('operacao')) == 'Saída' ? 'selected' : '' }}>Saída</option>
                                             </select>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
                                         </div>
-                                    </form>
+                                    </form>                                    
                                 </div>
                             </div>
                         </div>
