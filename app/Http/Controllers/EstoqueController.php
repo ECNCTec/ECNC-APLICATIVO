@@ -50,6 +50,7 @@ class EstoqueController extends Controller
     {
         $produtoEstoque = \App\Models\Produto::selectRaw('MIN(id) as id, descricao')
             ->groupBy('descricao')
+            ->orderBy('id', 'asc')
             ->get();
 
         $registrosEstoque = \App\Models\Estoque::all();
