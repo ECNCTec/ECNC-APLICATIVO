@@ -421,9 +421,63 @@
                         </a>
                     </div>
                     <div>
-                        <a href="#" data-toggle="modal" data-target="#filtroModal">
-                            <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="">
+                        <a href="#" data-toggle="modal" data-target="#filtroModalEstoque">
+                            <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="Abrir Filtro">
                         </a>
+                    </div>
+                    <div class="modal fade" id="filtroModalEstoque" tabindex="-1" role="dialog" aria-labelledby="filtroModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h6 class="modal-title" id="filtroModalLabel">Filtros</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('estoque') }}" method="GET">
+                                        <div class="form-group">
+                                            <label for="idDescricao">ID ou Descrição</label>
+                                            <div class="input-group">
+                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ request()->input('search') }}">
+                                                <i class="fas fa-search"></i>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="quantidadeMaximaPecas">Quantidade Máxima Peças:</label>
+                                                <input type="number" name="quantidadeMaximaPecaso" class="form-control" id="quantidadeMaximaPecas" value="{{ request()->input('quantidadeMaximaPecaso') }}">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="quantidadeMinimaPecas">Quantidade Mínima Peças:</label>
+                                                <input type="number" name="quantidadeMinimaPecas" class="form-control" id="quantidadeMinimaPecas" value="{{ request()->input('quantidadeMinimaPecas') }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label for="dataInicial">Data Inicial:</label>
+                                                <input type="date" name="dataInicial" class="form-control" id="dataInicial" value="{{ request()->input('dataInicial') }}">
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="dataFinal">Data Final:</label>
+                                                <input type="date" name="dataFinal" class="form-control" id="dataFinal" value="{{ request()->input('dataFinal') }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="operacao">Operação</label>
+                                            <select name="operacao" class="form-control" id="operacao">
+                                                <option value="" disabled selected>Selecione uma opção:</option>
+                                                <option value="Entrada" {{ request()->input('operacao') == 'Entrada' ? 'selected' : '' }}>Entrada</option>
+                                                <option value="Saída" {{ request()->input('operacao') == 'Saída' ? 'selected' : '' }}>Saída</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -470,7 +524,8 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="editModalLabel{{ $estoque->id }}">Editar Estoque
                                             </h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Fechar">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -478,14 +533,16 @@
                                             <form action="{{ route('cadastroEstoque', $estoque->id ?? null) }}"
                                                 method="POST">
                                                 @csrf
-                                                <input type="hidden" name="estoque_id" value="{{ $estoque->id ?? '' }}">
+                                                <input type="hidden" name="estoque_id"
+                                                    value="{{ $estoque->id ?? '' }}">
                                                 <input type="hidden" name="produto_id"
                                                     value="{{ $estoque->produto_id ?? '' }}">
                                                 <input type="hidden" name="fornecedor_id"
                                                     value="{{ $estoque->fornecedor_id ?? '' }}">
                                                 <div class="form-group">
                                                     <label for="quantidade_pecas">Produto</label>
-                                                    <select id="produto_id" name="produto_id" class="form-control" required>
+                                                    <select id="produto_id" name="produto_id" class="form-control"
+                                                        required>
                                                         <option value="" disabled>Selecione uma opção:</option>
                                                         @foreach ($produtoEstoque as $produto)
                                                             <option value="{{ $produto->id }}"
@@ -503,8 +560,10 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="custo">Custo</label>
-                                                    <input type="text" class="form-control" id="custo" name="custo"
-                                                        value="{{ number_format($estoque->custo, 2, ',', '.') }}" required>
+                                                    <input type="text" class="form-control" id="custo"
+                                                        name="custo"
+                                                        value="{{ number_format($estoque->custo, 2, ',', '.') }}"
+                                                        required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="operacao">Operação</label>
@@ -517,7 +576,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                </div>                                                
+                                                </div>
                                                 <div class="modal-footer">
                                                     <button type="submit" class="button-atualizar-modal btn">Atualizar
                                                         Produto</button>

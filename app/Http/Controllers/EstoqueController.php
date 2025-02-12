@@ -46,22 +46,53 @@ class EstoqueController extends Controller
         return view('cadastroEstoque', compact('produtos', 'fornecedores', 'contagemEstoque', 'informacoesEstoque', 'somaEstoque', 'dataUltimaAtualizacao'));
     }
 
-    public function produtosNoEstoque()
+    public function produtosNoEstoque(Request $request)
     {
-        $produtoEstoque = \App\Models\Produto::selectRaw('MIN(id) as id, descricao')
+        $search = $request->input('search');
+        $quantidadeMaximaPecas = $request->input('quantidadeMaximaPecas');
+        $quantidadeMinimaPecas = $request->input('quantidadeMinimaPecas');
+        $dataInicial = $request->input('dataInicial');
+        $dataFinal = $request->input('dataFinal');
+        $operacao = $request->input('operacao');
+
+        $userId = auth()->id();
+
+        $registrosEstoque = Estoque::where('user_id', $userId)
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->where('produto_id', '=', $search); 
+                });
+            })
+            ->when($quantidadeMaximaPecas, function ($query, $quantidadeMaximaPecas) {
+                return $query->where('quant_atual', '<=', $quantidadeMaximaPecas); 
+            })
+            ->when($quantidadeMinimaPecas, function ($query, $quantidadeMinimaPecas) {
+                return $query->where('quant_atual', '>=', $quantidadeMinimaPecas); 
+            })
+            ->when($dataInicial, function ($query, $dataInicial) {
+                return $query->where('created_at', '>=', $dataInicial); 
+            })
+            ->when($dataFinal, function ($query, $dataFinal) {
+                return $query->where('created_at', '<=', $dataFinal); 
+            })
+            ->when($operacao, function ($query, $operacao) {
+                return $query->where('operacao', '=', $operacao);
+            })
+            ->get();
+
+        $produtoEstoque = Produto::selectRaw('MIN(id) as id, descricao')
             ->groupBy('descricao')
             ->orderBy('id', 'asc')
             ->get();
 
-        $registrosEstoque = \App\Models\Estoque::all();
+        $operacao = Estoque::select('operacao')->distinct()->get();
 
-        $operacao = \App\Models\Estoque::select('operacao')->distinct()->get();
-
-        $contagemEstoque = \App\Models\Estoque::where('user_id', Auth::id())
+        $contagemEstoque = Estoque::where('user_id', Auth::id())
             ->count('produto_id');
 
-        return view('estoque', compact('produtoEstoque', 'registrosEstoque','operacao', 'contagemEstoque'));
+        return view('estoque', compact('produtoEstoque', 'registrosEstoque', 'operacao', 'contagemEstoque'));
     }
+
 
     public function create()
     {
