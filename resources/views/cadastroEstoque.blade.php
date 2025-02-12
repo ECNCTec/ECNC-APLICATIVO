@@ -488,7 +488,7 @@
                                 <div class="modal-body">
                                     <form action="{{ route('cadastroEstoque') }}" method="GET">
                                         <div class="form-group">
-                                            <label for="idDescricao">Filtro Descrição</label>
+                                            <label for="idDescricao">Descrição</label>
                                             <div class="input-group">
                                                 <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ old('search', request()->input('search')) }}">
                                                 <i class="fas fa-search"></i>
