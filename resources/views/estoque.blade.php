@@ -409,6 +409,14 @@
                 .modal-content {
                     max-width: 100%;
                 }
+
+                .modal {
+                    z-index: 99999 !important;
+                }
+
+                .modal-backdrop {
+                    z-index: 1040 !important;
+                }
             }
         </style>
         <div id="form" class="crm-table-container">
