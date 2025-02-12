@@ -14,6 +14,16 @@
     @extends('dashboard')
     @section('content')
         <style>
+            .titulo {
+                margin-top: -42px;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                z-index: 9999;
+            }
+
             #form {
                 margin: 0px 10px 0px 10px;
             }
@@ -312,6 +322,16 @@
             }
 
             @media (max-width: 768px) {
+                .titulo {
+                    margin-top: -25px;
+                    margin-bottom: 0px;
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    position: relative;
+                    z-index: 0;
+                }
+
                 #form {
                     margin: 30px 10px -25px 10px;
                 }
@@ -412,6 +432,9 @@
             }
         </style>
         <div id="form">
+            <div class="titulo">
+                <h6>Cadastro Estoque</h6>
+            </div>
             <div id="form-container">
                 <form action="entradaEstoque" method="POST">
                     @csrf
@@ -467,8 +490,9 @@
                 <h6>Atualmente, a lista contém {{ $contagemEstoque }} produto(s).</h6>
                 <div class="filtro">
                     <div>
-                        <a href="{{ route('cadastroEstoque')}}">
-                            <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}" alt="Recarregar Filtros">
+                        <a href="{{ route('cadastroEstoque') }}">
+                            <img class="mr-2" src="{{ asset('storage/images/recarregar.png') }}"
+                                alt="Recarregar Filtros">
                         </a>
                     </div>
                     <div>
@@ -476,7 +500,8 @@
                             <img class="mr-2" src="{{ asset('storage/images/filtro.png') }}" alt="">
                         </a>
                     </div>
-                    <div class="modal fade" id="filtroModalEstoqueCadastro" tabindex="-1" role="dialog" aria-labelledby="filtroModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="filtroModalEstoqueCadastro" tabindex="-1" role="dialog"
+                        aria-labelledby="filtroModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -490,18 +515,23 @@
                                         <div class="form-group">
                                             <label for="idDescricao">Descrição</label>
                                             <div class="input-group">
-                                                <input type="text" name="search" class="filtro-id-descricao form-control" id="idDescricao" placeholder="Digite ID ou descrição" value="{{ old('search', request()->input('search')) }}">
+                                                <input type="text" name="search"
+                                                    class="filtro-id-descricao form-control" id="idDescricao"
+                                                    placeholder="Digite ID ou descrição"
+                                                    value="{{ old('search', request()->input('search')) }}">
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="submit" class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar Filtros</button>
+                                            <button type="submit"
+                                                class="button-atualizar-modal btn button-filtrar btn btn-sm">Aplicar
+                                                Filtros</button>
                                         </div>
-                                    </form>                                  
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
             <div class="d-none d-md-block">
@@ -522,7 +552,8 @@
                                 <td>{{ $estoque->produto->descricao }}</td>
                                 <td>{{ $estoque->total_quantidade }}</td>
                                 <td>{{ number_format($estoque->total_custo, 2, ',', '.') }}</td>
-                                <td>{{ $estoque->dataUltimaAtualizacao ? $estoque->dataUltimaAtualizacao->format('d/m/Y H:i') : 'Sem atualização' }}</td>
+                                <td>{{ $estoque->dataUltimaAtualizacao ? $estoque->dataUltimaAtualizacao->format('d/m/Y H:i') : 'Sem atualização' }}
+                                </td>
                             </tr>
                         @empty
                             <tr>

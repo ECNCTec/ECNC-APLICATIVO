@@ -379,7 +379,7 @@
             </ul>
         </nav>
         <div id="content" class="content">
-            <p>Bem-vindo, {{ auth()->user()->email }}!</p>
+            {{-- <p>Bem-vindo, {{ auth()->user()->email }}!</p> --}}
             <nav class="top-container navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <a href="#" id="sidebarCollapse" class="buttonSideBar">
