@@ -96,7 +96,6 @@ class EstoqueController extends Controller
         return view('estoque', compact('produtoEstoque', 'registrosEstoque', 'operacao', 'contagemEstoque'));
     }
 
-
     public function create()
     {
         $produtos = Produto::where('user_id', Auth::id())->get();
