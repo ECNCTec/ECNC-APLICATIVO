@@ -534,103 +534,6 @@
                                     </a>
                                 </td>
                             </tr>
-                            <div class="modal fade" id="editModal{{ $estoque->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="editModalLabel{{ $estoque->id }}" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editModalLabel{{ $estoque->id }}">Editar Estoque
-                                            </h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{ route('cadastroEstoque', $estoque->id ?? null) }}"
-                                                method="POST">
-                                                @csrf
-                                                <input type="hidden" name="estoque_id"
-                                                    value="{{ $estoque->id ?? '' }}">
-                                                <input type="hidden" name="produto_id"
-                                                    value="{{ $estoque->produto_id ?? '' }}">
-                                                <input type="hidden" name="fornecedor_id"
-                                                    value="{{ $estoque->fornecedor_id ?? '' }}">
-                                                <div class="form-group">
-                                                    <label for="quantidade_pecas">Produto</label>
-                                                    <select id="produto_id" name="produto_id" class="form-control"
-                                                        required>
-                                                        <option value="" disabled>Selecione uma opção:</option>
-                                                        @foreach ($produtoEstoque as $produto)
-                                                            <option value="{{ $produto->id }}"
-                                                                {{ old('produto_id', $estoque->produto_id ?? '') == $produto->id ? 'selected' : '' }}>
-                                                                {{ $produto->id }} - {{ $produto->descricao }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="quantidade_pecas">Quantidade de Peças</label>
-                                                    <input type="number" class="form-control" id="quantidade_pecas"
-                                                        name="quantidade_pecas" value="{{ $estoque->quantidade_pecas }}"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="custo">Custo</label>
-                                                    <input type="text" class="form-control" id="custo"
-                                                        name="custo"
-                                                        value="{{ number_format($estoque->custo, 2, ',', '.') }}"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="operacao">Operação</label>
-                                                    <select id="operacao" name="operacao" class="form-control" required>
-                                                        <option value="" disabled>Selecione uma opção:</option>
-                                                        @foreach ($operacao as $op)
-                                                            <option value="{{ $op->operacao }}"
-                                                                {{ old('operacao', $estoque->operacao ?? '') == $op->operacao ? 'selected' : '' }}>
-                                                                {{ $op->operacao }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="button-atualizar-modal btn">Atualizar
-                                                        Produto</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="deleteModal{{ $estoque->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="deleteModalLabel{{ $estoque->id }}" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="deleteModalLabel{{ $estoque->produto_id }}">
-                                                Excluir
-                                                Estoque</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Fechar">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <p>Tem certeza de que deseja excluir este registro de
-                                                "{{ $estoque->produto->descricao }}?</p>
-                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="button-cancelar-modal btn"
-                                                    data-dismiss="modal">Cancelar</button>
-                                                <button type="submit" class="button-excluir-modal btn">Excluir</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         @empty
                             <tr>
                                 <td colspan="5">Nenhum estoque encontrado.</td>
@@ -664,6 +567,92 @@
                 <p class="text-center">Nenhum estoque encontrado.</p>
             @endforelse
         </div>
+        @foreach ($registrosEstoque as $estoque)
+            <div class="modal fade" id="editModal{{ $estoque->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="editModalLabel{{ $estoque->id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel{{ $estoque->id }}">Editar Estoque
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('cadastroEstoque', $estoque->id ?? null) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="estoque_id" value="{{ $estoque->id ?? '' }}">
+                                <input type="hidden" name="produto_id" value="{{ $estoque->produto_id ?? '' }}">
+                                <input type="hidden" name="fornecedor_id" value="{{ $estoque->fornecedor_id ?? '' }}">
+                                <div class="form-group">
+                                    <label for="quantidade_pecas">Produto</label>
+                                    <select id="produto_id" name="produto_id" class="form-control" required>
+                                        <option value="" disabled>Selecione uma opção:</option>
+                                        @foreach ($produtoEstoque as $produto)
+                                            <option value="{{ $produto->id }}"
+                                                {{ old('produto_id', $estoque->produto_id ?? '') == $produto->id ? 'selected' : '' }}>
+                                                {{ $produto->id }} - {{ $produto->descricao }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantidade_pecas">Quantidade de Peças</label>
+                                    <input type="number" class="form-control" id="quantidade_pecas"
+                                        name="quantidade_pecas" value="{{ $estoque->quantidade_pecas }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="custo">Custo</label>
+                                    <input type="text" class="form-control" id="custo" name="custo"
+                                        value="{{ number_format($estoque->custo, 2, ',', '.') }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="operacao">Operação</label>
+                                    <select id="operacao" name="operacao" class="form-control" required>
+                                        <option value="" disabled>Selecione uma opção:</option>
+                                        @foreach ($operacao as $op)
+                                            <option value="{{ $op->operacao }}"
+                                                {{ old('operacao', $estoque->operacao ?? '') == $op->operacao ? 'selected' : '' }}>
+                                                {{ $op->operacao }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="button-atualizar-modal btn">Atualizar
+                                        Produto</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="deleteModal{{ $estoque->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="deleteModalLabel{{ $estoque->id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel{{ $estoque->id }}">Excluir Estoque</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Tem certeza de que deseja excluir este registro de "{{ $estoque->produto->descricao }}"?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     @endsection
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
