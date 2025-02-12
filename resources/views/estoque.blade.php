@@ -538,7 +538,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">Nenhum estoque encontrado.</td>
+                                <td colspan="9" class="text-center">Nenhum estoque encontrado.</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -645,7 +645,8 @@
                             <p>Tem certeza de que deseja excluir este registro de "{{ $estoque->produto->descricao }}"?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="button-cancelar-modal btn" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="button-cancelar-modal btn"
+                                data-dismiss="modal">Cancelar</button>
                             <form action="{{ route('estoque.destroy', $estoque->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
