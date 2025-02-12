@@ -14,6 +14,16 @@
     @extends('dashboard')
     @section('content')
         <style>
+            .titulo {
+                margin-top: -42px;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                z-index: 9999;
+            }
+
             #form {
                 margin: 0px 10px 0px 10px;
             }
@@ -312,6 +322,12 @@
             }
 
             @media (max-width: 768px) {
+                .titulo {
+                    margin-top: -22px;
+                    margin-bottom: -5px;
+                    z-index: 0;
+                }
+
                 #form {
                     margin: 30px 10px -25px 10px;
                 }
@@ -412,6 +428,9 @@
             }
         </style>
         <div id="form">
+            <div class="titulo">
+                <h6>Cadastrar Produto</h6>
+            </div>
             <div id="form-container">
                 <form action="{{ route('produtos.store') }}" method="POST">
                     @csrf
