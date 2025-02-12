@@ -475,10 +475,21 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}"
-                                                method="POST">
+                                            <form action="{{ route('cadastroEstoque', $estoque->id ?? null) }}" method="POST">
                                                 @csrf
-                                                @method($estoque ? 'PUT' : 'POST')
+                                                <input type="hidden" name="estoque_id" value="{{ $estoque->id ?? '' }}">
+                                                <div class="form-group">
+                                                    <label for="produto_id">Id Produto</label>
+                                                    <input type="text" class="form-control" id="produto_id"
+                                                        name="produto_id" value="{{ $estoque->id }}"
+                                                        required>
+                                                </div>        
+                                                <div class="form-group">
+                                                    <label for="fornecedor_id">Fornecedor</label>
+                                                    <input type="text" class="form-control" id="fornecedor_id"
+                                                        name="fornecedor_id" value="{{ $estoque->fornecedor_id ?? '' }}"
+                                                        required>
+                                                </div>                                                                                        
                                                 <div class="form-group">
                                                     <label for="descricao">Descrição</label>
                                                     <input type="text" class="form-control" id="descricao"

@@ -73,15 +73,15 @@ class EstoqueController extends Controller
             'operacao' => 'required|in:Entrada,Saida',
         ]);
 
-        $estoque = Estoque::where('produto_id', $request->produto_id)
-            ->where('fornecedor_id', $request->fornecedor_id)
-            ->first();
+        $custo = str_replace(['.', ','], ['', '.'], $request->custo); 
+
+        $custo = (float) $custo;
 
         Estoque::create([
             'produto_id' => $request->produto_id,
             'fornecedor_id' => $request->fornecedor_id,
             'quantidade_pecas' => $request->quantidade_pecas,
-            'custo' => $request->custo,
+            'custo' => $custo, 
             'user_id' => Auth::id(),
             'operacao' => $request->operacao,
         ]);
@@ -100,10 +100,48 @@ class EstoqueController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'quantidade_pecas' => 'required|integer|min:1',
+            'custo' => 'required|numeric|min:0.01',
+        ]);
+
         $estoque = Estoque::findOrFail($id);
-        $estoque->update($request->all());
+
+        $custo = str_replace(['.', ','], ['', '.'], $request->custo);
+        $custo = (float) $custo;
+
+        // Atualizando o registro
+        $estoque->update([
+            'quantidade_pecas' => $request->quantidade_pecas,
+            'custo' => $custo, 
+        ]);
 
         return redirect()->route('entradaEstoque.index')->with('success', 'Estoque atualizado com sucesso!');
+    }
+
+    public function storeOrUpdate(Request $request, $id = null)
+    {
+        $custo = str_replace(',', '.', str_replace('.', '', $request->input('custo')));
+
+        if (!is_numeric($custo)) {
+            return redirect()->back()->with('error', 'Custo inválido.');
+        }
+
+        $custoFloat = (float) $custo;
+
+        $estoque = Estoque::updateOrCreate(
+            ['id' => $request->estoque_id ?? $id], 
+            [
+                'produto_id' => $request->produto_id,
+                'fornecedor_id' => $request->fornecedor_id,
+                'quantidade_pecas' => $request->quantidade_pecas,
+                'custo' => $custoFloat,
+                'operacao' => $request->operacao,
+                'user_id' => Auth::id(),
+            ]
+        );
+
+        return redirect()->route('estoque')->with('success', 'Operação de estoque registrada/atualizada com sucesso!');
     }
 
     public function destroy($id)
