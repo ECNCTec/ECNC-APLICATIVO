@@ -48,12 +48,16 @@ class EstoqueController extends Controller
 
     public function produtosNoEstoque()
     {
-        $registrosEstoque = Estoque::all();
+        $produtoEstoque = \App\Models\Produto::selectRaw('MIN(id) as id, descricao')
+            ->groupBy('descricao')
+            ->get();
 
-        $contagemEstoque = Estoque::where('user_id', Auth::id())
+        $registrosEstoque = \App\Models\Estoque::all();
+
+        $contagemEstoque = \App\Models\Estoque::where('user_id', Auth::id())
             ->count('produto_id');
 
-        return view('estoque', compact('registrosEstoque', 'contagemEstoque'));
+        return view('estoque', compact('produtoEstoque', 'registrosEstoque', 'contagemEstoque'));
     }
 
     public function create()
@@ -73,7 +77,7 @@ class EstoqueController extends Controller
             'operacao' => 'required|in:Entrada,Saida',
         ]);
 
-        $custo = str_replace(['.', ','], ['', '.'], $request->custo); 
+        $custo = str_replace(['.', ','], ['', '.'], $request->custo);
 
         $custo = (float) $custo;
 
@@ -81,7 +85,7 @@ class EstoqueController extends Controller
             'produto_id' => $request->produto_id,
             'fornecedor_id' => $request->fornecedor_id,
             'quantidade_pecas' => $request->quantidade_pecas,
-            'custo' => $custo, 
+            'custo' => $custo,
             'user_id' => Auth::id(),
             'operacao' => $request->operacao,
         ]);
@@ -113,7 +117,7 @@ class EstoqueController extends Controller
         // Atualizando o registro
         $estoque->update([
             'quantidade_pecas' => $request->quantidade_pecas,
-            'custo' => $custo, 
+            'custo' => $custo,
         ]);
 
         return redirect()->route('entradaEstoque.index')->with('success', 'Estoque atualizado com sucesso!');
@@ -130,7 +134,7 @@ class EstoqueController extends Controller
         $custoFloat = (float) $custo;
 
         $estoque = Estoque::updateOrCreate(
-            ['id' => $request->estoque_id ?? $id], 
+            ['id' => $request->estoque_id ?? $id],
             [
                 'produto_id' => $request->produto_id,
                 'fornecedor_id' => $request->fornecedor_id,

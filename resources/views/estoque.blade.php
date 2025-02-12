@@ -484,10 +484,16 @@
                                                 <input type="hidden" name="fornecedor_id"
                                                     value="{{ $estoque->fornecedor_id ?? '' }}">
                                                 <div class="form-group">
-                                                    <label for="descricao">Descrição</label>
-                                                    <input type="text" class="form-control" id="descricao"
-                                                        name="descricao" value="{{ $estoque->produto->descricao }}"
-                                                        required>
+                                                    <label for="quantidade_pecas">Produto</label>
+                                                    <select id="produto_id" name="produto_id" class="form-control" required>
+                                                        <option value="" disabled>Selecione uma opção:</option>
+                                                        @foreach ($produtoEstoque as $produto)
+                                                            <option value="{{ $produto->id }}"
+                                                                {{ old('produto_id', $estoque->produto_id ?? '') == $produto->id ? 'selected' : '' }}>
+                                                                {{ $produto->id }} - {{ $produto->descricao }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="quantidade_pecas">Quantidade de Peças</label>
