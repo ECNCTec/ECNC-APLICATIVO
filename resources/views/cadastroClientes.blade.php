@@ -14,6 +14,16 @@
     @extends('dashboard')
     @section('content')
         <style>
+            .titulo {
+                margin-top: -42px;
+                margin-bottom: 15px;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                position: relative;
+                z-index: 9999;
+            }
+
             #form {
                 margin: 0px 10px 0px 10px;
             }
@@ -87,12 +97,25 @@
             }
 
             @media (max-width: 768px) {
+                .titulo {
+                    margin-top: -24px;
+                    margin-bottom: -5px;
+                    z-index: 0;
+                }
+
+                .titulo h6 {
+                    font-size: 18px;
+                }
+
                 #form {
                     margin: 30px 10px 30px 10px;
                 }
             }
         </style>
         <div id="form">
+            <div class="titulo">
+                <h6>Cadastrar Cliente</h6>
+            </div>
             <div id="form-container">
                 <form action="{{ route('clientes.store') }}" method="POST">
                     @csrf
