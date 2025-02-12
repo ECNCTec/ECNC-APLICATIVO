@@ -60,20 +60,23 @@ class EstoqueController extends Controller
         $registrosEstoque = Estoque::where('user_id', $userId)
             ->when($search, function ($query, $search) {
                 return $query->where(function ($query) use ($search) {
-                    $query->where('produto_id', '=', $search); 
+                    $query->whereHas('produto', function ($q) use ($search) {
+                        $q->where('descricao', 'like', '%' . $search . '%');
+                    })
+                        ->orWhere('id', '=', $search); 
                 });
             })
             ->when($quantidadeMaximaPecas, function ($query, $quantidadeMaximaPecas) {
-                return $query->where('quant_atual', '<=', $quantidadeMaximaPecas); 
+                return $query->where('quant_atual', '<=', $quantidadeMaximaPecas);
             })
             ->when($quantidadeMinimaPecas, function ($query, $quantidadeMinimaPecas) {
-                return $query->where('quant_atual', '>=', $quantidadeMinimaPecas); 
+                return $query->where('quant_atual', '>=', $quantidadeMinimaPecas);
             })
             ->when($dataInicial, function ($query, $dataInicial) {
-                return $query->where('created_at', '>=', $dataInicial); 
+                return $query->where('created_at', '>=', $dataInicial);
             })
             ->when($dataFinal, function ($query, $dataFinal) {
-                return $query->where('created_at', '<=', $dataFinal); 
+                return $query->where('created_at', '<=', $dataFinal);
             })
             ->when($operacao, function ($query, $operacao) {
                 return $query->where('operacao', '=', $operacao);
