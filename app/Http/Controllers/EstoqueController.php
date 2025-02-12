@@ -14,8 +14,8 @@ class EstoqueController extends Controller
 {
     public function informacoesDoSistema(Request $request)
     {
-        $search = $request->input('search');
         $userId = Auth::id();
+        $search = $request->input('search');
 
         $produtos = Produto::where('user_id', Auth::id())->get();
         $fornecedores = Fornecedor::where('user_id', Auth::id())->get();
@@ -30,9 +30,7 @@ class EstoqueController extends Controller
             ->groupBy('produto_id')
             ->get();
 
-        $somaEstoque = Estoque::with([
-            'produto:id,descricao'
-        ])
+        $somaEstoque = Estoque::with(['produto:id,descricao'])
             ->selectRaw("
                     produto_id, 
                     SUM(CASE WHEN operacao = 'Entrada' THEN quantidade_pecas ELSE -quantidade_pecas END) AS total_quantidade, 
