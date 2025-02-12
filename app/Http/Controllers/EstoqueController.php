@@ -199,6 +199,6 @@ class EstoqueController extends Controller
         $estoque = Estoque::findOrFail($id);
         $estoque->delete();
 
-        return redirect()->route('cadastroEstoque')->with('success', 'Estoque excluído com sucesso!');
+        return redirect()->route('estoque')->with('success', 'Estoque excluído com sucesso!');
     }
 }

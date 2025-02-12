@@ -642,15 +642,36 @@
                             <p>Tem certeza de que deseja excluir este registro de "{{ $estoque->produto->descricao }}"?</p>
                         </div>
                         <div class="modal-footer">
-                            <form action="{{ route('cadastroEstoque', $estoque->produto_id) }}" method="POST">
+                            <button type="button" class="button-cancelar-modal btn" data-dismiss="modal">Cancelar</button>
+                            <form action="{{ route('estoque.destroy', $estoque->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                <button type="submit" class="button-excluir-modal btn">Excluir</button>
                             </form>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                @if (session('success'))
+                    <div class="alert alert-success message">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger message">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('deleted'))
+                    <div class="alert alert-warning message">
+                        {{ session('deleted') }}
+                    </div>
+                @endif
             </div>
         @endforeach
     @endsection

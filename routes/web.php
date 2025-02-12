@@ -40,7 +40,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cadastroEstoque', [EstoqueController::class, 'informacoesDoSistema'])->name('cadastroEstoque');
 
+    Route::delete('/estoque/{id}', [EstoqueController::class, 'destroy'])->name('estoque.destroy');
+
     Route::match(['get', 'post'], '/cadastroEstoque/{id?}', [EstoqueController::class, 'storeOrUpdate'])->name('cadastroEstoque');
+    
     Route::put('/cadastroEstoque/{id}', [EstoqueController::class, 'update'])->name('cadastroEstoque.update');
 
     Route::get('/estoque', [EstoqueController::class, 'produtosNoEstoque'])->name('estoque');
