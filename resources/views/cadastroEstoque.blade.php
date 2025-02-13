@@ -517,7 +517,7 @@
                                             <div class="input-group">
                                                 <input type="text" name="search"
                                                     class="filtro-id-descricao form-control" id="idDescricao"
-                                                    placeholder="Digite ID ou descrição"
+                                                    placeholder="Digite a descrição"
                                                     value="{{ old('search', request()->input('search')) }}">
                                                 <i class="fas fa-search"></i>
                                             </div>
