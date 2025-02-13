@@ -41,7 +41,7 @@
 
             #form-container input,
             #form-container select {
-                border-radius: 2px;
+                border-radius: 1px;
             }
 
             #form-container .form-control {
