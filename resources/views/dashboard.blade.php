@@ -306,6 +306,9 @@
                 <img src="{{ asset('storage/images/logo2.png') }}" alt="">
             </div>
             <ul class="list-unstyled components">
+                <li>
+                    <a href="dashboardAnaliseDados"><i class="fas fa-user-plus" style="margin: 0px 6px 0px 12px;"></i> Dashboard</a>
+                </li>
                 <li class="{{ request()->routeIs('gerarOrcamento') ? 'active' : '' }}">
                     <a href="{{ route('gerarOrcamento') }}"><i class="fas fa-file-alt"
                             style="margin: 0px 8px 0px 12px;"></i> Gerar Orçamento</a>

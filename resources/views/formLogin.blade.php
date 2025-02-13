@@ -15,10 +15,15 @@
             width: 400px;
         }
 
+        .card img {
+            width: 170px;
+        }
+
         h1 {
+            font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
-            color: #0f3540;
+            color: #333;
         }
 
         .label-float input {
@@ -61,7 +66,7 @@
         .label-float input:valid+label {
             font-size: 11px;
             margin-top: 0;
-            color: #8a897b;
+            color: #3a4e87;
         }
 
         .button {

@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('/dashboardAnaliseDados', function () {
+        return view('dashboardAnaliseDados');
+    })->name('dashboardAnaliseDados');
+
     Route::get('/gerarOrcamento', [GerarOrcamentoController::class, 'index'])->name('gerarOrcamento');
 
     Route::resource('orcamento', GerarOrcamentoController::class);

@@ -143,7 +143,6 @@
                 <ul>
                     @foreach ($dados['material'] as $index => $material)
                         @php
-                            // Encontre o produto correspondente pelo ID (supondo que $produtos seja uma coleção de produtos)
                             $produto = $produtosCadastrados->firstWhere('id', $material);
                         @endphp
                         <li>
