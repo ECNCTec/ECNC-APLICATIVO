@@ -439,7 +439,6 @@
                 <form action="entradaEstoque" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    {{-- <input type="hidden" name="operacao" value="Entrada"> --}}
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="produto_id">Selecione um Produto:</label>
