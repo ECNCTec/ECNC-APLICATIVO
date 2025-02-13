@@ -57,48 +57,83 @@
             </div>
             <style>
                 #card {
-                    border: 1px solid rgba(172, 172, 172, 0.322);
+                    border: 1px solid rgba(243, 243, 243, 0.978);
                     border-left: 3px solid #5790d6;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.1);
-                    padding: 15px 10px;
-
-                    /* Efeito de vidro fosco */
-                    background: rgba(255, 255, 255, 0.3);
-                    /* Fundo levemente translúcido, mais opaco */
-                    backdrop-filter: blur(8px);
-                    /* Desfoque no fundo */
+                    padding: 5px;
                     border-radius: 8px;
-                    /* Bordas arredondadas */
                 }
 
                 #card h6 {
-                    font-size: 16px;
+                    font-size: 14px;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    color: #333;
+                }
+
+                #card strong {
+                    color: rgb(58, 163, 54);
+                    margin-right: 5px;
+                }
+
+                #card .valor {
+                    font-size: 18px;
+                }
+
+                .tituloCard {
+                    border-bottom: 1px solid #d9d9d9;
+                    padding: 5px 0px 5px 8px;
+                }
+
+                .valoresCards {
+                    padding: 5px 0px 0px 5px;
+                    display: flex;
+                }
+
+                @media (max-width: 768px) {
+                    #card {
+                        margin-top: 10px;
+                    }
                 }
             </style>
             <div id="form-container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div id="card">
-                            <h5>Clientes Cadastrados</h5>
-                            <h6>2.390,00</h6>
+                        <div id="card" style="media (max-width: 768px){margin-top: none;}">
+                            <h6 class="tituloCard">Receita</h6>
+                            <div class="valoresCards">
+                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="porcentagem ml-auto mr-1">48%</h6>
+                            </div>
+                            <div>
+                                <h6>gráfico aqui</h6>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card">
-                            <h5>Peças no Estoque</h5>
-                            <h6>2.390,00</h6>
+                            <h6 class="tituloCard">Orçamentos Aprovados</h6>
+                            <div class="valoresCards">
+                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="porcentagem ml-auto mr-1">21%</h6>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card">
-                            <h5>Valor em Estoque</h5>
-                            <h6>2.390,00</h6>
+                            <h6 class="tituloCard">Orçamentos Pendentes</h6>
+                            <div class="valoresCards">
+                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="porcentagem ml-auto mr-1">5%</h6>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mt-md-2 mt-sm-2 mt-lg-0">
                         <div id="card">
-                            <h5>card1</h5>
-                            <h6>2.390,00</h6>
+                            <h6 class="tituloCard">Valor em Estoque</h6>
+                            <div class="valoresCards">
+                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="porcentagem ml-auto mr-1">35%</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
