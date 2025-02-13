@@ -40,7 +40,7 @@ class EstoqueController extends Controller
         $registrosEstoque = $this->estoqueService->obterRegistrosEstoque($filtros);
         $produtoEstoque = $this->estoqueService->obterProdutosNoEstoque();
         $operacao = $this->estoqueService->obterOperacoes();
-        $contagemEstoque = $this->estoqueService->contarProdutosNoEstoque();
+        $contagemEstoque = $this->estoqueService->contarProdutosNoEstoque($filtros);
         $fornecedores = $this->estoqueService->obterFornecedores();
 
         return view('estoque', compact('produtoEstoque', 'registrosEstoque', 'operacao', 'contagemEstoque', 'fornecedores'));

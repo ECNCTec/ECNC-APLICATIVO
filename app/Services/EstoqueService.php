@@ -45,8 +45,8 @@ class EstoqueService
                 $query->whereHas('produto', function ($q) use ($search) {
                     $q->where('descricao', 'like', '%' . $search . '%');
                 })
-                ->orWhere('id', 'like', '%' . $search . '%')
-                ->orWhere('produto_id', 'like', '%' . $search . '%');
+                    ->orWhere('id', 'like', '%' . $search . '%')
+                    ->orWhere('produto_id', 'like', '%' . $search . '%');
             });
         });
     }
@@ -73,15 +73,10 @@ class EstoqueService
             return $estoque;
         });
     }
-    
+
     public function obterOperacoes()
     {
         return Estoque::select('operacao')->distinct()->get();
-    }
-
-    public function contarProdutosNoEstoque()
-    {
-        return Estoque::where('user_id', Auth::id())->count('produto_id');
     }
 
     public function obterProdutosNoEstoque()
@@ -98,6 +93,36 @@ class EstoqueService
             'produto:id,descricao',
             'fornecedor:id,razao_social'
         ]);
+    }
+
+    public function contarProdutosNoEstoque($filtros)
+    {
+        $userId = Auth::id();
+
+        return Estoque::where('user_id', $userId)
+            ->when($filtros['search'] ?? null, function ($query, $search) {
+                return $query->where(function ($query) use ($search) {
+                    $query->whereHas('produto', function ($q) use ($search) {
+                        $q->where('descricao', 'like', '%' . $search . '%');
+                    })->orWhere('id', '=', $search);
+                });
+            })
+            ->when($filtros['quantidadeMaximaPecas'] ?? null, function ($query, $quantidadeMaximaPecas) {
+                return $query->where('quantidade_pecas', '<=', $quantidadeMaximaPecas);
+            })
+            ->when($filtros['quantidadeMinimaPecas'] ?? null, function ($query, $quantidadeMinimaPecas) {
+                return $query->where('quantidade_pecas', '>=', $quantidadeMinimaPecas);
+            })
+            ->when($filtros['dataInicial'] ?? null, function ($query, $dataInicial) {
+                return $query->where('created_at', '>=', $dataInicial);
+            })
+            ->when($filtros['dataFinal'] ?? null, function ($query, $dataFinal) {
+                return $query->where('created_at', '<=', $dataFinal);
+            })
+            ->when($filtros['operacao'] ?? null, function ($query, $operacao) {
+                return $query->where('operacao', '=', $operacao);
+            })
+            ->count('produto_id');
     }
 
     public function obterRegistrosEstoque($filtros)
