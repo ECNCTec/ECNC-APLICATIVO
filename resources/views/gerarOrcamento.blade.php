@@ -39,6 +39,11 @@
                 font-size: 12px;
             }
 
+            #form-container input,
+            #form-container select {
+                border-radius: 2px;
+            }
+
             #form-container .form-control {
                 height: 27px;
                 padding: 2px 5px;
