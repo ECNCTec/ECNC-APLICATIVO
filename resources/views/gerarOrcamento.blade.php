@@ -156,7 +156,7 @@
                         <label>Material:</label>
                         <select name="material" id="materialSelect" class="form-control" required
                             onchange="atualizarCampos()">
-                            <option value="">Selecione um material</option>
+                            <option disabled selected>Selecione um material:</option>
                             @foreach ($produtosCadastrados as $produto)
                                 <option value="{{ $produto->id }}" data-comprimento="{{ $produto->comprimento }}"
                                     data-largura="{{ $produto->largura }}" data-tipo-medida="{{ $produto->tipo_medida }}">
