@@ -140,61 +140,69 @@
                 <h6>Gerar Orçamento</h6>
             </div>
         </div>
-        <div id="form-container">
-            <div class="lucro-multiplicador col-md-2">
-                <label>Lucro Miltiplicador:</label>
-                <input type="number" name="lucro" class="form-control" required>
-            </div>
-            <div id="formsContainer">
-                <div class="form-row" id="formTemplate">
-                    <div class="form-row-wrapper">
-                        <a class="buttonExcluir remove-btn d-none" onclick="removeForm(this)">
-                            <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
-                        </a>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Material:</label>
-                        <select name="material" id="materialSelect" class="form-control" required
-                            onchange="atualizarCampos()">
-                            <option disabled selected>Selecione um material:</option>
-                            @foreach ($produtosCadastrados as $produto)
-                                <option value="{{ $produto->id }}" data-comprimento="{{ $produto->comprimento }}"
-                                    data-largura="{{ $produto->largura }}" data-tipo-medida="{{ $produto->tipo_medida }}">
-                                    {{ $produto->id }} - {{ $produto->descricao ?? 'Produto desconhecido' }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <input type="hidden" id="comprimento" name="comprimento">
-                    <input type="hidden" id="largura" name="largura">
-                    <input type="hidden" id="tipo_medida" name="tipo_medida">
-                    <div class="form-group col-md-3">
-                        <label>Comprimento da Arte:</label>
-                        <input type="number" class="form-control comprimentoCalculo" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Largura da Arte:</label>
-                        <input type="number" class="form-control larguraCalculo" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Tempo de Usinagem (min):</label>
-                        <input type="number" class="form-control tempoUsinagem" required>
+        <form id="orcamentoForm" action="{{ route('orcamento.store') }}" method="POST">
+            @csrf
+            <div id="form-container">
+                <div class="lucro-multiplicador col-md-2">
+                    <label>Lucro Miltiplicador:</label>
+                    <input type="number" name="lucro" class="form-control" required>
+                </div>
+                <div id="formsContainer">
+                    <div class="form-row" id="formTemplate">
+                        <div class="form-row-wrapper">
+                            <a class="buttonExcluir remove-btn d-none" onclick="removeForm(this)">
+                                <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
+                            </a>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Material:</label>
+                            <select name="material[]" class="form-control" required onchange="atualizarCampos(this)">
+                                <option disabled selected>Selecione um material:</option>
+                                @foreach ($produtosCadastrados as $produto)
+                                    <option value="{{ $produto->id }}" data-comprimento="{{ $produto->comprimento }}"
+                                        data-largura="{{ $produto->largura }}"
+                                        data-tipo-medida="{{ $produto->tipo_medida }}"
+                                        data-descricao="{{ $produto->descricao }}">
+                                        {{ $produto->id }} - {{ $produto->descricao }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <input type="hidden" class="descricao" name="descricao[]">
+                        <input type="hidden" class="comprimento" name="comprimento[]">
+                        <input type="hidden" class="largura" name="largura[]">
+                        <input type="hidden" class="tipo_medida" name="tipo_medida[]">
+                        <div class="form-group col-md-3">
+                            <label>Comprimento da Arte:</label>
+                            <input type="number" class="form-control comprimentoCalculo" name="comprimento_arte[]"
+                                required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Largura da Arte:</label>
+                            <input type="number" class="form-control larguraCalculo" name="largura_arte[]" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Tempo de Usinagem (min):</label>
+                            <input type="number" class="form-control tempoUsinagem" name="tempo_usinagem[]" required>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="d-flex justify-content-end">
-            <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
-                onclick="addForm()">Adicionar</button>
-            <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-2 mb-3">Gerar
-                Orçamento</button>
-        </div>
-        <div class="mt-2 ml-2 mr-2">
-            <button id="addFormBtn" type="button" class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none"
-                onclick="addForm()">Adicionar</button>
-            <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none mb-3">Gerar
-                Orçamento</button>
-        </div>
+            <div class="d-flex justify-content-end">
+                <button id="addFormBtn" type="button"
+                    class="button-adicionar btn btn-sm d-none d-sm-inline-block mt-1 mr-1"
+                    onclick="addForm()">Adicionar</button>
+                <button type="submit" class="button-enviar btn btn-sm d-none d-sm-inline-block mt-1 mr-2 mb-3">Gerar
+                    Orçamento</button>
+            </div>
+            <div class="mt-2 ml-2 mr-2">
+                <button id="addFormBtn" type="button"
+                    class="button-adicionar btn btn-sm btn-block d-inline-block d-sm-none"
+                    onclick="addForm()">Adicionar</button>
+                <button type="submit" class="button-enviar btn btn-sm btn-block d-inline-block d-sm-none mb-3">Gerar
+                    Orçamento</button>
+            </div>
+        </form>
         </div>
     @endsection
 
@@ -238,17 +246,18 @@
     </script>
     {{-- Script garante que comprimento, largura e tipo_medida estejam vinculados ao ID do produto selecionado --}}
     <script>
-        function atualizarCampos() {
-            var select = document.getElementById("materialSelect");
-            var optionSelecionada = select.options[select.selectedIndex];
+        function atualizarCampos(selectElement) {
+            var formRow = selectElement.closest('.form-row');
+            var optionSelecionada = selectElement.options[selectElement.selectedIndex];
 
-            // Atualiza os inputs ocultos com os valores do option selecionado
-            document.getElementById("comprimento").value = optionSelecionada.getAttribute("data-comprimento") || "";
-            document.getElementById("largura").value = optionSelecionada.getAttribute("data-largura") || "";
-            document.getElementById("tipo_medida").value = optionSelecionada.getAttribute("data-tipo-medida") || "";
+            // Atualiza os inputs ocultos dentro do mesmo formulário
+            formRow.querySelector(".comprimento").value = optionSelecionada.getAttribute("data-comprimento") || "";
+            formRow.querySelector(".largura").value = optionSelecionada.getAttribute("data-largura") || "";
+            formRow.querySelector(".tipo_medida").value = optionSelecionada.getAttribute("data-tipo-medida") || "";
+            formRow.querySelector(".descricao").value = optionSelecionada.getAttribute("data-descricao") ||
+                "Produto desconhecido";
         }
     </script>
-
 </body>
 
 </html>

@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/gerarOrcamento', [GerarOrcamentoController::class, 'index'])->name('gerarOrcamento');
 
-    Route::resource('Orcamento', GerarOrcamentoController::class);
+    Route::resource('orcamento', GerarOrcamentoController::class);
 
     Route::get('/cadastroClientes', function () {
         return view('cadastroClientes');
