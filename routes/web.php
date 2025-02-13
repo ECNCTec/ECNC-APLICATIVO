@@ -6,6 +6,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\GerarOrcamentoController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login.form');
 
@@ -22,9 +23,9 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/gerarOrcamento', function () {
-        return view('gerarOrcamento');
-    })->name('gerarOrcamento');
+    Route::get('/gerarOrcamento', [GerarOrcamentoController::class, 'index'])->name('gerarOrcamento');
+
+    Route::resource('Orcamento', GerarOrcamentoController::class);
 
     Route::get('/cadastroClientes', function () {
         return view('cadastroClientes');

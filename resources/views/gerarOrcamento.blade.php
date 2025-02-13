@@ -142,15 +142,27 @@
             </div>
             <div id="formsContainer">
                 <div class="form-row" id="formTemplate">
-                    <div class="form-row-wrapper"> 
+                    <div class="form-row-wrapper">
                         <a class="buttonExcluir remove-btn d-none" onclick="removeForm(this)">
                             <img src="{{ asset('storage/images/buttonExcluir.png') }}" alt="">
                         </a>
                     </div>
                     <div class="form-group col-md-3">
                         <label>Material:</label>
-                        <input type="text" name="material" class="form-control" required>
+                        <select name="material" id="materialSelect" class="form-control" required
+                            onchange="atualizarCampos()">
+                            <option value="">Selecione um material</option>
+                            @foreach ($produtosCadastrados as $produto)
+                                <option value="{{ $produto->id }}" data-comprimento="{{ $produto->comprimento }}"
+                                    data-largura="{{ $produto->largura }}" data-tipo-medida="{{ $produto->tipo_medida }}">
+                                    {{ $produto->id }} - {{ $produto->descricao ?? 'Produto desconhecido' }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+                    <input type="hidden" id="comprimento" name="comprimento">
+                    <input type="hidden" id="largura" name="largura">
+                    <input type="hidden" id="tipo_medida" name="tipo_medida">
                     <div class="form-group col-md-3">
                         <label>Comprimento da Arte:</label>
                         <input type="number" class="form-control comprimentoCalculo" required>
@@ -217,6 +229,18 @@
                 const removeButton = form.querySelector('.remove-btn');
                 showRemove ? removeButton.classList.remove('d-none') : removeButton.classList.add('d-none');
             });
+        }
+    </script>
+    {{-- Script garante que comprimento, largura e tipo_medida estejam vinculados ao ID do produto selecionado --}}
+    <script>
+        function atualizarCampos() {
+            var select = document.getElementById("materialSelect");
+            var optionSelecionada = select.options[select.selectedIndex];
+
+            // Atualiza os inputs ocultos com os valores do option selecionado
+            document.getElementById("comprimento").value = optionSelecionada.getAttribute("data-comprimento") || "";
+            document.getElementById("largura").value = optionSelecionada.getAttribute("data-largura") || "";
+            document.getElementById("tipo_medida").value = optionSelecionada.getAttribute("data-tipo-medida") || "";
         }
     </script>
 
