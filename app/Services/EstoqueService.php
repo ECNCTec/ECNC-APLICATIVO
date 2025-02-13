@@ -120,7 +120,7 @@ class EstoqueService
             'fornecedor_id' => 'required|exists:fornecedores,id',
             'quantidade_pecas' => 'required|integer|min:1',
             'custo' => 'required|numeric|min:0.01',
-            'operacao' => 'required|in:Entrada,Saida',
+            'operacao' => 'required|in:Entrada,Saída',
         ]);
 
         $custo = (float) str_replace(['.', ','], ['', '.'], $request->custo);

@@ -15,8 +15,8 @@
     @section('content')
         <style>
             .titulo {
-                margin-top: -42px;
-                margin-bottom: 15px;
+                margin-top: -44px;
+                margin-bottom: 17px;
                 display: flex;
                 justify-content: center;
                 text-align: center;
@@ -33,72 +33,6 @@
                 padding: 10px;
                 border: 1px solid #ddd;
                 font-size: 12px;
-            }
-
-            #form-container label {
-                font-weight: bold;
-                font-size: 12px;
-            }
-
-            #form-container input,
-            #form-container select {
-                border-radius: 1px;
-            }
-
-            #form-container .form-control {
-                height: 27px;
-                padding: 2px 5px;
-                font-size: 12px;
-            }
-
-            #form-container select {
-                height: 27px;
-                font-size: 12px;
-            }
-
-            #form-container .btn {
-                padding: 3px 10px;
-                font-size: 12px;
-            }
-
-            .message {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                padding: 20px;
-                border-radius: 1px;
-                z-index: 1000;
-                min-width: 200px;
-                text-align: center;
-                font-size: 16px;
-                opacity: 1;
-                transition: opacity 1s ease-out;
-            }
-
-            .alert-success,
-            .alert-warning,
-            .alert-danger {
-                background: linear-gradient(10deg, #c8d8f1d3, #dee9f9d3, #c8d8f1d3, #dee9f9d3);
-                color: rgb(40, 40, 40);
-                font-weight: bold;
-                border: none;
-            }
-
-            .button-cadastrar {
-                background: linear-gradient(to bottom, #3387fb, #4242ff, #3387fb);
-                color: #fff;
-                height: 28px;
-                padding: 0 20px;
-                border: none;
-                border-radius: 3px;
-                font-size: 13px;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                transition: background 0.3s ease;
             }
 
             @media (max-width: 768px) {
@@ -118,29 +52,61 @@
             }
         </style>
         <div id="form">
+            <div class="titulo">
+                <h6>Dashboard</h6>
+            </div>
+            <style>
+                #card {
+                    border: 1px solid rgba(172, 172, 172, 0.322);
+                    border-left: 3px solid #5790d6;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.1);
+                    padding: 15px 10px;
+
+                    /* Efeito de vidro fosco */
+                    background: rgba(255, 255, 255, 0.3);
+                    /* Fundo levemente translúcido, mais opaco */
+                    backdrop-filter: blur(8px);
+                    /* Desfoque no fundo */
+                    border-radius: 8px;
+                    /* Bordas arredondadas */
+                }
+
+                #card h6 {
+                    font-size: 16px;
+                }
+            </style>
             <div id="form-container">
-                <h1>Dashboard Análise de Dados</h1>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div id="card">
+                            <h5>Clientes Cadastrados</h5>
+                            <h6>2.390,00</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div id="card">
+                            <h5>Peças no Estoque</h5>
+                            <h6>2.390,00</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div id="card">
+                            <h5>Valor em Estoque</h5>
+                            <h6>2.390,00</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div id="card">
+                            <h5>card1</h5>
+                            <h6>2.390,00</h6>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     @endsection
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-    {{-- script para controle do tempo de aparição das mensagens no sistema --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const messages = document.querySelectorAll('.message');
-            messages.forEach(function(message) {
-                setTimeout(function() {
-                    message.style.opacity = '0';
-                }, 2000);
-
-                setTimeout(function() {
-                    message.remove();
-                }, 15000);
-            });
-        });
-    </script>
 </body>
 
 </html>

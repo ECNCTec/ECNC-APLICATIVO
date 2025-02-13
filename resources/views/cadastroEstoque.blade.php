@@ -439,9 +439,9 @@
                 <form action="entradaEstoque" method="POST">
                     @csrf
                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                    <input type="hidden" name="operacao" value="Entrada">
+                    {{-- <input type="hidden" name="operacao" value="Entrada"> --}}
                     <div class="form-row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-2">
                             <label for="produto_id">Selecione um Produto:</label>
                             <select id="produto_id" name="produto_id" class="form-control" required>
                                 <option value="" disabled selected>Selecione uma opção:</option>
@@ -463,6 +463,14 @@
                                         {{ $fornecedor->cpf_cnpj }} - {{ $fornecedor->razao_social }}
                                     </option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="operacao">Selecione uma Operação:</label>
+                            <select id="operacao" name="operacao" class="form-control" required>
+                                <option value="" disabled selected>Selecione uma opção:</option>
+                                <option value="Entrada">Entrada</option>
+                                <option value="Saída">Saída</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
