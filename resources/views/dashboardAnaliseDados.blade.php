@@ -81,7 +81,7 @@
                 }
 
                 #card .porcentagem {
-                    background-image: linear-gradient(to right, #e0efff, #d1e5ff, #c2deff);
+                    background-image: linear-gradient(to right, #f2f2f2, #eeeeee, #f4f4f4);
                     border: 1px rgb(219, 219, 219);
                     border-radius: 50%;
                     padding: 5px;
