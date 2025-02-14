@@ -315,11 +315,11 @@
             criarGrafico('graficoReceita', [1100, 1000, 1500, 1200, 1800, 2390, 1500, 1200, 2800, 2390, 1500, 1200],
                 'rgba(0, 86, 179, 1)');
             criarGrafico('graficoAprovados', [400, 1900, 1400, 1100, 1600, 2200, 1300, 1100, 2600, 2200, 1400, 1100],
-                'rgba(0, 128, 96, 1)');
+                'rgba(153, 40, 40, 1)');
             criarGrafico('graficoPendentes', [3000, 700, 1200, 900, 1500, 1200, 2200, 1000, 2400, 2000, 1300, 1700],
                 'rgba(204, 163, 0, 1)');
             criarGrafico('graficoEstoque', [1200, 600, 1100, 800, 1400, 1900, 1100, 900, 2300, 1900, 1200, 1900],
-                'rgba(153, 40, 40, 1)');
+                'rgba(0, 128, 96, 1)');
         </script>
         {{-- Gráfico principal de barras --}}
         <script>
@@ -361,7 +361,7 @@
                     },
                     {
                         name: 'Despesas',
-                        color: 'rgba(153, 40, 40, 1)',
+                        color: '#992828',
                         data: [45000, 14000, 10000, 14050, 19050, 11350, 28000, 22000, 50000, 54000, 30000, 23000]
                     }
                 ],
@@ -473,12 +473,12 @@
                 ]);
 
                 createChart('graficoClientesCadastrados', 'Clientes Cadastrados', [{
-                        name: 'Pessoa Física',
+                        name: 'Física',
                         y: 254,
                         color: '#0f4571'
                     },
                     {
-                        name: 'Pessoa Jurídica',
+                        name: 'Jurídica',
                         y: 187,
                         color: '#009ddd'
                     }
@@ -495,14 +495,14 @@
                         color: '#386dbd'
                     },
                     {
-                        name: 'Não Aprovados',
-                        y: 20,
+                        name: 'Concluídos',
+                        y: 25,
                         color: '#009ddd'
                     },
                     {
-                        name: 'Concluídos',
-                        y: 25,
-                        color: '#05d3f8'
+                        name: 'Não Aprovados',
+                        y: 20,
+                        color: '#992828'
                     }
                 ]);
             });
