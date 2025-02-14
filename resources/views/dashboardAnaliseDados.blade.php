@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <title>Clientes</title>
     </style>
 </head>
@@ -31,9 +32,54 @@
 
             #form-container {
                 background: #f8f9fa;
+                height: auto;
                 padding: 10px;
                 border: 1px solid #ddd;
                 font-size: 12px;
+            }
+
+            #card {
+                border: 1px solid rgba(243, 243, 243, 0.978);
+                border-left: 3px solid #5790d6;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.1);
+                padding: 5px;
+                border-radius: 8px;
+            }
+
+            #card h6 {
+                font-size: 14px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #333;
+            }
+
+            #card strong {
+                color: rgb(58, 163, 54);
+                margin-right: 5px;
+            }
+
+            #card .valor {
+                font-size: 18px;
+            }
+
+            #card .porcentagem {
+                background-image: linear-gradient(45deg, #eeeeee, #f4f4f4, #eeeeee);
+                border: 1px rgb(219, 219, 219);
+                border-radius: 50%;
+                padding: 5px;
+            }
+
+            .icon img {
+                margin-top: 2px;
+            }
+
+            .tituloCard {
+                border-bottom: 1px solid #d9d9d9;
+                padding: 5px 0px 5px 8px;
+            }
+
+            .valoresCards {
+                padding: 5px 0px 0px 5px;
+                display: flex;
             }
 
             @media (max-width: 768px) {
@@ -50,63 +96,65 @@
                 #form {
                     margin: 30px 10px 30px 10px;
                 }
+
+                #card {
+                    margin-top: 10px;
+                }
+            }
+        </style>
+        {{-- Style gráfico principal de barras --}}
+        <style>
+            .highcharts-figure,
+            .highcharts-data-table table {
+                min-width: 310px;
+                max-width: 100%;
+                margin: 1em auto;
+            }
+
+            .highcharts-data-table table {
+                font-family: Verdana, sans-serif;
+                border-collapse: collapse;
+                border: 1px solid #ebebeb;
+                margin: 10px auto;
+                text-align: center;
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .highcharts-data-table caption {
+                padding: 1em 0;
+                font-size: 1.2em;
+                color: #555;
+            }
+
+            .highcharts-data-table th {
+                font-weight: 600;
+                padding: 0.5em;
+            }
+
+            .highcharts-data-table td,
+            .highcharts-data-table th,
+            .highcharts-data-table caption {
+                padding: 0.5em;
+            }
+
+            .highcharts-data-table thead tr,
+            .highcharts-data-table tr:nth-child(even) {
+                background: #f8f8f8;
+            }
+
+            .highcharts-data-table tr:hover {
+                background: #f1f7ff;
+            }
+
+            .highcharts-description {
+                margin: 0.3rem 10px;
             }
         </style>
         <div id="form">
             <div class="titulo">
                 <h6>Dashboard</h6>
             </div>
-            <style>
-                #card {
-                    border: 1px solid rgba(243, 243, 243, 0.978);
-                    border-left: 3px solid #5790d6;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.1);
-                    padding: 5px;
-                    border-radius: 8px;
-                }
-
-                #card h6 {
-                    font-size: 14px;
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                    color: #333;
-                }
-
-                #card strong {
-                    color: rgb(58, 163, 54);
-                    margin-right: 5px;
-                }
-
-                #card .valor {
-                    font-size: 18px;
-                }
-
-                #card .porcentagem {
-                    background-image: linear-gradient(45deg, #eeeeee, #f4f4f4, #eeeeee);
-                    border: 1px rgb(219, 219, 219);
-                    border-radius: 50%;
-                    padding: 5px;
-                }
-
-                .icon img {
-                    margin-top: 2px;
-                }
-
-                .tituloCard {
-                    border-bottom: 1px solid #d9d9d9;
-                    padding: 5px 0px 5px 8px;
-                }
-
-                .valoresCards {
-                    padding: 5px 0px 0px 5px;
-                    display: flex;
-                }
-
-                @media (max-width: 768px) {
-                    #card {
-                        margin-top: 10px;
-                    }
-                }
-            </style>
             <div id="form-container">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
@@ -199,8 +247,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <figure class="highcharts-figure col-lg-12 col-md-12">
+                        <div id="container"></div>
+                    </figure>
+                </div>
             </div>
         </div>
+        {{-- Gráfico para os cards --}}
         <script>
             function criarGrafico(id, dataValores, cor) {
                 var ctx = document.getElementById(id).getContext('2d');
@@ -248,6 +302,51 @@
             criarGrafico('graficoEstoque', [1200, 600, 1100, 800, 1400, 1900, 1100, 900, 2300, 1900, 1200, 1900],
                 'rgba(153, 40, 40, 1)');
         </script>
+        {{-- Gráfico principal de barras --}}
+        <script>
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column',
+                    height: 310,
+                },
+                title: {
+                    text: 'Produção estimada de Milho vs Trigo para 2023'
+                },
+                xAxis: {
+                    categories: ['EUA', 'China', 'Brasil', 'UE', 'Argentina', 'Índia', 'México', 'Rússia', 'Ucrânia',
+                        'Canadá', 'Indonésia', 'Paquistão', 'França', 'Austrália', 'Vietnã', 'Bulgária', 'Itália',
+                        'Turquia', 'Irã', 'Egito'
+                    ],
+                    crosshair: true,
+                    accessibility: {
+                        description: 'Países'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' (1000 MT)'
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                        name: 'Milho',
+                        data: [387749, 280000, 129000, 64300, 54000, 34300, 30000, 21000, 50000, 60000, 40000,
+                            18000, 20000, 15000, 22000, 19000, 48000, 16000, 13000, 12000
+                        ]
+                    },
+                    {
+                        name: 'Trigo',
+                        data: [45321, 140000, 10000, 140500, 190500, 113500, 28000, 22000, 50000, 54000, 30000,
+                            23000, 21000, 170000, 600000, 160000, 380000, 210000, 18000, 202000
+                        ]
+                    }
+                ]
+            });
+        </script>
+        
     @endsection
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
