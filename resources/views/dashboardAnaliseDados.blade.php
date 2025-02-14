@@ -184,9 +184,9 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card">
-                            <h6 class="tituloCard d-flex justify-content-between">Despesas <img
-                                    class="ml-auto mr-1" src="{{ asset('storage/images/iconOrcamentos.png') }}"
-                                    alt="Seta para subir" height="16" width="18"></h6>
+                            <h6 class="tituloCard d-flex justify-content-between">Despesas <img class="ml-auto mr-1"
+                                    src="{{ asset('storage/images/iconOrcamentos.png') }}" alt="Seta para subir"
+                                    height="16" width="18"></h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
                                 <div class="d-flex ml-auto">
@@ -333,12 +333,16 @@
                 },
                 xAxis: {
                     categories: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
-                        'Setembro',
-                        'Outubro', 'Novembro', 'Dezembro'
+                        'Setembro', 'Outubro', 'Novembro', 'Dezembro'
                     ],
                     crosshair: true,
                     accessibility: {
                         description: 'Meses do ano'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: null
                     }
                 },
                 tooltip: {
@@ -360,7 +364,10 @@
                         color: 'rgba(153, 40, 40, 1)',
                         data: [45000, 14000, 10000, 14050, 19050, 11350, 28000, 22000, 5000, 5400, 30000, 23000]
                     }
-                ]
+                ],
+                exporting: {
+                    enabled: false 
+                }
             });
         </script>
         {{-- Graficos de Doughnut --}}
@@ -445,7 +452,10 @@
                         colorByPoint: true,
                         innerSize: '75%',
                         data: data
-                    }]
+                    }],
+                    exporting: {
+                        enabled: false 
+                    }
                 });
             }
 
