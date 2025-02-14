@@ -252,6 +252,22 @@
                         <div id="container"></div>
                     </figure>
                 </div>
+                <div id="form-container">
+                    <div class="row">
+                        <div class="col-md-3 border">
+                            <h1>gráfico</h1>
+                        </div>
+                        <div class="col-md-3 border">
+                            <h1>gráfico</h1>
+                        </div>
+                        <div class="col-md-3 border">
+                            <h1>gráfico</h1>
+                        </div>
+                        <div class="col-md-3 border">
+                            <h1>gráfico</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {{-- Gráfico para os cards --}}
@@ -346,7 +362,6 @@
                 ]
             });
         </script>
-        
     @endsection
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
