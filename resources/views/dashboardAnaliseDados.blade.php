@@ -251,7 +251,7 @@
                 </div>
                 <div class="row">
                     <figure class="highcharts-figure col-lg-12 col-md-12">
-                        <div id="container"></div>
+                        <div id="container" class="border"></div>
                     </figure>
                 </div>
                 <div class="row">
@@ -414,15 +414,15 @@
                             }
                         }
                     },
+                    title: {
+                        text: title,
+                        style: {
+                            fontSize: '16px' // Define o tamanho da fonte do título
+                        }
+                    },
                     accessibility: {
                         point: {
                             valueSuffix: '%'
-                        }
-                    },
-                    title: {
-                        text: 'Balanço Financeiro',
-                        style: {
-                            fontSize: '16px'
                         }
                     },
                     tooltip: {
