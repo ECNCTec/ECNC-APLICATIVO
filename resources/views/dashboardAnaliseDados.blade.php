@@ -256,17 +256,17 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="border m-0">
+                        <div class="border">
                             <div id="graficoEntradaeSaidaEstoque"></div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="border m-0">
+                        <div class="border mt-2 mt-md-0">
                             <div id="graficoClientesCadastrados"></div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="border m-0">
+                        <div class="border mt-2 mt-md-0">
                             <div id="graficoStatusOrcamento"></div>
                         </div>
                     </div>
@@ -329,7 +329,10 @@
                     height: 310,
                 },
                 title: {
-                    text: 'Balanço Financeiro'
+                    text: 'Balanço Financeiro',
+                    style: {
+                        fontSize: '16px'
+                    }
                 },
                 xAxis: {
                     categories: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
@@ -366,7 +369,7 @@
                     }
                 ],
                 exporting: {
-                    enabled: false 
+                    enabled: false
                 }
             });
         </script>
@@ -417,7 +420,10 @@
                         }
                     },
                     title: {
-                        text: title
+                        text: 'Balanço Financeiro',
+                        style: {
+                            fontSize: '16px'
+                        }
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>'
@@ -454,7 +460,7 @@
                         data: data
                     }],
                     exporting: {
-                        enabled: false 
+                        enabled: false
                     }
                 });
             }
