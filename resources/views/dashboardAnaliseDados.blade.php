@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <title>Clientes</title>
     </style>
 </head>
@@ -182,7 +184,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card">
-                            <h6 class="tituloCard d-flex justify-content-between">Orçamentos Aprovados <img
+                            <h6 class="tituloCard d-flex justify-content-between">Despesas <img
                                     class="ml-auto mr-1" src="{{ asset('storage/images/iconOrcamentos.png') }}"
                                     alt="Seta para subir" height="16" width="18"></h6>
                             <div class="valoresCards">
@@ -252,6 +254,23 @@
                         <div id="container"></div>
                     </figure>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="border m-0">
+                            <div id="graficoEntradaeSaidaEstoque"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="border m-0">
+                            <div id="graficoClientesCadastrados"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="border m-0">
+                            <div id="graficoStatusOrcamento"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {{-- Gráfico para os cards --}}
@@ -310,20 +329,20 @@
                     height: 310,
                 },
                 title: {
-                    text: 'Produção estimada de Milho vs Trigo para 2023'
+                    text: 'Balanço Financeiro'
                 },
                 xAxis: {
-                    categories: ['EUA', 'China', 'Brasil', 'UE', 'Argentina', 'Índia', 'México', 'Rússia', 'Ucrânia',
-                        'Canadá', 'Indonésia', 'Paquistão', 'França', 'Austrália', 'Vietnã', 'Bulgária', 'Itália',
-                        'Turquia', 'Irã', 'Egito'
+                    categories: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto',
+                        'Setembro',
+                        'Outubro', 'Novembro', 'Dezembro'
                     ],
                     crosshair: true,
                     accessibility: {
-                        description: 'Países'
+                        description: 'Meses do ano'
                     }
                 },
                 tooltip: {
-                    valueSuffix: ' (1000 MT)'
+                    valueSuffix: ' (R$)'
                 },
                 plotOptions: {
                     column: {
@@ -332,18 +351,150 @@
                     }
                 },
                 series: [{
-                        name: 'Milho',
-                        data: [387749, 280000, 129000, 64300, 54000, 34300, 30000, 21000, 50000, 60000, 40000,
-                            18000, 20000, 15000, 22000, 19000, 48000, 16000, 13000, 12000
-                        ]
+                        name: 'Receitas',
+                        color: '#0f4571',
+                        data: [38000, 28000, 13000, 6400, 54000, 3400, 30000, 21000, 5000, 6000, 40000, 38000]
                     },
                     {
-                        name: 'Trigo',
-                        data: [45321, 140000, 10000, 140500, 190500, 113500, 28000, 22000, 50000, 54000, 30000,
-                            23000, 21000, 170000, 600000, 160000, 380000, 210000, 18000, 202000
-                        ]
+                        name: 'Despesas',
+                        color: 'rgba(153, 40, 40, 1)',
+                        data: [45000, 14000, 10000, 14050, 19050, 11350, 28000, 22000, 5000, 5400, 30000, 23000]
                     }
                 ]
+            });
+        </script>
+        {{-- Graficos de Doughnut --}}
+        <script>
+            function createChart(containerId, title, data) {
+                Highcharts.chart(containerId, {
+                    chart: {
+                        type: 'pie',
+                        height: Math.min(window.innerHeight, 300),
+                        custom: {},
+                        events: {
+                            render() {
+                                const chart = this,
+                                    series = chart.series[0];
+                                let customLabel = chart.options.chart.custom.label;
+
+                                if (!customLabel) {
+                                    customLabel = chart.options.chart.custom.label =
+                                        chart.renderer.label(
+                                            'Total<br/>' +
+                                            '<strong>' + data.reduce((acc, point) => acc + point.y, 0) + '</strong>'
+                                        )
+                                        .css({
+                                            color: '#000',
+                                            textAnchor: 'middle'
+                                        })
+                                        .add();
+                                }
+
+                                const x = series.center[0] + chart.plotLeft,
+                                    y = series.center[1] + chart.plotTop - (customLabel.attr('height') / 2);
+
+                                customLabel.attr({
+                                    x,
+                                    y
+                                });
+
+                                customLabel.css({
+                                    fontSize: `${series.center[2] / 12}px`
+                                });
+                            }
+                        }
+                    },
+                    accessibility: {
+                        point: {
+                            valueSuffix: '%'
+                        }
+                    },
+                    title: {
+                        text: title
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.0f}%</b>'
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        series: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            borderRadius: 8,
+                            dataLabels: [{
+                                    enabled: true,
+                                    distance: 20,
+                                    format: '{point.name}'
+                                },
+                                {
+                                    enabled: true,
+                                    distance: -15,
+                                    format: '{point.percentage:.0f}%',
+                                    style: {
+                                        fontSize: '0.9em'
+                                    }
+                                }
+                            ],
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                        name: 'Registrations',
+                        colorByPoint: true,
+                        innerSize: '75%',
+                        data: data
+                    }]
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                createChart('graficoEntradaeSaidaEstoque', 'Entrada e Saída Estoque', [{
+                        name: 'Entrada',
+                        y: 90,
+                        color: '#0f4571'
+                    },
+                    {
+                        name: 'Saída',
+                        y: 40,
+                        color: '#009ddd'
+                    }
+                ]);
+
+                createChart('graficoClientesCadastrados', 'Clientes Cadastrados', [{
+                        name: 'Pessoa Física',
+                        y: 254,
+                        color: '#0f4571'
+                    },
+                    {
+                        name: 'Pessoa Jurídica',
+                        y: 187,
+                        color: '#009ddd'
+                    }
+                ]);
+
+                createChart('graficoStatusOrcamento', 'Status dos Orçamentos', [{
+                        name: 'Aprovados',
+                        y: 25,
+                        color: '#0f4571'
+                    },
+                    {
+                        name: 'Pendentes',
+                        y: 40,
+                        color: '#386dbd'
+                    },
+                    {
+                        name: 'Não Aprovados',
+                        y: 20,
+                        color: '#009ddd'
+                    },
+                    {
+                        name: 'Concluídos',
+                        y: 25,
+                        color: '#05d3f8'
+                    }
+                ]);
             });
         </script>
     @endsection
@@ -352,6 +503,9 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
