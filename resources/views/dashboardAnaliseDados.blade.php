@@ -80,6 +80,17 @@
                     font-size: 18px;
                 }
 
+                #card .porcentagem {
+                    background-image: linear-gradient(to right, #e0efff, #d1e5ff, #c2deff);
+                    border: 1px rgb(219, 219, 219);
+                    border-radius: 50%;
+                    padding: 5px;
+                }
+
+                .icon img {
+                    margin-top: 2px;
+                }
+
                 .tituloCard {
                     border-bottom: 1px solid #d9d9d9;
                     padding: 5px 0px 5px 8px;
@@ -103,7 +114,14 @@
                             <h6 class="tituloCard">Receita</h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
-                                <h6 class="porcentagem ml-auto mr-1">48%</h6>
+                                <div class="d-flex ml-auto">
+                                    <div class="icon mr-1">
+                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir" height="20" width="20">
+                                    </div>
+                                    <h6 class="porcentagem mr-1">
+                                        9%
+                                    </h6>
+                                </div>
                             </div>
                             <div>
                                 <canvas id="graficoReceita" height="40"></canvas>
@@ -115,7 +133,14 @@
                             <h6 class="tituloCard">Orçamentos Aprovados</h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
-                                <h6 class="porcentagem ml-auto mr-1">21%</h6>
+                                <div class="d-flex ml-auto">
+                                    <div class="icon mr-1">
+                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir" height="20" width="20">
+                                    </div>
+                                    <h6 class="porcentagem mr-1">
+                                        37%
+                                    </h6>
+                                </div>
                             </div>
                             <div>
                                 <canvas id="graficoAprovados" height="40"></canvas>
@@ -127,7 +152,14 @@
                             <h6 class="tituloCard">Orçamentos Pendentes</h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
-                                <h6 class="porcentagem ml-auto mr-1">5%</h6>
+                                <div class="d-flex ml-auto">
+                                    <div class="icon mr-1">
+                                        <img src="{{ asset('storage/images/seta-para-baixo.png') }}" alt="Seta para subir" height="20" width="20">
+                                    </div>
+                                    <h6 class="porcentagem mr-1">
+                                        -14%
+                                    </h6>
+                                </div>
                             </div>
                             <div>
                                 <canvas id="graficoPendentes" height="40"></canvas>
@@ -139,7 +171,14 @@
                             <h6 class="tituloCard">Valor em Estoque</h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
-                                <h6 class="porcentagem ml-auto mr-1">35%</h6>
+                                <div class="d-flex ml-auto">
+                                    <div class="icon mr-1">
+                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir" height="20" width="20">
+                                    </div>
+                                    <h6 class="porcentagem mr-1">
+                                        19%
+                                    </h6>
+                                </div>
                             </div>
                             <div>
                                 <canvas id="graficoEstoque" height="40"></canvas>
