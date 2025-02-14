@@ -81,7 +81,7 @@
                 }
 
                 #card .porcentagem {
-                    background-image: linear-gradient(to right, #f2f2f2, #eeeeee, #f4f4f4);
+                    background-image: linear-gradient(45deg, #eeeeee, #f4f4f4, #eeeeee);
                     border: 1px rgb(219, 219, 219);
                     border-radius: 50%;
                     padding: 5px;
@@ -111,12 +111,16 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card" style="media (max-width: 768px){margin-top: none;}">
-                            <h6 class="tituloCard">Receita</h6>
+                            <h6 class="tituloCard d-flex justify-content-between">Receita <img class="ml-auto mr-1"
+                                    src="{{ asset('storage/images/iconReceita.png') }}" alt="Seta para subir" height="18"
+                                    width="20">
+                            </h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
-                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir" height="20" width="20">
+                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir"
+                                            height="20" width="20">
                                     </div>
                                     <h6 class="porcentagem mr-1">
                                         9%
@@ -130,12 +134,15 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card">
-                            <h6 class="tituloCard">Orçamentos Aprovados</h6>
+                            <h6 class="tituloCard d-flex justify-content-between">Orçamentos Aprovados <img
+                                    class="ml-auto mr-1" src="{{ asset('storage/images/iconOrcamentos.png') }}"
+                                    alt="Seta para subir" height="16" width="18"></h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
-                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir" height="20" width="20">
+                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir"
+                                            height="20" width="20">
                                     </div>
                                     <h6 class="porcentagem mr-1">
                                         37%
@@ -147,14 +154,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-6 col-sm-12 mt-md-2 mt-sm-2 mt-lg-0">
                         <div id="card">
-                            <h6 class="tituloCard">Orçamentos Pendentes</h6>
+                            <h6 class="tituloCard d-flex justify-content-between">Orçamentos Pendentes <img
+                                    class="ml-auto mr-1" src="{{ asset('storage/images/iconPendente.png') }}"
+                                    alt="Seta para subir" height="16" width="18"></h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
-                                        <img src="{{ asset('storage/images/seta-para-baixo.png') }}" alt="Seta para subir" height="20" width="20">
+                                        <img src="{{ asset('storage/images/seta-para-baixo.png') }}" alt="Seta para subir"
+                                            height="20" width="20">
                                     </div>
                                     <h6 class="porcentagem mr-1">
                                         -14%
@@ -168,12 +178,15 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 mt-md-2 mt-sm-2 mt-lg-0">
                         <div id="card">
-                            <h6 class="tituloCard">Valor em Estoque</h6>
+                            <h6 class="tituloCard d-flex justify-content-between">Valor em Estoque <img class="ml-auto mr-1"
+                                    src="{{ asset('storage/images/iconEstoque.png') }}" alt="Seta para subir" height="16"
+                                    width="18"></h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
-                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir" height="20" width="20">
+                                        <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir"
+                                            height="20" width="20">
                                     </div>
                                     <h6 class="porcentagem mr-1">
                                         19%
@@ -199,7 +212,7 @@
                             label: id,
                             data: dataValores,
                             borderColor: cor,
-                            backgroundColor: cor.replace('1)', '0.1)'), 
+                            backgroundColor: cor.replace('1)', '0.1)'),
                             borderWidth: 1,
                             fill: true,
                             tension: 0.48,
