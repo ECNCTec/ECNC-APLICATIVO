@@ -182,11 +182,11 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card" style="media (max-width: 768px){margin-top: none;}">
                             <h6 class="tituloCard d-flex justify-content-between">Receita <img class="ml-auto mr-1"
-                                    src="{{ asset('storage/images/iconReceita.png') }}" alt="Seta para subir" height="18"
+                                    src="{{ asset('storage/images/iconReceita4.png') }}" alt="Seta para subir" height="18"
                                     width="20">
                             </h6>
                             <div class="valoresCards">
-                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="valor ml-1"><strong>R$</strong> 98.390,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
                                         <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir"
@@ -205,10 +205,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card">
                             <h6 class="tituloCard d-flex justify-content-between">Despesas <img class="ml-auto mr-1"
-                                    src="{{ asset('storage/images/iconOrcamentos.png') }}" alt="Seta para subir"
+                                    src="{{ asset('storage/images/iconDespesas2.png') }}" alt="Seta para subir"
                                     height="16" width="18"></h6>
                             <div class="valoresCards">
-                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="valor ml-1"><strong>R$</strong> 73.480,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
                                         <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir"
@@ -227,10 +227,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 mt-md-2 mt-sm-2 mt-lg-0">
                         <div id="card">
                             <h6 class="tituloCard d-flex justify-content-between">Orçamentos Pendentes <img
-                                    class="ml-auto mr-1" src="{{ asset('storage/images/iconPendente.png') }}"
+                                    class="ml-auto mr-1" src="{{ asset('storage/images/iconPendente3.png') }}"
                                     alt="Seta para subir" height="16" width="18"></h6>
                             <div class="valoresCards">
-                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="valor ml-1"><strong>R$</strong> 18.190,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
                                         <img src="{{ asset('storage/images/seta-para-baixo.png') }}" alt="Seta para subir"
@@ -249,10 +249,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 mt-md-2 mt-sm-2 mt-lg-0">
                         <div id="card">
                             <h6 class="tituloCard d-flex justify-content-between">Valor em Estoque <img class="ml-auto mr-1"
-                                    src="{{ asset('storage/images/iconEstoque.png') }}" alt="Seta para subir" height="16"
+                                    src="{{ asset('storage/images/iconEstoque3.png') }}" alt="Seta para subir" height="16"
                                     width="18"></h6>
                             <div class="valoresCards">
-                                <h6 class="valor ml-1"><strong>R$</strong> 2.390,00</h6>
+                                <h6 class="valor ml-1"><strong>R$</strong> 42.990,00</h6>
                                 <div class="d-flex ml-auto">
                                     <div class="icon mr-1">
                                         <img src="{{ asset('storage/images/seta-para-cima.png') }}" alt="Seta para subir"
@@ -354,7 +354,7 @@
                 title: {
                     text: 'Balanço Financeiro',
                     style: {
-                        fontSize: '16px'
+                        fontSize: '14px'
                     }
                 },
                 xAxis: {
@@ -440,7 +440,7 @@
                     title: {
                         text: title,
                         style: {
-                            fontSize: '16px'
+                            fontSize: '14px'
                         }
                     },
                     accessibility: {
@@ -501,13 +501,13 @@
                     }
                 ]);
 
-                createChart('graficoClientesCadastrados', 'Clientes Cadastrados', [{
-                        name: 'Física',
+                createChart('graficoClientesCadastrados', 'Clientes', [{
+                        name: 'P. Física',
                         y: 254,
                         color: '#0f4571'
                     },
                     {
-                        name: 'Jurídica',
+                        name: 'P. Jurídica',
                         y: 187,
                         color: '#009ddd'
                     }
