@@ -277,7 +277,7 @@
                 top: 0;
                 left: -100%;
                 height: 100%;
-                z-index: 9999;
+                z-index: 99999;
                 transition: left 0.3s ease;
             }
 
@@ -293,7 +293,7 @@
                 position: absolute;
                 top: 20px;
                 right: 10px;
-                z-index: 10000;
+                z-index: 999999;
             }
         }
     </style>

@@ -182,8 +182,8 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div id="card" style="media (max-width: 768px){margin-top: none;}">
                             <h6 class="tituloCard d-flex justify-content-between">Receita <img class="ml-auto mr-1"
-                                    src="{{ asset('storage/images/iconReceita4.png') }}" alt="Seta para subir" height="18"
-                                    width="20">
+                                    src="{{ asset('storage/images/iconReceita4.png') }}" alt="Seta para subir"
+                                    height="18" width="20">
                             </h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 98.390,00</h6>
@@ -249,8 +249,8 @@
                     <div class="col-lg-3 col-md-6 col-sm-12 mt-md-2 mt-sm-2 mt-lg-0">
                         <div id="card">
                             <h6 class="tituloCard d-flex justify-content-between">Valor em Estoque <img class="ml-auto mr-1"
-                                    src="{{ asset('storage/images/iconEstoque3.png') }}" alt="Seta para subir" height="16"
-                                    width="18"></h6>
+                                    src="{{ asset('storage/images/iconEstoque3.png') }}" alt="Seta para subir"
+                                    height="16" width="18"></h6>
                             <div class="valoresCards">
                                 <h6 class="valor ml-1"><strong>R$</strong> 42.990,00</h6>
                                 <div class="d-flex ml-auto">
@@ -354,7 +354,8 @@
                 title: {
                     text: 'Balanço Financeiro',
                     style: {
-                        fontSize: '14px'
+                        fontSize: '14px',
+                        fontWeight: '630'
                     }
                 },
                 xAxis: {
@@ -440,8 +441,9 @@
                     title: {
                         text: title,
                         style: {
-                            fontSize: '14px'
-                        }
+                        fontSize: '14px',
+                        fontWeight: '630'
+                    }
                     },
                     accessibility: {
                         point: {
