@@ -153,6 +153,26 @@
                 margin: 0.3rem 10px;
             }
         </style>
+        {{-- Style do Icon de Filtro --}}
+        <style>
+            .filtroDashboard {
+                position: relative;
+            }
+
+            .filtroDashboard img {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                height: 20px;
+                z-index: 9999;
+            }
+
+            @media (max-width: 768px) {
+                .filtroDashboard img {
+                    height: 25px;
+                }
+            }
+        </style>
         <div id="form">
             <div class="titulo">
                 <h6>Dashboard</h6>
@@ -251,6 +271,9 @@
                 </div>
                 <div class="row">
                     <figure class="highcharts-figure col-lg-12 col-md-12">
+                        <div class="filtroDashboard">
+                            <img src="{{ asset('storage/images/filtro.png') }}" alt="">
+                        </div>
                         <div id="container" class="border"></div>
                     </figure>
                 </div>
@@ -417,7 +440,7 @@
                     title: {
                         text: title,
                         style: {
-                            fontSize: '16px' // Define o tamanho da fonte do título
+                            fontSize: '16px'
                         }
                     },
                     accessibility: {
